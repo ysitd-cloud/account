@@ -1,6 +1,10 @@
-FROM alpine:3.4
+FROM golang:1.8-alpine
 
-ADD account /
-ADD dist /
+ADD . /go/src/github.com/ysitd-cloud/account
+WORKDIR /go/src/github.com/ysitd-cloud/account
 
-CMD ["/account"]
+RUN go install
+
+EXPOSE 8080
+
+CMD ["account"]

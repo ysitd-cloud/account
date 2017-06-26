@@ -10,9 +10,7 @@ account:
 	go build
 
 dist/signin.html: frontend/node_modules
-	cd frontend
-	yarn build
+	cd frontend && yarn build
 
 frontend/node_modules:
-	cd frontend
-	yarn install
+	cd frontend && yarn install

@@ -5,11 +5,16 @@ services:
     build: .
     ports:
       - "8080:8080"
+    depends_on:
+      - redis
+      - postgres
     links:
       - redis
       - postgres
     environment:
-      DB_URL: "postgresql://postgres:mysecretpassword@postgres/postgres"
+      DB_URL: "postgresql://postgres:mysecretpassword@postgres:5432/postgres?sslmode=disable"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
   redis:
     image: redis:3-alpine
     volumes:
