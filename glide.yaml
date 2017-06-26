@@ -1,0 +1,6 @@
+package: github.com/ysitd-cloud/account
+import:
+- package: gopkg.in/oauth2.v3
+  version: ^v3.8.1
+- package: github.com/jinzhu/gorm
+  version: ^1.0.0
