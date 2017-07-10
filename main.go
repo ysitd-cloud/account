@@ -1,32 +1,48 @@
 package main
 
 import (
+	_ "github.com/joho/godotenv/autoload"
+	_ "github.com/lib/pq"
+
+	"database/sql"
 	"os"
-	"gopkg.in/oauth2.v3/manage"
-	"github.com/go-oauth2/redis"
-	"gopkg.in/oauth2.v3"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/ory/osin-storage/storage/postgres"
+	"github.com/RangelReale/osin"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
-func createRedisTokenStore() (oauth2.TokenStore, error) {
-	return redis.NewTokenStore(createRedisConfig())
-}
+func handleAuthorize(server *osin.Server) (handlerFunc gin.HandlerFunc) {
+	return func (c *gin.Context) {
+		resp := server.NewResponse()
+		defer resp.Close()
 
-func createRedisConfig() *redis.Config {
-	host := os.Getenv("REDIS_HOST")
-	port := os.Getenv("REDIS_PORT")
-	return &redis.Config{
-		Addr: host + ":" + port,
+		if ar := server.HandleAuthorizeRequest(resp, c.Request); ar != nil {
+			c.Next()
+			return
+		}
+		if resp.IsError && resp.InternalError != nil {
+			c.AbortWithError(500, resp.InternalError)
+		}
+		osin.OutputJSON(resp, c.Writer, c.Request)
+		c.Abort()
 	}
 }
 
 func main() {
-	db, err := gorm.Open("postgres", os.Getenv("DB_URL"))
+	db, err := sql.Open("postgres", os.Getenv("DB_URL"))
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
-	manager := manage.NewDefaultManager()
-	manager.MustTokenStorage(createRedisTokenStore())
+
+	store := postgres.New(db)
+	config := osin.NewServerConfig()
+	config.AllowedAccessTypes = osin.AllowedAccessType{osin.AUTHORIZATION_CODE, osin.REFRESH_TOKEN}
+	config.ErrorStatusCode = 400
+	server := osin.NewServer(config, store)
+
+	app := gin.Default()
+
+	app.GET("/authorize", handleAuthorize(server))
+
+	app.Run(":" + os.Getenv("PORT"))
 }

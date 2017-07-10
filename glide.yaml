@@ -1,0 +1,8 @@
+package: github.com/ysitd-cloud/account
+import:
+- package: github.com/RangelReale/osin
+- package: github.com/lib/pq
+- package: gopkg.in/gin-gonic/gin.v1
+- package: github.com/joho/godotenv
+  version: ^1.1.0
+- package: github.com/ory/osin-storage
