@@ -13,6 +13,8 @@ func main() {
 
 	app := gin.Default()
 
+	app.Use(middlewares.Sessions())
+
 	app.GET("/authorize", middlewares.HandleAuthorize(server))
 
 	app.Run(":" + os.Getenv("PORT"))
