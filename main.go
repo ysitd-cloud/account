@@ -19,7 +19,12 @@ func main() {
 	app.Use(middlewares.Sessions())
 
 	app.GET("/authorize", middlewares.HandleAuthorize(server), handler.LoginForm)
-	app.POST("/authorize", middlewares.HandleAuthorize(server))
+	app.POST("/authorize",
+		middlewares.HandleAuthorize(server),
+		handler.LoginPost,
+		handler.LoginForm,
+		middlewares.HandleAuthorizeApprove(server),
+	)
 
 	app.Run(":" + os.Getenv("PORT"))
 }

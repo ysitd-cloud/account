@@ -115,6 +115,6 @@ func (s *Session) Written() bool {
 	return s.written
 }
 
-func getSession(c *gin.Context) Session {
+func GetSession(c *gin.Context) Session {
 	return c.MustGet(defaultKey).(Session)
 }

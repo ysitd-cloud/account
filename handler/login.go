@@ -11,9 +11,16 @@ import (
 )
 
 func LoginForm(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.tmpl", gin.H{
-		"url": template.URL(fmt.Sprintf("/authorize?%s", c.Request.URL.RawQuery)),
-	})
+	session := middlewares.GetSession(c)
+	if !session.Exists("username") {
+		c.HTML(http.StatusOK, "login.tmpl", gin.H{
+			"url": template.URL(fmt.Sprintf("/authorize?%s", c.Request.URL.RawQuery)),
+		})
+		c.Abort()
+	} else {
+		c.Next()
+	}
+
 }
 
 func LoginPost(c *gin.Context) {
@@ -24,9 +31,9 @@ func LoginPost(c *gin.Context) {
 
 	user, err := model.LoadUserFromDBWithUsername(db, username)
 	if err == sql.ErrNoRows {
-		LoginForm(c)
-		c.Abort()
-		return
+		c.Next()
+	} else if err != nil {
+		c.AbortWithError(http.StatusInternalServerError, err)
 	}
 
 	if user.ValidatePassword(password) {
@@ -35,9 +42,7 @@ func LoginPost(c *gin.Context) {
 		session.Set("email", user.Email)
 		session.Set("avatar_url", user.AvatarUrl)
 		session.Set("display_name", user.DisplayName)
-		c.Next()
-	} else {
-		LoginForm(c)
-		c.Abort()
 	}
+
+	c.Next()
 }
