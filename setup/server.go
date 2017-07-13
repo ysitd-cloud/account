@@ -14,6 +14,7 @@ func SetupOsinServer() (*osin.Server) {
 	store := postgres.New(db)
 	config := osin.NewServerConfig()
 	config.AllowedAccessTypes = osin.AllowedAccessType{osin.AUTHORIZATION_CODE, osin.REFRESH_TOKEN}
+	config.AllowClientSecretInParams = true
 	config.ErrorStatusCode = 400
 	return osin.NewServer(config, store)
 }

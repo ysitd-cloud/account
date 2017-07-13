@@ -12,6 +12,7 @@ import (
 )
 
 func LoginForm(c *gin.Context) {
+	log.Println("login.LoginForm")
 	session := middlewares.GetSession(c)
 	if !session.Exists("username") {
 		c.HTML(http.StatusOK, "login.tmpl", gin.H{
@@ -25,6 +26,7 @@ func LoginForm(c *gin.Context) {
 }
 
 func LoginPost(c *gin.Context) {
+	log.Println("login.LoginPost")
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 

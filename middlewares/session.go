@@ -45,8 +45,8 @@ type Session struct {
 }
 
 func (s *Session) Exists(key interface{}) bool {
-	val := s.Get(key)
-	return val != nil
+	_, exists := s.Session().Values[key]
+	return exists
 }
 
 func (s *Session) Get(key interface{}) interface{} {
