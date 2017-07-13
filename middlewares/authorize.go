@@ -30,5 +30,7 @@ func HandleAuthorizeApprove(server *osin.Server) gin.HandlerFunc {
 		resp := c.MustGet("osin.response").(*osin.Response)
 		req.Authorized = true
 		server.FinishAuthorizeRequest(resp, c.Request, req)
+		osin.OutputJSON(resp, c.Writer, c.Request)
+		c.Abort()
 	}
 }

@@ -18,7 +18,7 @@ func main() {
 	app.Use(middlewares.DB())
 	app.Use(middlewares.Sessions())
 
-	app.GET("/authorize", middlewares.HandleAuthorize(server), handler.LoginForm)
+	app.GET("/authorize", middlewares.HandleAuthorize(server), handler.LoginForm, middlewares.HandleAuthorizeApprove(server))
 	app.POST("/authorize",
 		middlewares.HandleAuthorize(server),
 		handler.LoginPost,

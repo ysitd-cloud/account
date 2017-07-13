@@ -23,6 +23,7 @@ func HandleTokenRequest(server *osin.Server) gin.HandlerFunc {
 				}
 			case osin.CLIENT_CREDENTIALS:
 				req.Authorized = true
+			}
 			server.FinishAccessRequest(resp, c.Request, req)
 		}
 

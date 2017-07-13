@@ -8,6 +8,7 @@ import (
 	"gopkg.in/gin-gonic/gin.v1"
 	"github.com/ysitd-cloud/account/model"
 	"github.com/ysitd-cloud/account/middlewares"
+	"log"
 )
 
 func LoginForm(c *gin.Context) {
@@ -27,6 +28,8 @@ func LoginPost(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
+	log.Printf("%s : %s", username, password)
+
 	db := c.MustGet("db").(*sql.DB)
 
 	user, err := model.LoadUserFromDBWithUsername(db, username)
@@ -37,11 +40,12 @@ func LoginPost(c *gin.Context) {
 	}
 
 	if user.ValidatePassword(password) {
-		session := c.MustGet("sessions").(middlewares.Session)
+		session := middlewares.GetSession(c)
 		session.Set("username", user.Username)
 		session.Set("email", user.Email)
 		session.Set("avatar_url", user.AvatarUrl)
 		session.Set("display_name", user.DisplayName)
+		session.Save()
 	}
 
 	c.Next()

@@ -45,8 +45,8 @@ type Session struct {
 }
 
 func (s *Session) Exists(key interface{}) bool {
-	_, exist := s.Session().Values[key]
-	return exist
+	val := s.Get(key)
+	return val != nil
 }
 
 func (s *Session) Get(key interface{}) interface{} {
@@ -107,6 +107,13 @@ func (s *Session) Session() *gSession.Session {
 		if err != nil {
 			log.Printf(errorFormat, err)
 		}
+
+		if s.session == nil {
+			s.session, err = s.store.New(s.request, s.name)
+			if err != nil {
+				log.Printf(errorFormat, err)
+			}
+		}
 	}
 	return s.session
 }
@@ -115,6 +122,6 @@ func (s *Session) Written() bool {
 	return s.written
 }
 
-func GetSession(c *gin.Context) Session {
-	return c.MustGet(defaultKey).(Session)
+func GetSession(c *gin.Context) *Session {
+	return c.MustGet(defaultKey).(*Session)
 }
