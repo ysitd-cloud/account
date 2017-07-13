@@ -5,28 +5,30 @@ import (
 	"os"
 	"gopkg.in/gin-gonic/gin.v1"
 	"github.com/ysitd-cloud/account/middlewares"
-	"github.com/ysitd-cloud/account/setup"
 	"github.com/ysitd-cloud/account/handler"
 )
 
 func main() {
-	server := setup.SetupOsinServer()
-
 	app := gin.Default()
 	app.LoadHTMLGlob("views/*.tmpl")
 
 	app.Use(middlewares.DB())
 	app.Use(middlewares.Sessions())
+	app.Use(middlewares.Osin())
 
-	app.GET("/authorize", middlewares.HandleAuthorize(server), handler.LoginForm, middlewares.HandleAuthorizeApprove(server))
+	app.GET("/authorize",
+		handler.HandleAuthorize,
+		handler.LoginForm,
+		handler.HandleAuthorizeApprove,
+	)
 	app.POST("/authorize",
-		middlewares.HandleAuthorize(server),
+		handler.HandleAuthorize,
 		handler.LoginPost,
 		handler.LoginForm,
-		middlewares.HandleAuthorizeApprove(server),
+		handler.HandleAuthorizeApprove,
 	)
 
-	app.POST("/token", handler.HandleTokenRequest(server))
+	app.POST("/token", handler.HandleTokenRequest)
 
 	app.Run(":" + os.Getenv("PORT"))
 }
