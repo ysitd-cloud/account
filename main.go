@@ -26,5 +26,7 @@ func main() {
 		middlewares.HandleAuthorizeApprove(server),
 	)
 
+	app.POST("/token", handler.HandleTokenRequest(server))
+
 	app.Run(":" + os.Getenv("PORT"))
 }
