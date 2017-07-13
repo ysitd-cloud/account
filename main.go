@@ -6,7 +6,7 @@ import (
 	"gopkg.in/gin-gonic/gin.v1"
 	"github.com/ysitd-cloud/account/middlewares"
 	"github.com/ysitd-cloud/account/setup"
-	"github.com/ysitd-cloud/account/routes"
+	"github.com/ysitd-cloud/account/handler"
 )
 
 func main() {
@@ -15,7 +15,11 @@ func main() {
 	app := gin.Default()
 	app.LoadHTMLGlob("views/*.tmpl")
 
-	app.GET("/authorize", middlewares.HandleAuthorize(server), routes.LoginForm)
+	app.Use(middlewares.DB())
+	app.Use(middlewares.Sessions())
+
+	app.GET("/authorize", middlewares.HandleAuthorize(server), handler.LoginForm)
+	app.POST("/authorize", middlewares.HandleAuthorize(server))
 
 	app.Run(":" + os.Getenv("PORT"))
 }

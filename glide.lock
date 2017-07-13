@@ -1,5 +1,5 @@
-hash: d4c895f9b5bfb5f7493d8211fda2418ed1293b67ab7180e228a32d80fb06c499
-updated: 2017-07-12T01:31:18.782541213+08:00
+hash: 441c790b6ddc228d5732f11e44b46a86950922e15582ca15d30286996bd41b87
+updated: 2017-07-13T23:09:34.149312189+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -80,6 +80,10 @@ imports:
   version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
   subpackages:
   - codec
+- name: golang.org/x/crypto
+  version: dd85ac7e6a88fc6ca420478e934de5f1a42dd3c6
+  subpackages:
+  - bcrypt
 - name: golang.org/x/sys
   version: 0e0164865330d5cf1c00247be08330bf96e2f87c
   subpackages:

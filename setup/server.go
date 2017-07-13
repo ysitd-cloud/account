@@ -1,15 +1,12 @@
 package setup
 
 import (
-	_ "github.com/lib/pq"
 	"github.com/RangelReale/osin"
-	"database/sql"
-	"os"
 	"github.com/ory/osin-storage/storage/postgres"
 )
 
 func SetupOsinServer() (*osin.Server) {
-	db, err := sql.Open("postgres", os.Getenv("DB_URL"))
+	db, err := SetupDB()
 	if err != nil {
 		panic(err)
 	}

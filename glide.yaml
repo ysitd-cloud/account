@@ -7,3 +7,6 @@ import:
   version: ^1.1.0
 - package: github.com/ory/osin-storage
 - package: github.com/gin-contrib/sessions
+- package: golang.org/x/crypto
+  subpackages:
+  - bcrypt

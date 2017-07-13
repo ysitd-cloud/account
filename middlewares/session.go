@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	defaultKey  = "github.com/gin-contrib/sessions"
+	defaultKey  = "sessions"
 	errorFormat = "[sessions] ERROR! %s\n"
 )
 
@@ -28,14 +28,14 @@ func Sessions() gin.HandlerFunc {
 	name := os.Getenv("SESSION_NAME")
 
 	return func (c *gin.Context) {
-		s := &session{name, c.Request, store, nil, false, c.Writer}
+		s := &Session{name, c.Request, store, nil, false, c.Writer}
 		c.Set(defaultKey, s)
 		defer context.Clear(c.Request)
 		c.Next()
 	}
 }
 
-type session struct {
+type Session struct {
 	name    string
 	request *http.Request
 	store   sessions.Store
@@ -44,37 +44,42 @@ type session struct {
 	writer  http.ResponseWriter
 }
 
-func (s *session) Get(key interface{}) interface{} {
+func (s *Session) Exists(key interface{}) bool {
+	_, exist := s.Session().Values[key]
+	return exist
+}
+
+func (s *Session) Get(key interface{}) interface{} {
 	return s.Session().Values[key]
 }
 
-func (s *session) Set(key interface{}, val interface{}) {
+func (s *Session) Set(key interface{}, val interface{}) {
 	s.Session().Values[key] = val
 	s.written = true
 }
 
-func (s *session) Delete(key interface{}) {
+func (s *Session) Delete(key interface{}) {
 	delete(s.Session().Values, key)
 	s.written = true
 }
 
-func (s *session) Clear() {
+func (s *Session) Clear() {
 	for key := range s.Session().Values {
 		s.Delete(key)
 	}
 }
 
-func (s *session) AddFlash(value interface{}, vars ...string) {
+func (s *Session) AddFlash(value interface{}, vars ...string) {
 	s.Session().AddFlash(value, vars...)
 	s.written = true
 }
 
-func (s *session) Flashes(vars ...string) []interface{} {
+func (s *Session) Flashes(vars ...string) []interface{} {
 	s.written = true
 	return s.Session().Flashes(vars...)
 }
 
-func (s *session) Options(options sessions.Options) {
+func (s *Session) Options(options sessions.Options) {
 	s.Session().Options = &gSession.Options{
 		Path:     options.Path,
 		Domain:   options.Domain,
@@ -84,7 +89,7 @@ func (s *session) Options(options sessions.Options) {
 	}
 }
 
-func (s *session) Save() error {
+func (s *Session) Save() error {
 	if s.Written() {
 		e := s.Session().Save(s.request, s.writer)
 		if e == nil {
@@ -95,7 +100,7 @@ func (s *session) Save() error {
 	return nil
 }
 
-func (s *session) Session() *gSession.Session {
+func (s *Session) Session() *gSession.Session {
 	if s.session == nil {
 		var err error
 		s.session, err = s.store.Get(s.request, s.name)
@@ -106,6 +111,10 @@ func (s *session) Session() *gSession.Session {
 	return s.session
 }
 
-func (s *session) Written() bool {
+func (s *Session) Written() bool {
 	return s.written
+}
+
+func getSession(c *gin.Context) Session {
+	return c.MustGet(defaultKey).(Session)
 }
