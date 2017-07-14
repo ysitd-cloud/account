@@ -1,2 +1,6 @@
+.idea
+docker-compose.yml
 volumes
-frontend
+account
+/.env
+vendor
