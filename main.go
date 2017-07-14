@@ -18,17 +18,18 @@ func main() {
 
 	app.GET("/authorize",
 		handler.HandleAuthorize,
-		handler.LoginForm,
+		middlewares.LoginOrRedirect,
 		handler.HandleAuthorizeApprove,
 	)
 	app.POST("/authorize",
 		handler.HandleAuthorize,
-		handler.LoginPost,
-		handler.LoginForm,
+		middlewares.LoginOrRedirect,
 		handler.HandleAuthorizeApprove,
 	)
 
 	app.POST("/token", handler.HandleTokenRequest)
+	app.GET("/login", handler.LoginForm)
+	app.POST("/login", handler.LoginPost)
 
 	app.Run(":" + os.Getenv("PORT"))
 }

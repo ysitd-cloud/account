@@ -20,8 +20,7 @@ func HandleAuthorize(c *gin.Context) {
 		return
 	}
 	if resp.IsError && resp.InternalError != nil {
-		c.AbortWithError(500, resp.InternalError)
-		return
+		log.Printf("ERROR: %s\n", resp.InternalError)
 	}
 	osin.OutputJSON(resp, c.Writer, c.Request)
 	c.Abort()
