@@ -24,14 +24,12 @@ func HandleTokenRequest(c *gin.Context) {
 		case osin.CLIENT_CREDENTIALS:
 			req.Authorized = true
 		}
+		resp.Output["user"] = req.AuthorizeData.UserData.(string)
 		server.FinishAccessRequest(resp, c.Request, req)
 	}
 
 	if resp.IsError && resp.InternalError != nil {
 		fmt.Printf("ERROR: %s\n", resp.InternalError)
-	}
-	if !resp.IsError {
-		resp.Output["custom_parameter"] = 19923
 	}
 	osin.OutputJSON(resp, c.Writer, c.Request)
 }

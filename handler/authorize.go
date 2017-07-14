@@ -4,6 +4,7 @@ import (
 	"github.com/RangelReale/osin"
 	"gopkg.in/gin-gonic/gin.v1"
 	"log"
+	"github.com/ysitd-cloud/account/middlewares"
 )
 
 func HandleAuthorize(c *gin.Context) {
@@ -27,11 +28,16 @@ func HandleAuthorize(c *gin.Context) {
 }
 
 func HandleAuthorizeApprove(c *gin.Context) {
-	server := c.MustGet("osin.server").(*osin.Server)
 	log.Println("Middleware:HandleAuthorizeApprove")
+
+	server := c.MustGet("osin.server").(*osin.Server)
 	req := c.MustGet("osin.request").(*osin.AuthorizeRequest)
 	resp := c.MustGet("osin.response").(*osin.Response)
+	session := middlewares.GetSession(c)
+
 	req.Authorized = true
+	req.UserData = session.Get("username")
+
 	server.FinishAuthorizeRequest(resp, c.Request, req)
 	osin.OutputJSON(resp, c.Writer, c.Request)
 	c.Abort()
