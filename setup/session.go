@@ -1,7 +1,7 @@
 package setup
 
 import (
-	"github.com/gin-contrib/sessions"
+	sessions "github.com/ysitd-cloud/gin-sessions"
 	"os"
 )
 

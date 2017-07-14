@@ -6,7 +6,8 @@ import:
 - package: github.com/joho/godotenv
   version: ^1.1.0
 - package: github.com/ory/osin-storage
-- package: github.com/gin-contrib/sessions
 - package: golang.org/x/crypto
   subpackages:
   - bcrypt
+- package: github.com/ysitd-cloud/gin-sessions
+  version: ^1.1.0

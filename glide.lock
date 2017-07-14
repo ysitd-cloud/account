@@ -1,5 +1,5 @@
-hash: 441c790b6ddc228d5732f11e44b46a86950922e15582ca15d30286996bd41b87
-updated: 2017-07-13T23:09:34.149312189+08:00
+hash: c87ebbefda88d6ca8769b017bab215ea2dfa81b8b87288e0b0a9c6fb508c1d47
+updated: 2017-07-14T21:05:21.153817744+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -18,8 +18,6 @@ imports:
   subpackages:
   - internal
   - redis
-- name: github.com/gin-contrib/sessions
-  version: 227bb6c9c4d414dc87160512d271788ed918e7ef
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
@@ -43,8 +41,6 @@ imports:
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
   subpackages:
   - autoload
-- name: github.com/kidstuff/mongostore
-  version: 256d65ac5b0e35e7c5ebb3f175c0bed1e5c2b253
 - name: github.com/lib/pq
   version: 8837942c3e09574accbc5f150e2c5e057189cace
   subpackages:
@@ -80,10 +76,13 @@ imports:
   version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
   subpackages:
   - codec
+- name: github.com/ysitd-cloud/gin-sessions
+  version: 07db2975490d8dc0e0aadad0bf53dccb9289d10d
 - name: golang.org/x/crypto
   version: dd85ac7e6a88fc6ca420478e934de5f1a42dd3c6
   subpackages:
   - bcrypt
+  - blowfish
 - name: golang.org/x/sys
   version: 0e0164865330d5cf1c00247be08330bf96e2f87c
   subpackages:
@@ -92,13 +91,6 @@ imports:
   version: d459835d2b077e44f7c9b453505ee29881d5d12d
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
-- name: gopkg.in/mgo.v2
-  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
-  subpackages:
-  - bson
-  - internal/json
-  - internal/sasl
-  - internal/scram
 - name: gopkg.in/yaml.v2
   version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 testImports: []
