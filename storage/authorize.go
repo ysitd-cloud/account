@@ -1,0 +1,64 @@
+package storage
+
+import (
+	"log"
+	"github.com/RangelReale/osin"
+	"github.com/garyburd/redigo/redis"
+)
+
+func (s *Store) SaveAuthorize(data *osin.AuthorizeData) (err error) {
+	log.Println("SaveAuthorize")
+	conn := s.Redis.Get()
+	if err := conn.Err(); err != nil {
+		return err
+	}
+
+	defer conn.Close()
+
+	payload, err := encode(data)
+	if err != nil {
+		return error(err)
+	}
+
+	_, err = conn.Do("SETEX", makeKey("auth", data.Code), data.ExpiresIn, string(payload))
+	return error(err)
+}
+
+func (s *Store) LoadAuthorize(code string) (*osin.AuthorizeData, error) {
+	conn := s.Redis.Get()
+	if err := conn.Err(); err != nil {
+		return nil, err
+	}
+
+	defer conn.Close()
+
+	var (
+		rawAuthGob interface{}
+		err        error
+	)
+
+	if rawAuthGob, err = conn.Do("GET", makeKey("auth", code)); err != nil {
+		return nil, err
+	}
+	if rawAuthGob == nil {
+		return nil, nil
+	}
+
+	authGob, _ := redis.Bytes(rawAuthGob, err)
+
+	var auth osin.AuthorizeData
+	err = decode(authGob, &auth)
+	return &auth, err
+}
+
+func (s *Store) RemoveAuthorize(code string) (err error) {
+	conn := s.Redis.Get()
+	if err := conn.Err(); err != nil {
+		return err
+	}
+
+	defer conn.Close()
+
+	_, err = conn.Do("DEL", makeKey("auth", code))
+	return err
+}

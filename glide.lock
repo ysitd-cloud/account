@@ -1,5 +1,5 @@
-hash: c87ebbefda88d6ca8769b017bab215ea2dfa81b8b87288e0b0a9c6fb508c1d47
-updated: 2017-07-14T21:05:21.153817744+08:00
+hash: a5f46d27ebe12d419838c30aaed113c60cc8cf36c628fb0ac2a552d8cd9be926
+updated: 2017-07-15T04:53:57.924938797+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -14,7 +14,7 @@ imports:
   subpackages:
   - spew
 - name: github.com/garyburd/redigo
-  version: 9f3a0116c9f72c5a56f958206a43dc881b502c37
+  version: 433969511232c397de61b1442f9fd49ec06ae9ba
   subpackages:
   - internal
   - redis
@@ -53,10 +53,6 @@ imports:
   version: b6357395e30805e2ad1f6d8fb759fa2b7146d8da
   subpackages:
   - pkg
-- name: github.com/ory/osin-storage
-  version: aa4920ab894adc94763e04a23f8bc11d171c5d45
-  subpackages:
-  - storage/postgres
 - name: github.com/pborman/uuid
   version: e790cca94e6cc75c7064b1332e63811d4aae1a53
 - name: github.com/pmezard/go-difflib
@@ -65,6 +61,8 @@ imports:
   - difflib
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
+- name: github.com/satori/go.uuid
+  version: 879c5887cd475cd7864858769793b2ceb0d44feb
 - name: github.com/Sirupsen/logrus
   version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
 - name: github.com/stretchr/testify
