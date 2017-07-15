@@ -25,6 +25,7 @@ func HandleTokenRequest(c *gin.Context) {
 			req.Authorized = true
 		}
 		resp.Output["user"] = req.AuthorizeData.UserData.(string)
+		req.UserData = resp.Output["user"]
 		server.FinishAccessRequest(resp, c.Request, req)
 	}
 

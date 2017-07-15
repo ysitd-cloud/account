@@ -37,9 +37,10 @@ func AuthToken(c *gin.Context) {
 	}
 	token := pieces[1]
 	server := c.MustGet("osin.server").(*osin.Server)
-	if _, err := server.Storage.LoadAccess(token); err != nil {
+	if access, err := server.Storage.LoadAccess(token); err != nil {
 		c.AbortWithStatus(http.StatusForbidden)
 	} else {
+		c.Set("oauth.access", access)
 		c.Next()
 	}
 }

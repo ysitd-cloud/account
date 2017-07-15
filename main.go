@@ -31,5 +31,11 @@ func main() {
 	app.GET("/login", handler.LoginForm)
 	app.POST("/login", handler.LoginPost)
 
+	app.GET("/user/:user",
+		middlewares.AuthToken,
+		handler.CheckGetUserAccess,
+		handler.GetUser,
+	)
+
 	app.Run(":" + os.Getenv("PORT"))
 }
