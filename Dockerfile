@@ -1,11 +1,13 @@
-FROM golang:1.8-alpine
+FROM ysitd/glide
 
 COPY . /go/src/github.com/ysitd-cloud/account
 
 WORKDIR /go/src/github.com/ysitd-cloud/account
 
-RUN wget -qO- https://glide.sh/get | sh && \
-    glide install && \
+RUN glide install && \
     go install
+
+ENV PORT 80
+EXPOSE 80
 
 CMD ["account"]
