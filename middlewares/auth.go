@@ -3,7 +3,9 @@ package middlewares
 import (
 	"net/url"
 	"net/http"
+	"strings"
 	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/RangelReale/osin"
 )
 
 func LoginOrRedirect(c *gin.Context) {
@@ -19,4 +21,26 @@ func LoginOrRedirect(c *gin.Context) {
 	redirect.RawQuery = query.Encode()
 	c.Redirect(http.StatusFound, redirect.String())
 	c.Abort()
+}
+
+func AuthToken(c *gin.Context) {
+	authHeader := c.GetHeader("Authorization")
+	if authHeader == "" {
+		c.AbortWithStatus(http.StatusForbidden)
+		return
+	}
+
+	pieces := strings.Split(authHeader, " ")
+	if len(pieces) != 2 {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	token := pieces[1]
+	server := c.MustGet("osin.server").(*osin.Server)
+	if access, err := server.Storage.LoadAccess(token); err != nil {
+		c.AbortWithStatus(http.StatusForbidden)
+	} else {
+		c.Set("oauth.access", access)
+		c.Next()
+	}
 }

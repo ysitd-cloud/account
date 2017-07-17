@@ -10,8 +10,8 @@ type User struct {
 	DisplayName string `json:"display_name"`
 	Email string `json:"email"`
 	AvatarUrl string `json:"avatar_url"`
-	password string
-	db *sql.DB
+	password string `json:"-"`
+	db *sql.DB `json:"-"`
 }
 
 func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
