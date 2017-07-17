@@ -1,5 +1,5 @@
 hash: a5f46d27ebe12d419838c30aaed113c60cc8cf36c628fb0ac2a552d8cd9be926
-updated: 2017-07-15T04:53:57.924938797+08:00
+updated: 2017-07-17T23:00:28.895586167+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -21,14 +21,14 @@ imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
-  version: f0b54a30238973ddb0bc9c9a58d8b7af038139b1
+  version: 65a6dd46a50bd435597b5bcababd1b2a811c9073
   subpackages:
   - binding
   - render
 - name: github.com/go-errors/errors
   version: 8fa88b06e5974e97fbf9899a7f86a344bfd1f105
 - name: github.com/golang/protobuf
-  version: 6a1fa9404c0aebf36c879bc50152edcc953910d2
+  version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
   subpackages:
   - proto
 - name: github.com/gorilla/context
@@ -41,8 +41,10 @@ imports:
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
   subpackages:
   - autoload
+- name: github.com/json-iterator/go
+  version: 8b0360418449ea45a97fd198b3ee29dcbf4dca65
 - name: github.com/lib/pq
-  version: 8837942c3e09574accbc5f150e2c5e057189cace
+  version: dd1fe2071026ce53f36a39112e645b4d4f5793a4
   subpackages:
   - oid
 - name: github.com/mattn/go-isatty
@@ -82,7 +84,7 @@ imports:
   - bcrypt
   - blowfish
 - name: golang.org/x/sys
-  version: 0e0164865330d5cf1c00247be08330bf96e2f87c
+  version: abf9c25f54453410d0c6668e519582a9e1115027
   subpackages:
   - unix
 - name: gopkg.in/gin-gonic/gin.v1
@@ -90,5 +92,5 @@ imports:
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
-  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
+  version: 3b4ad1db5b2a649883ff3782f5f9f6fb52be71af
 testImports: []
