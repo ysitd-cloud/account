@@ -1,14 +1,12 @@
 package storage
 
 import (
-	"log"
 	"github.com/RangelReale/osin"
 	"github.com/satori/go.uuid"
 	"github.com/garyburd/redigo/redis"
 )
 
 func (s *Store) SaveAccess(data *osin.AccessData) (err error) {
-	log.Println("SaveAccess")
 	conn := s.Redis.Get()
 	if err := conn.Err(); err != nil {
 		return err
@@ -37,13 +35,11 @@ func (s *Store) SaveAccess(data *osin.AccessData) (err error) {
 
 // LoadAccess gets access data with given access token
 func (s *Store) LoadAccess(token string) (*osin.AccessData, error) {
-	log.Println("LoadAccess")
 	return s.loadAccessByKey(makeKey("access_token", token))
 }
 
 // RemoveAccess deletes AccessData with given access token
 func (s *Store) RemoveAccess(token string) error {
-	log.Println("RemoveAccess")
 	return s.removeAccessByKey(makeKey("access_token", token))
 }
 

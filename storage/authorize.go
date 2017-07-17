@@ -1,13 +1,11 @@
 package storage
 
 import (
-	"log"
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
 )
 
 func (s *Store) SaveAuthorize(data *osin.AuthorizeData) (err error) {
-	log.Println("SaveAuthorize")
 	conn := s.Redis.Get()
 	if err := conn.Err(); err != nil {
 		return err
@@ -17,11 +15,11 @@ func (s *Store) SaveAuthorize(data *osin.AuthorizeData) (err error) {
 
 	payload, err := encode(data)
 	if err != nil {
-		return error(err)
+		return err
 	}
 
 	_, err = conn.Do("SETEX", makeKey("auth", data.Code), data.ExpiresIn, string(payload))
-	return error(err)
+	return err
 }
 
 func (s *Store) LoadAuthorize(code string) (*osin.AuthorizeData, error) {

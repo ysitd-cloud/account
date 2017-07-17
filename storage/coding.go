@@ -10,6 +10,7 @@ func init() {
 	gob.Register(map[string]interface{}{})
 	gob.Register(osin.AuthorizeData{})
 	gob.Register(osin.AccessData{})
+	gob.Register(&osin.DefaultClient{})
 }
 
 func encode(v interface{}) ([]byte, error) {
