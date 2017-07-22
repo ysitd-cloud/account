@@ -3,6 +3,7 @@ package model
 import (
 	"database/sql"
 	"golang.org/x/crypto/bcrypt"
+	"github.com/ysitd-cloud/account/setup"
 )
 
 type User struct {
@@ -10,12 +11,10 @@ type User struct {
 	DisplayName string `json:"display_name"`
 	Email string `json:"email"`
 	AvatarUrl string `json:"avatar_url"`
-	password string `json:"-"`
-	db *sql.DB `json:"-"`
 }
 
 func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
-	query := "SELECT username, password, display_name, email, avatar_url FROM users WHERE username = $1"
+	query := "SELECT username, display_name, email, avatar_url FROM users WHERE username = $1"
 	stmt, err := db.Prepare(query)
 	if err != nil {
 		return nil, err
@@ -26,13 +25,12 @@ func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
 }
 
 func LoadFromRow(row *sql.Row) (*User, error) {
-	var username, displayName, email, avatarUrl, password string
-	if err := row.Scan(&username, &password, &displayName, &email, &avatarUrl); err != nil {
+	var username, displayName, email, avatarUrl string
+	if err := row.Scan(&username, &displayName, &email, &avatarUrl); err != nil {
 		return nil, err
 	}
 	user := &User {
 		Username: username,
-		password: password,
 		DisplayName: displayName,
 		Email: email,
 		AvatarUrl: avatarUrl,
@@ -42,5 +40,17 @@ func LoadFromRow(row *sql.Row) (*User, error) {
 }
 
 func (user *User) ValidatePassword(password string) bool {
-	return bcrypt.CompareHashAndPassword([]byte(user.password), []byte(password)) == nil
+	var hash string
+	query := "SELECT password FROM user_auth WHERE username = $1";
+	db, err := setup.SetupDB()
+	if err != nil {
+		return false
+	}
+
+	row := db.QueryRow(query, user.Username)
+	if err := row.Scan(&hash); err != nil {
+		return false
+	}
+
+	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(password)) == nil
 }
