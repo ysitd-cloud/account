@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/RangelReale/osin"
-	"github.com/ysitd-cloud/account/middlewares"
+	"github.com/ysitd-cloud/account/http/middlewares"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 

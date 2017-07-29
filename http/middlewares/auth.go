@@ -24,7 +24,24 @@ func LoginOrRedirect(c *gin.Context) {
 	c.Abort()
 }
 
-func AuthToken(c *gin.Context) {
+func BearerToken(c *gin.Context) {
+	token := c.MustGet("authorization.value").(string)
+	server := c.MustGet("osin.server").(*osin.Server)
+
+	if c.MustGet("authorization.type").(string) != "bearer" {
+		c.Next()
+		return
+	}
+
+	if access, err := server.Storage.LoadAccess(token); err != nil {
+		c.AbortWithStatus(http.StatusForbidden)
+	} else {
+		c.Set("oauth.access", access)
+		c.Next()
+	}
+}
+
+func ContainsAuthHeader(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
 		c.AbortWithStatus(http.StatusForbidden)
@@ -36,12 +53,16 @@ func AuthToken(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	token := pieces[1]
-	server := c.MustGet("osin.server").(*osin.Server)
-	if access, err := server.Storage.LoadAccess(token); err != nil {
-		c.AbortWithStatus(http.StatusForbidden)
-	} else {
-		c.Set("oauth.access", access)
-		c.Next()
+
+	authType := pieces[0]
+
+	if authType != "bearer" && authType != "token" {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
 	}
+
+	c.Set("authorization.type", authType)
+	c.Set("authorization.value", pieces[1])
+
+	c.Next()
 }

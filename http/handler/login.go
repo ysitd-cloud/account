@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/ysitd-cloud/account/middlewares"
+	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/model"
 	"gopkg.in/gin-gonic/gin.v1"
 )
