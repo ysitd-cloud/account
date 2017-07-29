@@ -1,5 +1,5 @@
-hash: a5f46d27ebe12d419838c30aaed113c60cc8cf36c628fb0ac2a552d8cd9be926
-updated: 2017-07-17T23:00:28.895586167+08:00
+hash: c313a5d427371de8cd86e9865d90ca8a595037d3408745dcc7d6078b69b997c2
+updated: 2017-07-30T02:06:42.850415353+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -78,6 +78,8 @@ imports:
   - codec
 - name: github.com/ysitd-cloud/gin-sessions
   version: 07db2975490d8dc0e0aadad0bf53dccb9289d10d
+- name: github.com/ysitd-cloud/judge-go-client
+  version: b2a94a421d2091d5b15c65bb04025149c8c9b163
 - name: golang.org/x/crypto
   version: dd85ac7e6a88fc6ca420478e934de5f1a42dd3c6
   subpackages:
