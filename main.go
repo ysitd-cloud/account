@@ -4,8 +4,7 @@ import (
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/ysitd-cloud/account/handler"
-	"github.com/ysitd-cloud/account/middlewares"
+	"github.com/ysitd-cloud/account/http"
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
@@ -13,30 +12,7 @@ func main() {
 	app := gin.Default()
 	app.LoadHTMLGlob("views/*.tmpl")
 
-	app.Use(middlewares.DB())
-	app.Use(middlewares.Sessions())
-	app.Use(middlewares.Osin())
-
-	app.GET("/authorize",
-		handler.HandleAuthorize,
-		middlewares.LoginOrRedirect,
-		handler.HandleAuthorizeApprove,
-	)
-	app.POST("/authorize",
-		handler.HandleAuthorize,
-		middlewares.LoginOrRedirect,
-		handler.HandleAuthorizeApprove,
-	)
-
-	app.POST("/token", handler.HandleTokenRequest)
-	app.GET("/login", handler.LoginForm)
-	app.POST("/login", handler.LoginPost)
-
-	app.GET("/user/:user",
-		middlewares.AuthToken,
-		handler.CheckGetUserAccess,
-		handler.GetUser,
-	)
+	http.Register(app)
 
 	app.Run(":" + os.Getenv("PORT"))
 }
