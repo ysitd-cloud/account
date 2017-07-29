@@ -1,12 +1,12 @@
 package middlewares
 
 import (
-	"net/http"
 	"gopkg.in/gin-gonic/gin.v1"
+	"net/http"
 )
 
 func RequireLogin() gin.HandlerFunc {
-	return func (c *gin.Context) {
+	return func(c *gin.Context) {
 		session := GetSession(c)
 		if session.Exists("username") {
 			c.Next()

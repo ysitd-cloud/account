@@ -1,10 +1,10 @@
 package handler
 
 import (
-	"log"
 	"github.com/RangelReale/osin"
-	"gopkg.in/gin-gonic/gin.v1"
 	"github.com/ysitd-cloud/account/middlewares"
+	"gopkg.in/gin-gonic/gin.v1"
+	"log"
 )
 
 func HandleAuthorize(c *gin.Context) {

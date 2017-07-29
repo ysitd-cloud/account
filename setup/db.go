@@ -1,10 +1,10 @@
 package setup
 
 import (
-	_ "github.com/lib/pq"
 	"database/sql"
-	"os"
 	"github.com/garyburd/redigo/redis"
+	_ "github.com/lib/pq"
+	"os"
 	"strconv"
 )
 
@@ -33,8 +33,8 @@ func SetupRedis() (*redis.Pool, error) {
 		return nil, err
 	}
 
-	pool := &redis.Pool {
-		Dial: func () (redis.Conn, error){
+	pool := &redis.Pool{
+		Dial: func() (redis.Conn, error) {
 			return redis.Dial("tcp", address, redis.DialDatabase(dbNo))
 		},
 	}

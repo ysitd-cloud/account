@@ -1,13 +1,13 @@
 package handler
 
 import (
+	"database/sql"
+	"github.com/ysitd-cloud/account/middlewares"
+	"github.com/ysitd-cloud/account/model"
+	"gopkg.in/gin-gonic/gin.v1"
+	"html/template"
 	"log"
 	"net/http"
-	"database/sql"
-	"html/template"
-	"gopkg.in/gin-gonic/gin.v1"
-	"github.com/ysitd-cloud/account/model"
-	"github.com/ysitd-cloud/account/middlewares"
 	"net/url"
 )
 

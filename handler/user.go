@@ -2,10 +2,10 @@ package handler
 
 import (
 	"database/sql"
-	"net/http"
-	"gopkg.in/gin-gonic/gin.v1"
-	"github.com/ysitd-cloud/account/model"
 	"github.com/RangelReale/osin"
+	"github.com/ysitd-cloud/account/model"
+	"gopkg.in/gin-gonic/gin.v1"
+	"net/http"
 )
 
 func CheckGetUserAccess(c *gin.Context) {

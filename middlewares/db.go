@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-	"gopkg.in/gin-gonic/gin.v1"
 	"github.com/ysitd-cloud/account/setup"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func DB() gin.HandlerFunc {
@@ -11,7 +11,7 @@ func DB() gin.HandlerFunc {
 		panic(err)
 	}
 
-	return func (c *gin.Context) {
+	return func(c *gin.Context) {
 		c.Set("db", db)
 		c.Next()
 	}

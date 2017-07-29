@@ -2,8 +2,8 @@ package storage
 
 import (
 	"github.com/RangelReale/osin"
-	"github.com/satori/go.uuid"
 	"github.com/garyburd/redigo/redis"
+	"github.com/satori/go.uuid"
 )
 
 func (s *Store) SaveAccess(data *osin.AccessData) (err error) {

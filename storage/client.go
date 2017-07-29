@@ -1,11 +1,11 @@
 package storage
 
 import (
-	"fmt"
 	"database/sql"
+	"fmt"
 	"github.com/RangelReale/osin"
-	"github.com/ory-am/common/pkg"
 	"github.com/go-errors/errors"
+	"github.com/ory-am/common/pkg"
 )
 
 func (s *Store) GetClient(id string) (osin.Client, error) {

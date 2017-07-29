@@ -2,13 +2,13 @@ package storage
 
 import (
 	"database/sql"
-	"github.com/garyburd/redigo/redis"
 	"fmt"
 	"github.com/RangelReale/osin"
+	"github.com/garyburd/redigo/redis"
 )
 
 type Store struct {
-	DB *sql.DB
+	DB    *sql.DB
 	Redis *redis.Pool
 }
 

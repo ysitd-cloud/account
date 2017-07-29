@@ -5,7 +5,7 @@ import (
 	"github.com/ysitd-cloud/account/storage"
 )
 
-func SetupOsinServer() (*osin.Server) {
+func SetupOsinServer() *osin.Server {
 	db, err := SetupDB()
 	if err != nil {
 		panic(err)

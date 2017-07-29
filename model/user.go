@@ -2,15 +2,15 @@ package model
 
 import (
 	"database/sql"
-	"golang.org/x/crypto/bcrypt"
 	"github.com/ysitd-cloud/account/setup"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	Username string `json:"username"`
+	Username    string `json:"username"`
 	DisplayName string `json:"display_name"`
-	Email string `json:"email"`
-	AvatarUrl string `json:"avatar_url"`
+	Email       string `json:"email"`
+	AvatarUrl   string `json:"avatar_url"`
 }
 
 func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
@@ -29,11 +29,11 @@ func LoadFromRow(row *sql.Row) (*User, error) {
 	if err := row.Scan(&username, &displayName, &email, &avatarUrl); err != nil {
 		return nil, err
 	}
-	user := &User {
-		Username: username,
+	user := &User{
+		Username:    username,
 		DisplayName: displayName,
-		Email: email,
-		AvatarUrl: avatarUrl,
+		Email:       email,
+		AvatarUrl:   avatarUrl,
 	}
 
 	return user, nil
@@ -41,7 +41,7 @@ func LoadFromRow(row *sql.Row) (*User, error) {
 
 func (user *User) ValidatePassword(password string) bool {
 	var hash string
-	query := "SELECT password FROM user_auth WHERE username = $1";
+	query := "SELECT password FROM user_auth WHERE username = $1"
 	db, err := setup.SetupDB()
 	if err != nil {
 		return false

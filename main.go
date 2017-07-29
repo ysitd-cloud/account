@@ -2,10 +2,10 @@ package main
 
 import (
 	_ "github.com/joho/godotenv/autoload"
-	"os"
-	"gopkg.in/gin-gonic/gin.v1"
-	"github.com/ysitd-cloud/account/middlewares"
 	"github.com/ysitd-cloud/account/handler"
+	"github.com/ysitd-cloud/account/middlewares"
+	"gopkg.in/gin-gonic/gin.v1"
+	"os"
 )
 
 func main() {
