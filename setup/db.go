@@ -2,10 +2,11 @@ package setup
 
 import (
 	"database/sql"
-	"github.com/garyburd/redigo/redis"
-	_ "github.com/lib/pq"
 	"os"
 	"strconv"
+
+	"github.com/garyburd/redigo/redis"
+	_ "github.com/lib/pq"
 )
 
 func SetupDB() (*sql.DB, error) {

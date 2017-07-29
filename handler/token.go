@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+
 	"github.com/RangelReale/osin"
 	"gopkg.in/gin-gonic/gin.v1"
 )

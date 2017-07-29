@@ -2,13 +2,14 @@ package handler
 
 import (
 	"database/sql"
-	"github.com/ysitd-cloud/account/middlewares"
-	"github.com/ysitd-cloud/account/model"
-	"gopkg.in/gin-gonic/gin.v1"
 	"html/template"
 	"log"
 	"net/http"
 	"net/url"
+
+	"github.com/ysitd-cloud/account/middlewares"
+	"github.com/ysitd-cloud/account/model"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func LoginForm(c *gin.Context) {

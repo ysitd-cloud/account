@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+
 	"github.com/ysitd-cloud/account/setup"
 	"golang.org/x/crypto/bcrypt"
 )

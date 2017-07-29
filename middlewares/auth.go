@@ -1,11 +1,12 @@
 package middlewares
 
 import (
-	"github.com/RangelReale/osin"
-	"gopkg.in/gin-gonic/gin.v1"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/RangelReale/osin"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func LoginOrRedirect(c *gin.Context) {
