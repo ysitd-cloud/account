@@ -5,7 +5,7 @@ import (
 	"gopkg.in/gin-gonic/gin.v1"
 )
 
-func Register(app *gin.Engine) {
+func Register(app *gin.RouterGroup) {
 	app.GET("/user",
 		middlewares.ContainsAuthHeader,
 		middlewares.BearerToken,
