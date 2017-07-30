@@ -14,6 +14,39 @@ type User struct {
 	AvatarUrl   string `json:"avatar_url"`
 }
 
+func ListUserFromDB(db *sql.DB) ([]*User, error) {
+	query := "SELECT username, display_name, email, avatar_uri FROM users"
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, err
+	}
+
+	var users []*User
+
+	defer rows.Close()
+	for rows.Next() {
+		var username, displayName, email, avatarUrl string
+		if err := rows.Scan(&username, &displayName, &email, &avatarUrl); err != nil {
+			return nil, err
+		}
+		user := &User{
+			Username:    username,
+			DisplayName: displayName,
+			Email:       email,
+			AvatarUrl:   avatarUrl,
+		}
+
+		users = append(users, user)
+	}
+
+	return users, nil
+}
+
 func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
 	query := "SELECT username, display_name, email, avatar_url FROM users WHERE username = $1"
 	stmt, err := db.Prepare(query)
