@@ -11,6 +11,7 @@ func Register(app *gin.Engine) {
 	app.Use(middlewares.DB())
 	app.Use(middlewares.Sessions())
 	app.Use(middlewares.Osin())
+	app.Use(middlewares.Judge())
 
 	app.GET("/authorize",
 		handler.HandleAuthorize,
