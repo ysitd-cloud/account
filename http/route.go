@@ -21,6 +21,6 @@ func Register(app *gin.Engine) {
 
 	{
 		oauth := app.Group("/oauth")
-		registerApi(oauth)
+		registerOAuth(oauth)
 	}
 }
