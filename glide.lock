@@ -1,5 +1,5 @@
 hash: c313a5d427371de8cd86e9865d90ca8a595037d3408745dcc7d6078b69b997c2
-updated: 2017-07-30T02:06:42.850415353+08:00
+updated: 2017-07-30T16:02:55.416611867+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -49,14 +49,20 @@ imports:
   - oid
 - name: github.com/mattn/go-isatty
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/moul/http2curl
+  version: 4e24498b31dba4683efb9d35c1c8a91e2eda28c8
 - name: github.com/oleiade/reflections
   version: 2b6ec3da648e3e834dc41bad8d9ed7f2dc6a9496
 - name: github.com/ory-am/common
   version: b6357395e30805e2ad1f6d8fb759fa2b7146d8da
   subpackages:
   - pkg
+- name: github.com/parnurzeal/gorequest
+  version: a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3
 - name: github.com/pborman/uuid
   version: e790cca94e6cc75c7064b1332e63811d4aae1a53
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/pmezard/go-difflib
   version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
@@ -79,12 +85,16 @@ imports:
 - name: github.com/ysitd-cloud/gin-sessions
   version: 07db2975490d8dc0e0aadad0bf53dccb9289d10d
 - name: github.com/ysitd-cloud/judge-go-client
-  version: b2a94a421d2091d5b15c65bb04025149c8c9b163
+  version: eb7404c0578283790fc5c125481c33522c5bad29
 - name: golang.org/x/crypto
   version: dd85ac7e6a88fc6ca420478e934de5f1a42dd3c6
   subpackages:
   - bcrypt
   - blowfish
+- name: golang.org/x/net
+  version: f5079bd7f6f74e23c4d65efa0f4ce14cbd6a3c0f
+  subpackages:
+  - publicsuffix
 - name: golang.org/x/sys
   version: abf9c25f54453410d0c6668e519582a9e1115027
   subpackages:

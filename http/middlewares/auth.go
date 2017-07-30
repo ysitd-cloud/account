@@ -42,10 +42,11 @@ func JudgeToken(action, resource string) gin.HandlerFunc {
 			return
 		}
 		subjectType := judge.SubjectType(pieces[0])
-		subject := pieces[1]
+		subjectID := pieces[1]
 		client :=
 			c.MustGet("judge").(judge.Client)
-		result, reason, errors := client.Judge(subject, subjectType, action, resource, token)
+		subject := judge.NewSubject(subjectID, subjectType)
+		result, reason, errors := client.Judge(subject, action, resource, token)
 		if len(errors) > 0 {
 			c.AbortWithError(http.StatusBadGateway, errors[0])
 			return
