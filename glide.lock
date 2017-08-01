@@ -1,5 +1,5 @@
-hash: c313a5d427371de8cd86e9865d90ca8a595037d3408745dcc7d6078b69b997c2
-updated: 2017-07-30T16:02:55.416611867+08:00
+hash: 14ff3e9a903388d672fe57938286b8b25aa9662f44d39ec9c6deddb12acf266b
+updated: 2017-08-02T04:42:52.312772695+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -9,10 +9,16 @@ imports:
   - memcache
 - name: github.com/bradleypeabody/gorilla-sessions-memcache
   version: 75ee37df8664a47cd5d9eb84d41e1f2b08086893
+- name: github.com/CloudyKit/fastprinter
+  version: 74b38d55f37af5d6c05ca11147d616b613a3420e
+- name: github.com/CloudyKit/jet
+  version: 93b0e830ecf4c3f6102e1a69c6ea3bafa37aee7c
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
+- name: github.com/fatih/structs
+  version: a720dfa8df582c51dee1b36feabb906bde1588bd
 - name: github.com/garyburd/redigo
   version: 433969511232c397de61b1442f9fd49ec06ae9ba
   subpackages:
@@ -82,6 +88,8 @@ imports:
   version: 5efa3251c7f7d05e5d9704a69a984ec9f1386a40
   subpackages:
   - codec
+- name: github.com/ysitd-cloud/gin-jet
+  version: 2aa31e2cc105b4fda23707080b859842cb9ab03c
 - name: github.com/ysitd-cloud/gin-sessions
   version: 07db2975490d8dc0e0aadad0bf53dccb9289d10d
 - name: github.com/ysitd-cloud/judge-go-client
@@ -101,6 +109,8 @@ imports:
   - unix
 - name: gopkg.in/gin-gonic/gin.v1
   version: d459835d2b077e44f7c9b453505ee29881d5d12d
+  subpackages:
+  - render
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
