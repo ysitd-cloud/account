@@ -2,11 +2,11 @@ package handler
 
 import (
 	"database/sql"
-	"html/template"
 	"log"
 	"net/http"
 	"net/url"
 
+	"github.com/ysitd-cloud/account/http/helper"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/model"
 	"gopkg.in/gin-gonic/gin.v1"
@@ -17,9 +17,7 @@ func LoginForm(c *gin.Context) {
 	session := middlewares.GetSession(c)
 	nextUrl := c.DefaultQuery("next", "/")
 	if !session.Exists("username") {
-		c.HTML(http.StatusOK, "login.tmpl", gin.H{
-			"next": template.URL(nextUrl),
-		})
+		helper.RenderAppView(c, http.StatusOK, "account.login", "YSITD Cloud Login")
 	} else {
 		c.Redirect(http.StatusFound, nextUrl)
 	}
