@@ -14,7 +14,7 @@ func RenderAppView(c *gin.Context, code int, view, title string) {
 	vars := make(jet.VarMap)
 	vars.Set("title", title)
 	vars.Set("view", view)
-	vars.Set("script", fmt.Sprintf("%s/%s/app.js", host, view))
-	vars.Set("style", fmt.Sprintf("%s/%s/app.css", host, view))
+	vars.Set("script", fmt.Sprintf("%s/assets/%s/app.js", host, view))
+	vars.Set("style", fmt.Sprintf("%s/assets/%s/app.css", host, view))
 	c.HTML(code, "app.jet", vars)
 }
