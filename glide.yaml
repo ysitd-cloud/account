@@ -22,3 +22,6 @@ import:
   - pkg
 - package: github.com/ysitd-cloud/judge-go-client
 - package: github.com/ysitd-cloud/gin-jet
+- package: github.com/golang/groupcache
+  subpackages:
+  - lru

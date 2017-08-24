@@ -1,5 +1,5 @@
-hash: 14ff3e9a903388d672fe57938286b8b25aa9662f44d39ec9c6deddb12acf266b
-updated: 2017-08-02T04:42:52.312772695+08:00
+hash: 49a01c215afa984fbe1630e608c91131f54fb98d1acf6ceb9e941f72d3cbe550
+updated: 2017-08-24T19:08:55.019008862+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -27,12 +27,16 @@ imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
-  version: 65a6dd46a50bd435597b5bcababd1b2a811c9073
+  version: d459835d2b077e44f7c9b453505ee29881d5d12d
   subpackages:
   - binding
   - render
 - name: github.com/go-errors/errors
   version: 8fa88b06e5974e97fbf9899a7f86a344bfd1f105
+- name: github.com/golang/groupcache
+  version: b710c8433bd175204919eb38776e944233235d03
+  subpackages:
+  - lru
 - name: github.com/golang/protobuf
   version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
   subpackages:
@@ -47,8 +51,6 @@ imports:
   version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
   subpackages:
   - autoload
-- name: github.com/json-iterator/go
-  version: 8b0360418449ea45a97fd198b3ee29dcbf4dca65
 - name: github.com/lib/pq
   version: dd1fe2071026ce53f36a39112e645b4d4f5793a4
   subpackages:
@@ -109,8 +111,6 @@ imports:
   - unix
 - name: gopkg.in/gin-gonic/gin.v1
   version: d459835d2b077e44f7c9b453505ee29881d5d12d
-  subpackages:
-  - render
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
