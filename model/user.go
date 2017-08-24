@@ -49,12 +49,7 @@ func ListUserFromDB(db *sql.DB) ([]*User, error) {
 
 func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
 	query := "SELECT username, display_name, email, avatar_url FROM users WHERE username = $1"
-	stmt, err := db.Prepare(query)
-	if err != nil {
-		return nil, err
-	}
-
-	row := stmt.QueryRow(username)
+	row := db.QueryRow(query, username)
 	return LoadFromRow(row)
 }
 
