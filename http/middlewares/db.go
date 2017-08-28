@@ -6,12 +6,11 @@ import (
 )
 
 func DB() gin.HandlerFunc {
-	db, err := setup.SetupDB()
-	if err != nil {
-		panic(err)
-	}
-
 	return func(c *gin.Context) {
+		db, err := setup.SetupDB()
+		if err != nil {
+			panic(err)
+		}
 		c.Set("db", db)
 		c.Next()
 	}
