@@ -11,6 +11,8 @@ func DB() gin.HandlerFunc {
 		if err != nil {
 			panic(err)
 		}
+
+		defer db.Close()
 		c.Set("db", db)
 		c.Next()
 	}

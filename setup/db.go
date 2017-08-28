@@ -15,6 +15,13 @@ func SetupDB() (*sql.DB, error) {
 		return nil, err
 	}
 
+	for db.Ping() != nil {
+		db2, err2 := SetupDB()
+		db.Close()
+		db = db2
+		err = err2
+	}
+
 	return db, nil
 }
 

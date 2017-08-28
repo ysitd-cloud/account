@@ -6,8 +6,8 @@ import (
 )
 
 func Osin() gin.HandlerFunc {
-	server := setup.SetupOsinServer()
 	return func(c *gin.Context) {
+		server := setup.SetupOsinServer()
 		c.Set("osin.server", server)
 		c.Next()
 	}
