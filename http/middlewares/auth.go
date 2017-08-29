@@ -66,6 +66,31 @@ func JudgeToken(action, resource string) gin.HandlerFunc {
 	}
 }
 
+func ContainsJudgeHeader(c *gin.Context) {
+	authHeader := c.GetHeader("Authorization")
+	if authHeader == "" {
+		c.AbortWithStatus(http.StatusForbidden)
+		return
+	}
+
+	pieces := strings.Split(authHeader, " ")
+	if len(pieces) != 2 {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	authType := strings.ToLower(pieces[0])
+	if authType != "judge" {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	c.Set("authorization.type", authType)
+	c.Set("authorization.value", pieces[1])
+
+	c.Next()
+}
+
 func ContainsAuthHeader(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
