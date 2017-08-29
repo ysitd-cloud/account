@@ -6,11 +6,12 @@ import (
 )
 
 func Register(app *gin.RouterGroup) {
-	app.GET("/user",
+	app.GET("/user/info", getUserInfo)
+	app.GET("/users",
 		middlewares.JudgeToken("list", "cloud.ysitd.account.user"),
 		listUsers,
 	)
-	group := app.Group("/user")
+	group := app.Group("/users")
 	bindGroup(group)
 }
 
