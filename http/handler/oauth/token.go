@@ -16,6 +16,8 @@ func HandleTokenRequest(c *gin.Context) {
 		switch req.Type {
 		case osin.AUTHORIZATION_CODE:
 			req.Authorized = true
+			resp.Output["user"] = req.AuthorizeData.UserData.(string)
+			req.UserData = resp.Output["user"]
 		case osin.REFRESH_TOKEN:
 			req.Authorized = true
 		case osin.PASSWORD:
@@ -25,8 +27,6 @@ func HandleTokenRequest(c *gin.Context) {
 		case osin.CLIENT_CREDENTIALS:
 			req.Authorized = true
 		}
-		resp.Output["user"] = req.AuthorizeData.UserData.(string)
-		req.UserData = resp.Output["user"]
 		server.FinishAccessRequest(resp, c.Request, req)
 	}
 
