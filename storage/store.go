@@ -26,7 +26,6 @@ func (s *Store) Clone() osin.Storage {
 
 func (s *Store) Close() {
 	s.DB.Close()
-	s.Redis.Close()
 }
 
 func makeKey(namespace, id string) string {
