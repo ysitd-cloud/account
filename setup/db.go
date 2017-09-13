@@ -5,18 +5,24 @@ import (
 	"os"
 	"strconv"
 
+	"time"
+
 	"github.com/garyburd/redigo/redis"
 	_ "github.com/lib/pq"
 )
 
+func OpenDB() (*sql.DB, error) {
+	return sql.Open("postgres", os.Getenv("DB_URL"))
+}
+
 func SetupDB() (*sql.DB, error) {
-	db, err := sql.Open("postgres", os.Getenv("DB_URL"))
+	db, err := OpenDB()
 	if err != nil {
 		return nil, err
 	}
 
 	for db.Ping() != nil {
-		db2, err2 := SetupDB()
+		db2, err2 := OpenDB()
 		db.Close()
 		db = db2
 		err = err2
@@ -25,15 +31,11 @@ func SetupDB() (*sql.DB, error) {
 	return db, nil
 }
 
-func SetupRedis() (*redis.Pool, error) {
-	address := os.Getenv("REDIS_ADDRESS")
-	if address == "" {
-		address = "localhost:6379"
-	}
+var redisPool *redis.Pool = nil
 
-	db := os.Getenv("REDIS_DB")
-	if db == "" {
-		db = "0"
+func SetupRedis(address, db string) (*redis.Pool, error) {
+	if redisPool != nil {
+		return redisPool, nil
 	}
 
 	dbNo, err := strconv.Atoi(db)
@@ -45,7 +47,13 @@ func SetupRedis() (*redis.Pool, error) {
 		Dial: func() (redis.Conn, error) {
 			return redis.Dial("tcp", address, redis.DialDatabase(dbNo))
 		},
+		TestOnBorrow: func(c redis.Conn, _ time.Time) (err error) {
+			_, err = c.Do("PING")
+			return
+		},
 	}
+
+	redisPool = pool
 
 	return pool, nil
 }

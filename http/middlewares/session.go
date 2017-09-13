@@ -9,15 +9,15 @@ import (
 	sessions "github.com/ysitd-cloud/gin-sessions"
 )
 
+var SESSION_NAME string = os.Getenv("SESSION_NAME")
+
 func Sessions() gin.HandlerFunc {
 	store, err := setup.SetupSessionStore()
 	if err != nil {
 		panic(err)
 	}
 
-	name := os.Getenv("SESSION_NAME")
-
-	return sessions.Sessions(name, store, true)
+	return sessions.Sessions(SESSION_NAME, store, true)
 }
 
 func GetSession(c *gin.Context) sessions.Session {

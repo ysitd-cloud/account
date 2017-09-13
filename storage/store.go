@@ -3,6 +3,7 @@ package storage
 import (
 	"database/sql"
 	"fmt"
+
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
 )

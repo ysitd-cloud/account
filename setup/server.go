@@ -6,22 +6,43 @@ import (
 )
 
 func SetupOsinServer() *osin.Server {
+	store := SetupOsinStore()
+
+	config := SetupOsinServerConfig()
+
+	return osin.NewServer(config, store)
+}
+
+func SetupOsinStore() osin.Storage {
 	db, err := SetupDB()
 	if err != nil {
 		panic(err)
 	}
+	address := REDIS_ADDRESS
+	if address == "" {
+		address = "localhost:6379"
+	}
 
-	redis, err := SetupRedis()
+	redisDB := REDIS_DB
+	if redisDB == "" {
+		redisDB = "0"
+	}
+	redis, err := SetupRedis(address, redisDB)
 	if err != nil {
 		panic(err)
 	}
 
-	store := storage.NewStore(db, redis)
+	return storage.NewStore(db, redis)
+}
 
-	config := osin.NewServerConfig()
+var config *osin.ServerConfig = nil
+
+func SetupOsinServerConfig() *osin.ServerConfig {
+	if config != nil {
+		return config
+	}
+	config = osin.NewServerConfig()
 	config.AllowedAccessTypes = osin.AllowedAccessType{osin.AUTHORIZATION_CODE, osin.REFRESH_TOKEN}
 	config.AllowClientSecretInParams = true
 	config.ErrorStatusCode = 400
-
-	return osin.NewServer(config, store)
 }
