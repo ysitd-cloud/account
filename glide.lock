@@ -1,6 +1,8 @@
-hash: 4fec75389aec2780c016c3673762af0c02c2b1c6a58939a8a095f4283f2a4854
-updated: 2017-09-14T14:34:03.300520374+08:00
+hash: a277ba7e468b534cb1c61fd6c9f7a1274647e5274faa8b77ae0cf1aa37068da2
+updated: 2017-09-14T14:51:15.241513881+08:00
 imports:
+- name: github.com/boj/redistore
+  version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/CloudyKit/fastprinter
   version: 74b38d55f37af5d6c05ca11147d616b613a3420e
 - name: github.com/CloudyKit/jet
@@ -16,6 +18,8 @@ imports:
   subpackages:
   - internal
   - redis
+- name: github.com/gin-contrib/pprof
+  version: cea200e02ddddca4b843d75d32aa13c413549de9
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
@@ -86,6 +90,8 @@ imports:
   version: 2aa31e2cc105b4fda23707080b859842cb9ab03c
 - name: github.com/ysitd-cloud/gin-sessions
   version: 2ceccd6fa98bbeada774d8875056c817889afffb
+  subpackages:
+  - redis
 - name: github.com/ysitd-cloud/judge-go-client
   version: eb7404c0578283790fc5c125481c33522c5bad29
 - name: golang.org/x/crypto
