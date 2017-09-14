@@ -4,10 +4,10 @@ import (
 	"os"
 
 	"github.com/CloudyKit/jet"
+	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/ysitd-cloud/account/http"
 	render "github.com/ysitd-cloud/gin-jet"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func main() {

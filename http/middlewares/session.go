@@ -3,7 +3,7 @@ package middlewares
 import (
 	"os"
 
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 
 	"github.com/ysitd-cloud/account/setup"
 	sessions "github.com/ysitd-cloud/gin-sessions"

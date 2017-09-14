@@ -1,14 +1,6 @@
-hash: 49a01c215afa984fbe1630e608c91131f54fb98d1acf6ceb9e941f72d3cbe550
-updated: 2017-09-13T12:24:15.184417323+08:00
+hash: 4fec75389aec2780c016c3673762af0c02c2b1c6a58939a8a095f4283f2a4854
+updated: 2017-09-14T14:34:03.300520374+08:00
 imports:
-- name: github.com/boj/redistore
-  version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
-- name: github.com/bradfitz/gomemcache
-  version: 1952afaa557dc08e8e0d89eafab110fb501c1a2b
-  subpackages:
-  - memcache
-- name: github.com/bradleypeabody/gorilla-sessions-memcache
-  version: 75ee37df8664a47cd5d9eb84d41e1f2b08086893
 - name: github.com/CloudyKit/fastprinter
   version: 74b38d55f37af5d6c05ca11147d616b613a3420e
 - name: github.com/CloudyKit/jet
@@ -93,7 +85,7 @@ imports:
 - name: github.com/ysitd-cloud/gin-jet
   version: 2aa31e2cc105b4fda23707080b859842cb9ab03c
 - name: github.com/ysitd-cloud/gin-sessions
-  version: 07db2975490d8dc0e0aadad0bf53dccb9289d10d
+  version: 2ceccd6fa98bbeada774d8875056c817889afffb
 - name: github.com/ysitd-cloud/judge-go-client
   version: eb7404c0578283790fc5c125481c33522c5bad29
 - name: golang.org/x/crypto
@@ -106,11 +98,9 @@ imports:
   subpackages:
   - publicsuffix
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
   subpackages:
   - unix
-- name: gopkg.in/gin-gonic/gin.v1
-  version: d459835d2b077e44f7c9b453505ee29881d5d12d
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2

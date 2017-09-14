@@ -1,9 +1,9 @@
 package http
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/handler/oauth"
 	"github.com/ysitd-cloud/account/http/middlewares"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func registerOAuth(group *gin.RouterGroup) {

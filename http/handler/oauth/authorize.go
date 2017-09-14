@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/RangelReale/osin"
+	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/middlewares"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func HandleAuthorize(c *gin.Context) {

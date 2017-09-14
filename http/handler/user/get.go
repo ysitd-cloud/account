@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/ysitd-cloud/account/model"
-	"gopkg.in/gin-gonic/gin.v1"
 	"github.com/RangelReale/osin"
+	"github.com/gin-gonic/gin"
+	"github.com/ysitd-cloud/account/model"
 )
 
 func getUser(c *gin.Context) {

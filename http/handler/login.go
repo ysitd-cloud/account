@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/helper"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/model"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func LoginForm(c *gin.Context) {

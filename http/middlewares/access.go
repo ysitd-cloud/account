@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/RangelReale/osin"
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 )
 
 func CheckGetUserAccess(c *gin.Context) {

@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/model"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func listUsers(c *gin.Context) {

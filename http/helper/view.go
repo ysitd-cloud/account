@@ -10,9 +10,9 @@ import (
 	"net/http"
 
 	"github.com/CloudyKit/jet"
+	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/lru"
 	"github.com/parnurzeal/gorequest"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 var host string = os.Getenv("STATIC_ADDRESS")

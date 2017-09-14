@@ -1,8 +1,8 @@
 package middlewares
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/setup"
-	"gopkg.in/gin-gonic/gin.v1"
 )
 
 func Osin() gin.HandlerFunc {
