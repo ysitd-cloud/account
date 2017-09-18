@@ -4,10 +4,11 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/RangelReale/osin"
-	"github.com/ysitd-cloud/account/model"
-	"gopkg.in/gin-gonic/gin.v1"
 	"time"
+
+	"github.com/RangelReale/osin"
+	"github.com/gin-gonic/gin"
+	"github.com/ysitd-cloud/account/model"
 )
 
 type tokenInfo struct {

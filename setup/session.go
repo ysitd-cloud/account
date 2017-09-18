@@ -1,8 +1,10 @@
 package setup
 
 import (
-	sessions "github.com/ysitd-cloud/gin-sessions"
 	"os"
+
+	"github.com/ysitd-cloud/gin-sessions"
+	"github.com/ysitd-cloud/gin-sessions/redis"
 )
 
 var store sessions.Store = nil
@@ -28,6 +30,6 @@ func SetupSessionStore() (sessions.Store, error) {
 		return nil, err
 	}
 	secret := os.Getenv("SESSION_SECRET")
-	store, err = sessions.NewRedisStoreWithPool(pool, []byte(secret))
+	store, err = redis.NewRedisStoreWithPool(pool, []byte(secret))
 	return store, err
 }

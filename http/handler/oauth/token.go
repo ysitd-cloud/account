@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/RangelReale/osin"
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 )
 
 func HandleTokenRequest(c *gin.Context) {
