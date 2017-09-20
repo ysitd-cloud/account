@@ -14,7 +14,6 @@ func Register(app *gin.Engine) {
 	app.Use(middlewares.Judge())
 	login.Register(app)
 	connect.Register(app)
-
 	{
 		api := app.Group("/api")
 		registerApi(api)
