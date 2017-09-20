@@ -109,6 +109,8 @@ func getAllJS(assets []*appAsset) (js []string) {
 
 func getAllCSS(assets []*appAsset) (css []string) {
 	css = make([]string, 0, 3)
+	css = append(css, "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons")
+	css = append(css, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
 	for _, asset := range assets {
 		if asset.CSS != "" {
 			css = append(css, asset.CSS)
@@ -132,8 +134,6 @@ func RenderAppView(c *gin.Context, code int, view, title string) {
 
 	vars.Set("title", title)
 	vars.Set("view", view)
-	vars.Set("script", fmt.Sprintf("%s/%s/app.js", staticPath, view))
-	vars.Set("style", fmt.Sprintf("%s/%s/app.css", staticPath, view))
 	vars.Set("staticPath", staticPath)
 	c.HTML(code, "app.jet", vars)
 }
