@@ -12,10 +12,11 @@ type Provider struct {
 	Scopes       []string `json:"scopes"`
 	Name         string   `json:"name"`
 	RedirectURL  string   `json:"redirect_url"`
+	Icon         string   `json:"icon"`
 }
 
 func ListProvider(db *sql.DB) ([]*Provider, error) {
-	query := "SELECT id, client_id, client_secret, scopes, name, redirect_url FROM connect"
+	query := "SELECT id, client_id, client_secret, scopes, name, redirect_url, icon FROM connect"
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
@@ -24,8 +25,8 @@ func ListProvider(db *sql.DB) ([]*Provider, error) {
 	defer rows.Close()
 	var providers []*Provider
 	for rows.Next() {
-		var id, clientId, clientSecret, scopes, name, redirectURL string
-		if err := rows.Scan(&id, &clientId, &clientSecret, &scopes, &name, &redirectURL); err != nil {
+		var id, clientId, clientSecret, scopes, name, redirectURL, icon string
+		if err := rows.Scan(&id, &clientId, &clientSecret, &scopes, &name, &redirectURL, &icon); err != nil {
 			return nil, err
 		}
 
@@ -36,6 +37,7 @@ func ListProvider(db *sql.DB) ([]*Provider, error) {
 			Scopes:       processScope(scopes),
 			Name:         name,
 			RedirectURL:  redirectURL,
+			Icon:         icon,
 		}
 
 		providers = append(providers, provider)
@@ -45,10 +47,10 @@ func ListProvider(db *sql.DB) ([]*Provider, error) {
 }
 
 func GetProviderByID(db *sql.DB, id string) (*Provider, error) {
-	query := "SELECT client_id, client_secret, scopes, name, redirect_url FROM connect WHERE id = $1"
+	query := "SELECT client_id, client_secret, scopes, name, redirect_url, icon FROM connect WHERE id = $1"
 	row := db.QueryRow(query, id)
-	var clientId, clientSecret, scope, name, redirectURL string
-	if err := row.Scan(&id, &clientId, &clientSecret, &scope, &name, &redirectURL); err != nil {
+	var clientId, clientSecret, scope, name, redirectURL, icon string
+	if err := row.Scan(&clientId, &clientSecret, &scope, &name, &redirectURL, &icon); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -62,6 +64,7 @@ func GetProviderByID(db *sql.DB, id string) (*Provider, error) {
 		Scopes:       processScope(scope),
 		Name:         name,
 		RedirectURL:  redirectURL,
+		Icon:         icon,
 	}
 
 	return provider, nil
