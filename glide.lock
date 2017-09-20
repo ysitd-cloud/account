@@ -1,5 +1,5 @@
 hash: b3db32bef98cdeda3eb069b2347809b4de52a830c7c253d1aabf257978e86949
-updated: 2017-09-20T11:53:50.397211529+08:00
+updated: 2017-09-20T14:13:27.096408134+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -41,6 +41,10 @@ imports:
   version: eee178af22a1827e634e972b42fed57757688fc6
   subpackages:
   - github
+- name: github.com/google/go-querystring
+  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
+  subpackages:
+  - query
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/securecookie
@@ -48,7 +52,7 @@ imports:
 - name: github.com/gorilla/sessions
   version: 8b6b4cd75f07f7ee036eb37b8127bd40ab1efc49
 - name: github.com/joho/godotenv
-  version: 726cc8b906e3d31c70a9671c90a13716a8d3f50d
+  version: a79fa1e548e2c689c241d10173efd51e5d689d5b
   subpackages:
   - autoload
 - name: github.com/lib/pq
