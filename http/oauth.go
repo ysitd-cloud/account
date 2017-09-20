@@ -25,4 +25,8 @@ func registerOAuth(group *gin.RouterGroup) {
 		middlewares.JudgeToken("validate", "cloud.ysitd.account.token"),
 		oauth.ValidateToken,
 	)
+
+	group.GET("/:provider/callback",
+		middlewares.LoginOrRedirect,
+	)
 }

@@ -20,6 +20,7 @@ func redirectToOAuth(c *gin.Context) {
 
 	session := middlewares.GetSession(c)
 	session.Set(getStateSessionKey(providerID), state)
+	session.Set("provider:usage", "connect")
 	session.Save()
 
 	authProvider := provider.GetProvider(providerID)
