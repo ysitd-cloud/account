@@ -7,6 +7,7 @@ import (
 	"github.com/ysitd-cloud/account/model"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
+	"strconv"
 )
 
 type GithubAuthProvider struct {
@@ -31,7 +32,7 @@ func (provider *GithubAuthProvider) GetUserID(token *oauth2.Token) (string, erro
 		return "", err
 	}
 
-	return string(user.ID), nil
+	return strconv.Itoa(*user.ID), nil
 }
 
 func CreateGithubAuthProvider(provider *model.Provider) *GithubAuthProvider {
