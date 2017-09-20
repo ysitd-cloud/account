@@ -13,6 +13,7 @@ func Register(app *gin.Engine) {
 	app.Use(middlewares.Osin())
 	app.Use(middlewares.Judge())
 	login.Register(app)
+	connect.Register(app)
 
 	{
 		api := app.Group("/api")
@@ -23,6 +24,4 @@ func Register(app *gin.Engine) {
 		oauth := app.Group("/oauth")
 		registerOAuth(oauth)
 	}
-
-	connect.Register(app)
 }

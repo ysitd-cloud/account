@@ -26,7 +26,8 @@ func registerOAuth(group *gin.RouterGroup) {
 		oauth.ValidateToken,
 	)
 
-	group.GET("/:provider/callback",
+	group.GET("/provider/:provider/callback",
 		middlewares.LoginOrRedirect,
+		oauth.Callback,
 	)
 }
