@@ -3,11 +3,12 @@ package provider
 import (
 	"context"
 
+	"strconv"
+
 	githubClient "github.com/google/go-github/github"
 	"github.com/ysitd-cloud/account/model"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/github"
-	"strconv"
 )
 
 type GithubAuthProvider struct {
