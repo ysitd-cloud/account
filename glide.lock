@@ -1,5 +1,5 @@
-hash: a277ba7e468b534cb1c61fd6c9f7a1274647e5274faa8b77ae0cf1aa37068da2
-updated: 2017-09-18T21:15:53.181092318+08:00
+hash: b3db32bef98cdeda3eb069b2347809b4de52a830c7c253d1aabf257978e86949
+updated: 2017-09-20T11:53:50.397211529+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -37,6 +37,10 @@ imports:
   version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
   subpackages:
   - proto
+- name: github.com/google/go-github
+  version: eee178af22a1827e634e972b42fed57757688fc6
+  subpackages:
+  - github
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/securecookie
@@ -102,11 +106,28 @@ imports:
 - name: golang.org/x/net
   version: f2499483f923065a842d38eb4c7f1927e6fc6e6d
   subpackages:
+  - context
+  - context/ctxhttp
   - publicsuffix
+- name: golang.org/x/oauth2
+  version: 13449ad91cb26cb47661c1b080790392170385fd
+  subpackages:
+  - github
+  - internal
 - name: golang.org/x/sys
   version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:
   - unix
+- name: google.golang.org/appengine
+  version: d9a072cfa7b9736e44311ef77b3e09d804bfa599
+  subpackages:
+  - internal
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2

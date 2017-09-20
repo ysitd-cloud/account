@@ -1,4 +1,4 @@
-package handler
+package login
 
 import (
 	"database/sql"
@@ -12,7 +12,7 @@ import (
 	"github.com/ysitd-cloud/account/model"
 )
 
-func LoginForm(c *gin.Context) {
+func basicForm(c *gin.Context) {
 	log.Println("login.LoginForm")
 	session := middlewares.GetSession(c)
 	nextUrl := c.DefaultQuery("next", "/")
@@ -24,7 +24,7 @@ func LoginForm(c *gin.Context) {
 
 }
 
-func LoginPost(c *gin.Context) {
+func basicSubmit(c *gin.Context) {
 	log.Println("login.LoginPost")
 	auth := false
 	var reason string
