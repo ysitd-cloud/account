@@ -1,5 +1,5 @@
 hash: b3db32bef98cdeda3eb069b2347809b4de52a830c7c253d1aabf257978e86949
-updated: 2017-09-20T14:13:27.096408134+08:00
+updated: 2017-09-21T17:43:13.309088185+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -38,7 +38,7 @@ imports:
   subpackages:
   - proto
 - name: github.com/google/go-github
-  version: eee178af22a1827e634e972b42fed57757688fc6
+  version: 61bf8a6a2009b7fb88173ed454c77fb8013b8852
   subpackages:
   - github
 - name: github.com/google/go-querystring
@@ -119,7 +119,7 @@ imports:
   - github
   - internal
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
   subpackages:
   - unix
 - name: google.golang.org/appengine
