@@ -1,14 +1,13 @@
 package main
 
 import (
-	"os"
-
 	"github.com/CloudyKit/jet"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/ysitd-cloud/account/http"
 	render "github.com/ysitd-cloud/gin-jet"
+	"github.com/ysitd-cloud/gin-utils/net"
 )
 
 func main() {
@@ -24,5 +23,5 @@ func main() {
 
 	http.Register(app)
 
-	app.Run(":" + os.Getenv("PORT"))
+	app.Run(net.GetAddress())
 }
