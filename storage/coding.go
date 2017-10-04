@@ -3,6 +3,7 @@ package storage
 import (
 	"bytes"
 	"encoding/gob"
+
 	"github.com/RangelReale/osin"
 )
 
