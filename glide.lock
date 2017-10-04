@@ -1,5 +1,5 @@
 hash: f86b44f55516e71eb8e44ad5c8e6f98dd438e6fdc14b7fbd533c50a75908e0fc
-updated: 2017-10-03T21:28:24.319508262+08:00
+updated: 2017-10-04T19:02:57.803952848+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -36,7 +36,7 @@ imports:
   subpackages:
   - lru
 - name: github.com/golang/protobuf
-  version: 5a0f697c9ed9d68fef0116532c6e05cfeae00e55
+  version: 4bd1920723d7b7c925de087aa32e2187708897f7
   subpackages:
   - proto
 - name: github.com/gorilla/context
@@ -85,7 +85,7 @@ imports:
   - assert
   - require
 - name: github.com/ugorji/go
-  version: c88ee250d0221a57af388746f5cf03768c21d6e2
+  version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
   - codec
 - name: github.com/ysitd-cloud/gin-jet
@@ -96,23 +96,26 @@ imports:
   - redis
 - name: github.com/ysitd-cloud/gin-utils
   version: adb809e0d1710cdefc9227095e8a77e88337c286
+  subpackages:
+  - env
+  - net
 - name: github.com/ysitd-cloud/judge-go-client
   version: eb7404c0578283790fc5c125481c33522c5bad29
 - name: golang.org/x/crypto
-  version: adbae1b6b6fb4b02448a0fc0dbbc9ba2b95b294d
+  version: d172538b2cfce0c13cee31e647d0367aa8cd2486
   subpackages:
   - bcrypt
   - blowfish
 - name: golang.org/x/net
-  version: d4c55e66d8c3a2f3382d264b08e3e3454a66355a
+  version: f2499483f923065a842d38eb4c7f1927e6fc6e6d
   subpackages:
   - publicsuffix
 - name: golang.org/x/sys
-  version: 99f16d856c9836c42d24e7ab64ea72916925fa97
+  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:
   - unix
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
-  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+  version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
 testImports: []
