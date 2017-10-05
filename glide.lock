@@ -1,18 +1,12 @@
-hash: f86b44f55516e71eb8e44ad5c8e6f98dd438e6fdc14b7fbd533c50a75908e0fc
-updated: 2017-10-04T19:02:57.803952848+08:00
+hash: 4f1a2e901bb7cf7c98895b59caf7d18a174176ba29b06b0117967d062e1fdd02
+updated: 2017-10-06T02:57:35.102502736+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
-- name: github.com/CloudyKit/fastprinter
-  version: 74b38d55f37af5d6c05ca11147d616b613a3420e
-- name: github.com/CloudyKit/jet
-  version: 93b0e830ecf4c3f6102e1a69c6ea3bafa37aee7c
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
-- name: github.com/fatih/structs
-  version: a720dfa8df582c51dee1b36feabb906bde1588bd
 - name: github.com/garyburd/redigo
   version: 433969511232c397de61b1442f9fd49ec06ae9ba
   subpackages:
@@ -88,8 +82,6 @@ imports:
   version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
   - codec
-- name: github.com/ysitd-cloud/gin-jet
-  version: 2aa31e2cc105b4fda23707080b859842cb9ab03c
 - name: github.com/ysitd-cloud/gin-sessions
   version: 2ceccd6fa98bbeada774d8875056c817889afffb
   subpackages:

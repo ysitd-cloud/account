@@ -17,7 +17,7 @@ func LoginForm(c *gin.Context) {
 	session := middlewares.GetSession(c)
 	nextUrl := c.DefaultQuery("next", "/")
 	if !session.Exists("username") {
-		helper.RenderAppView(c, http.StatusOK, "account.login", "YSITD Cloud Login")
+		helper.RenderAppView(c, http.StatusOK, "login")
 	} else {
 		c.Redirect(http.StatusFound, nextUrl)
 	}
