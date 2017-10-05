@@ -23,4 +23,9 @@ func Register(app *gin.Engine) {
 		oauth := app.Group("/oauth")
 		registerOAuth(oauth)
 	}
+
+	if gin.ReleaseMode != gin.Mode() {
+		proxy := app.Group("/assets/")
+		proxy.GET("/:assets", handler.AssetsProxy)
+	}
 }
