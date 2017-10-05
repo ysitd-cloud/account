@@ -1,18 +1,12 @@
-hash: 3caced1e491fe7c9debbb01c534420673a934d492da57ac7e6a922c166cea5a3
-updated: 2017-10-03T21:06:20.360161377+08:00
+hash: 7713e08125c67a022ae79f7f5c8f8c292389b1f85fc423949325426de59f2bc0
+updated: 2017-10-06T00:14:51.672538435+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
-- name: github.com/CloudyKit/fastprinter
-  version: 74b38d55f37af5d6c05ca11147d616b613a3420e
-- name: github.com/CloudyKit/jet
-  version: 93b0e830ecf4c3f6102e1a69c6ea3bafa37aee7c
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
-- name: github.com/fatih/structs
-  version: a720dfa8df582c51dee1b36feabb906bde1588bd
 - name: github.com/garyburd/redigo
   version: 433969511232c397de61b1442f9fd49ec06ae9ba
   subpackages:
@@ -39,14 +33,6 @@ imports:
   version: 5a0f697c9ed9d68fef0116532c6e05cfeae00e55
   subpackages:
   - proto
-- name: github.com/google/go-github
-  version: 3a960f412f14b09737fec6c3cc4c66840f840afd
-  subpackages:
-  - github
-- name: github.com/google/go-querystring
-  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
-  subpackages:
-  - query
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/securecookie
@@ -96,8 +82,6 @@ imports:
   version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:
   - codec
-- name: github.com/ysitd-cloud/gin-jet
-  version: 2aa31e2cc105b4fda23707080b859842cb9ab03c
 - name: github.com/ysitd-cloud/gin-sessions
   version: 2ceccd6fa98bbeada774d8875056c817889afffb
   subpackages:
@@ -112,28 +96,11 @@ imports:
 - name: golang.org/x/net
   version: d4c55e66d8c3a2f3382d264b08e3e3454a66355a
   subpackages:
-  - context
-  - context/ctxhttp
   - publicsuffix
-- name: golang.org/x/oauth2
-  version: bb50c06baba3d0c76f9d125c0719093e315b5b44
-  subpackages:
-  - github
-  - internal
 - name: golang.org/x/sys
   version: 99f16d856c9836c42d24e7ab64ea72916925fa97
   subpackages:
   - unix
-- name: google.golang.org/appengine
-  version: 24e4144ec923c2374f6b06610c0df16a9222c3d9
-  subpackages:
-  - internal
-  - internal/base
-  - internal/datastore
-  - internal/log
-  - internal/remote_api
-  - internal/urlfetch
-  - urlfetch
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
