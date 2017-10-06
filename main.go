@@ -5,11 +5,17 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/ysitd-cloud/account/http"
+	"github.com/ysitd-cloud/account/providers"
 	"github.com/ysitd-cloud/gin-utils/net"
 )
 
-func main() {
+func init() {
 	app := gin.Default()
+	providers.Kernel.Instance("http.server", app)
+}
+
+func main() {
+	app := providers.Kernel.Make("http.server").(*gin.Engine)
 
 	if gin.Mode() != gin.ReleaseMode {
 		pprof.Register(app, nil)
