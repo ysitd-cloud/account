@@ -22,7 +22,7 @@ func (*osinServiceProvider) Provides() []string {
 }
 
 func (*osinServiceProvider) Register(app container.Container) {
-	app.Singleton("osin.storage", func(app container.Container) interface{} {
+	app.Bind("osin.storage", func(app container.Container) interface{} {
 		db := app.Make("db").(*sql.DB)
 		redisDB := app.Make("redis.pool").(*redis.Pool)
 		return storage.NewStore(db, redisDB)
@@ -38,7 +38,7 @@ func (*osinServiceProvider) Register(app container.Container) {
 
 	app.Bind("osin.server", func(app container.Container) interface{} {
 		store := app.Make("osin.storage").(osin.Storage)
-		config := app.Make("osin.config").(*osin.Config)
+		config := app.Make("osin.config").(*osin.ServerConfig)
 
 		return osin.NewServer(config, store)
 	})

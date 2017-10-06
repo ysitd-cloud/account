@@ -7,6 +7,7 @@ import (
 	"net/url"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/http/helper"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/model"
@@ -31,7 +32,9 @@ func LoginPost(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
-	db := c.MustGet("db").(*sql.DB)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	db := kernel.Make("db").(*sql.DB)
+	defer db.Close()
 
 	user, err := model.LoadUserFromDBWithUsername(db, username)
 	if user == nil || err == sql.ErrNoRows {

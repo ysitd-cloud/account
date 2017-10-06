@@ -8,6 +8,7 @@ import (
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/model"
 )
 
@@ -19,7 +20,10 @@ type tokenInfo struct {
 }
 
 func ValidateToken(c *gin.Context) {
-	server := c.MustGet("osin.server").(*osin.Server)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	server := kernel.Make("osin.server").(*osin.Server)
+	defer server.Storage.Close()
+
 	token := c.Query("token")
 	if token == "" {
 		c.AbortWithStatus(http.StatusBadRequest)
@@ -33,7 +37,7 @@ func ValidateToken(c *gin.Context) {
 	}
 
 	id := access.UserData.(string)
-	db := c.MustGet("db").(*sql.DB)
+	db := kernel.Make("db.postgres").(*sql.DB)
 	user, err := model.LoadUserFromDBWithUsername(db, id)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)

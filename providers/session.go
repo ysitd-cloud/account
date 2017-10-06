@@ -5,6 +5,7 @@ import (
 
 	"github.com/garyburd/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
+	"github.com/ysitd-cloud/gin-sessions"
 	redisSession "github.com/ysitd-cloud/gin-sessions/redis"
 )
 
@@ -16,10 +17,13 @@ func (*sessionServiceProvider) Provides() []string {
 	return []string{
 		"session.secret",
 		"session.store",
+		"session.name",
+		"session.middleware",
 	}
 }
 
 func (*sessionServiceProvider) Register(app container.Container) {
+	app.Instance("session.name", os.Getenv("SESSION_NAME"))
 	app.Instance("session.secret", os.Getenv("SESSION_SECRET"))
 	app.Singleton("session.store", func(app container.Container) interface{} {
 		secret := app.Make("session.secret").(string)
@@ -29,5 +33,10 @@ func (*sessionServiceProvider) Register(app container.Container) {
 			panic(err)
 		}
 		return store
+	})
+	app.Singleton("session.middleware", func(app container.Container) interface{} {
+		name := app.Make("session.name").(string)
+		store := app.Make("session.store").(sessions.Store)
+		return sessions.Sessions(name, store, true)
 	})
 }
