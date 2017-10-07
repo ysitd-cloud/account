@@ -1,5 +1,5 @@
-hash: 4f1a2e901bb7cf7c98895b59caf7d18a174176ba29b06b0117967d062e1fdd02
-updated: 2017-10-06T02:57:35.102502736+08:00
+hash: 03751cfaf5f2372b3fca284c97927494d1bd01f10f250bf295ebef57fb00c0f3
+updated: 2017-10-08T02:18:07.697743429+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -14,6 +14,8 @@ imports:
   - redis
 - name: github.com/gin-contrib/pprof
   version: cea200e02ddddca4b843d75d32aa13c413549de9
+- name: github.com/gin-contrib/secure
+  version: 27b250f7a38fe63c0f4f19074b4eeccf8efcdabb
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin

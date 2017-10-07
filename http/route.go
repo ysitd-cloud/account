@@ -7,6 +7,7 @@ import (
 )
 
 func Register(app *gin.Engine) {
+	app.Use(middlewares.Security())
 	app.Use(middlewares.DB())
 	app.Use(middlewares.Sessions())
 	app.Use(middlewares.Osin())
