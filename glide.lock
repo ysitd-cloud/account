@@ -1,5 +1,5 @@
-hash: 64ffccd0b2729759f65dcb87137ab74586671477e814e62e1f4b762f20fc9526
-updated: 2017-10-08T17:13:46.498058075+08:00
+hash: f0a9beaaaf05e2dc45b3688381a91f502fd6d56e67c89092940af4c20f6a4c55
+updated: 2017-10-08T17:18:16.215078419+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -82,6 +82,8 @@ imports:
   subpackages:
   - assert
   - require
+- name: github.com/tonyhhyip/go-di-container
+  version: 9ba78ccd7b8568269481cac661db23f969d3fc47
 - name: github.com/ugorji/go
   version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
