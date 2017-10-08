@@ -1,5 +1,5 @@
-hash: 3f4a4ce0e7b1480160baff7e6cc92f166338eec34f4639162bfa5150d4a81b00
-updated: 2017-10-06T02:58:50.427144142+08:00
+hash: 64ffccd0b2729759f65dcb87137ab74586671477e814e62e1f4b762f20fc9526
+updated: 2017-10-08T17:13:46.498058075+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -14,6 +14,10 @@ imports:
   - redis
 - name: github.com/gin-contrib/pprof
   version: cea200e02ddddca4b843d75d32aa13c413549de9
+- name: github.com/gin-contrib/secure
+  version: 1d2903615d9a21847cc4df4de0574574737b30c0
+  repo: https://github.com/ysitd-cloud/secure
+  vcs: git
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
@@ -78,8 +82,6 @@ imports:
   subpackages:
   - assert
   - require
-- name: github.com/tonyhhyip/go-di-container
-  version: 9ba78ccd7b8568269481cac661db23f969d3fc47
 - name: github.com/ugorji/go
   version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:

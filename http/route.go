@@ -10,6 +10,7 @@ import (
 func Register(app *gin.Engine) {
 	app.Use(middlewares.BindKernel)
 	app.Use(providers.Kernel.Make("session.middleware").(gin.HandlerFunc))
+	app.Use(middlewares.Security())
 	app.GET("/login", handler.LoginForm)
 	app.POST("/login", handler.LoginPost)
 
