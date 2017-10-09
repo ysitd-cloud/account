@@ -32,7 +32,7 @@ func (*sessionServiceProvider) Register(app container.Container) {
 		if err != nil {
 			panic(err)
 		}
-		return &store
+		return store
 	})
 	app.Singleton("session.middleware", func(app container.Container) interface{} {
 		name := app.Make("session.name").(string)
