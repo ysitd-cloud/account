@@ -1,4 +1,4 @@
-package handler
+package login
 
 import (
 	"database/sql"
