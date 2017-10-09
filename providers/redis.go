@@ -42,6 +42,6 @@ func (*redisServiceProvider) Register(app container.Container) {
 			},
 		}
 
-		return pool
+		return &pool
 	})
 }
