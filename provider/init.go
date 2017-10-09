@@ -1,15 +1,14 @@
 package provider
 
 import (
+	"database/sql"
+
 	"github.com/ysitd-cloud/account/model"
-	"github.com/ysitd-cloud/account/setup"
+	container "github.com/ysitd-cloud/account/providers"
 )
 
 func init() {
-	db, err := setup.OpenDB()
-	if err != nil {
-		panic(err)
-	}
+	db := container.Kernel.Make("db").(*sql.DB)
 
 	{
 		provider, err := model.GetProviderByID(db, "github")
