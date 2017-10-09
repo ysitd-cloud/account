@@ -83,7 +83,7 @@ imports:
   - assert
   - require
 - name: github.com/tonyhhyip/go-di-container
-  version: 9ba78ccd7b8568269481cac661db23f969d3fc47
+  version: 70c3bbde180962982ad98529ff7f56a98693292f
 - name: github.com/ugorji/go
   version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
