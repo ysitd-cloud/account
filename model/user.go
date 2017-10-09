@@ -3,7 +3,7 @@ package model
 import (
 	"database/sql"
 
-	"github.com/ysitd-cloud/account/setup"
+	"github.com/ysitd-cloud/account/providers"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -71,10 +71,8 @@ func LoadFromRow(row *sql.Row) (*User, error) {
 func (user *User) ValidatePassword(password string) bool {
 	var hash string
 	query := "SELECT password FROM user_auth WHERE username = $1"
-	db, err := setup.SetupDB()
-	if err != nil {
-		return false
-	}
+
+	db := providers.Kernel.Make("db").(*sql.DB)
 
 	row := db.QueryRow(query, user.Username)
 	if err := row.Scan(&hash); err != nil {

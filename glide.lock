@@ -1,18 +1,12 @@
-hash: b3db32bef98cdeda3eb069b2347809b4de52a830c7c253d1aabf257978e86949
-updated: 2017-09-20T14:13:27.096408134+08:00
+hash: f0a9beaaaf05e2dc45b3688381a91f502fd6d56e67c89092940af4c20f6a4c55
+updated: 2017-10-08T17:18:16.215078419+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
-- name: github.com/CloudyKit/fastprinter
-  version: 74b38d55f37af5d6c05ca11147d616b613a3420e
-- name: github.com/CloudyKit/jet
-  version: 93b0e830ecf4c3f6102e1a69c6ea3bafa37aee7c
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
-- name: github.com/fatih/structs
-  version: a720dfa8df582c51dee1b36feabb906bde1588bd
 - name: github.com/garyburd/redigo
   version: 433969511232c397de61b1442f9fd49ec06ae9ba
   subpackages:
@@ -20,10 +14,16 @@ imports:
   - redis
 - name: github.com/gin-contrib/pprof
   version: cea200e02ddddca4b843d75d32aa13c413549de9
+- name: github.com/gin-contrib/secure
+  version: 1d2903615d9a21847cc4df4de0574574737b30c0
+  repo: https://github.com/ysitd-cloud/secure
+  vcs: git
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
   version: d459835d2b077e44f7c9b453505ee29881d5d12d
+  repo: https://github.com/ysitd-cloud/gin
+  vcs: git
   subpackages:
   - binding
   - render
@@ -34,17 +34,9 @@ imports:
   subpackages:
   - lru
 - name: github.com/golang/protobuf
-  version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
+  version: 4bd1920723d7b7c925de087aa32e2187708897f7
   subpackages:
   - proto
-- name: github.com/google/go-github
-  version: eee178af22a1827e634e972b42fed57757688fc6
-  subpackages:
-  - github
-- name: github.com/google/go-querystring
-  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
-  subpackages:
-  - query
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/securecookie
@@ -60,7 +52,7 @@ imports:
   subpackages:
   - oid
 - name: github.com/mattn/go-isatty
-  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+  version: 57fdcb988a5c543893cc61bce354a6e24ab70022
 - name: github.com/moul/http2curl
   version: 4e24498b31dba4683efb9d35c1c8a91e2eda28c8
 - name: github.com/oleiade/reflections
@@ -90,16 +82,21 @@ imports:
   subpackages:
   - assert
   - require
+- name: github.com/tonyhhyip/go-di-container
+  version: 70c3bbde180962982ad98529ff7f56a98693292f
 - name: github.com/ugorji/go
   version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
   - codec
-- name: github.com/ysitd-cloud/gin-jet
-  version: 2aa31e2cc105b4fda23707080b859842cb9ab03c
 - name: github.com/ysitd-cloud/gin-sessions
   version: 2ceccd6fa98bbeada774d8875056c817889afffb
   subpackages:
   - redis
+- name: github.com/ysitd-cloud/gin-utils
+  version: adb809e0d1710cdefc9227095e8a77e88337c286
+  subpackages:
+  - env
+  - net
 - name: github.com/ysitd-cloud/judge-go-client
   version: eb7404c0578283790fc5c125481c33522c5bad29
 - name: golang.org/x/crypto
@@ -110,28 +107,11 @@ imports:
 - name: golang.org/x/net
   version: f2499483f923065a842d38eb4c7f1927e6fc6e6d
   subpackages:
-  - context
-  - context/ctxhttp
   - publicsuffix
-- name: golang.org/x/oauth2
-  version: 13449ad91cb26cb47661c1b080790392170385fd
-  subpackages:
-  - github
-  - internal
 - name: golang.org/x/sys
   version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
   subpackages:
   - unix
-- name: google.golang.org/appengine
-  version: d9a072cfa7b9736e44311ef77b3e09d804bfa599
-  subpackages:
-  - internal
-  - internal/base
-  - internal/datastore
-  - internal/log
-  - internal/remote_api
-  - internal/urlfetch
-  - urlfetch
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2

@@ -3,6 +3,7 @@ package storage
 import (
 	"database/sql"
 	"fmt"
+
 	"github.com/RangelReale/osin"
 	"github.com/go-errors/errors"
 	"github.com/ory-am/common/pkg"

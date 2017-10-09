@@ -20,14 +20,20 @@ import:
   subpackages:
   - pkg
 - package: github.com/ysitd-cloud/judge-go-client
-- package: github.com/ysitd-cloud/gin-jet
 - package: github.com/golang/groupcache
   subpackages:
   - lru
 - package: github.com/gin-gonic/gin
   version: ~1.2.0
+  repo: https://github.com/ysitd-cloud/gin
+  vcs: git
 - package: github.com/gin-contrib/pprof
   version: ^1.1.0
+- package: github.com/ysitd-cloud/gin-utils
+- package: github.com/tonyhhyip/go-di-container
+- package: github.com/gin-contrib/secure
+  repo: https://github.com/ysitd-cloud/secure
+  vcs: git
 - package: golang.org/x/oauth2
 - package: github.com/google/go-github
   subpackages:

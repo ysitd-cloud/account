@@ -1,139 +1,63 @@
 package helper
 
 import (
-	"fmt"
+	"net/http"
+	"net/url"
 	"os"
 
-	"encoding/json"
-	"time"
+	"fmt"
 
-	"net/http"
-
-	"github.com/CloudyKit/jet"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/lru"
 	"github.com/parnurzeal/gorequest"
 )
 
-var host string = os.Getenv("STATIC_ADDRESS")
 var cache *lru.Cache = lru.New(8)
+var sidecarHost string
 
-type appAsset struct {
-	CSS string `json:"css"`
-	JS  string `json:"js"`
+type httpCache struct {
+	etag    string
+	content string
 }
 
-type assetCache struct {
-	Asset  *appAsset
-	Expire time.Time
+func init() {
+	sidecarHost = os.Getenv("SIDECAR_URL")
 }
 
-func getAssetsFromRemote() (map[string]appAsset, error) {
-	var data map[string]appAsset
-	request := gorequest.New()
-	url := fmt.Sprintf("%s/assets.json", host)
-	_, body, errs := request.Get(url).End()
-	if len(errs) != 0 {
-		return nil, errs[0]
-	}
-
-	err := json.Unmarshal([]byte(body), &data)
-	if err != nil {
-		return nil, err
-	}
-	return data, nil
-}
-
-func hitCache(name string, now time.Time) (*appAsset, bool) {
-	data, exists := cache.Get(name)
-	if !exists {
-		return nil, false
-	}
-
-	cacheAsset := data.(*assetCache)
-	if cacheAsset.Expire.Before(now) {
-		return nil, false
-	}
-
-	return cacheAsset.Asset, true
-}
-
-func getAssets(name string) ([]*appAsset, error) {
-	assets := make([]*appAsset, 0, 3)
-	requests := []string{"manifest", "vendor", name}
-	allFound := true
-	now := time.Now()
-	for _, request := range requests {
-		asset, exists := hitCache(request, now)
-		if !exists {
-			allFound = false
-			break
-		}
-
-		assets = append(assets, asset)
-	}
-
-	if allFound {
-		return assets, nil
-	}
-
-	remoteAssets, err := getAssetsFromRemote()
-	if err != nil {
-		return nil, err
-	}
-
-	for _, request := range requests {
-		if asset, found := remoteAssets[request]; found {
-			cacheAssets := &assetCache{
-				Asset:  &asset,
-				Expire: now.Add(10 * time.Minute),
-			}
-
-			cache.Add(request, cacheAssets)
-			assets = append(assets, &asset)
-		}
-	}
-
-	return assets, nil
-}
-
-func getAllJS(assets []*appAsset) (js []string) {
-	js = make([]string, 0, 3)
-	for _, asset := range assets {
-		if asset.JS != "" {
-			js = append(js, asset.JS)
-		}
-	}
-	return
-}
-
-func getAllCSS(assets []*appAsset) (css []string) {
-	css = make([]string, 0, 3)
-	css = append(css, "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons")
-	css = append(css, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
-	for _, asset := range assets {
-		if asset.CSS != "" {
-			css = append(css, asset.CSS)
-		}
-	}
-	return
-}
-
-func RenderAppView(c *gin.Context, code int, view, title string) {
-	assets, err := getAssets(view)
+func RenderAppView(c *gin.Context, code int, view string, data interface{}) {
+	sideCarUrl, err := url.Parse(sidecarHost)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
-		panic(err)
+		return
 	}
 
-	vars := make(jet.VarMap)
-	staticPath := fmt.Sprintf("%s", host)
+	req := gorequest.New()
 
-	vars.Set("scripts", getAllJS(assets))
-	vars.Set("styles", getAllCSS(assets))
+	sideCarUrl.Path = fmt.Sprintf("/%s", view)
+	resultCaceh, exists := cache.Get(view)
+	var pageCache httpCache
+	if exists {
+		pageCache = resultCaceh.(httpCache)
+		req.Set("If-None-Match", pageCache.etag)
+	}
 
-	vars.Set("title", title)
-	vars.Set("view", view)
-	vars.Set("staticPath", staticPath)
-	c.HTML(code, "app.jet", vars)
+	resp, body, errs := req.
+		Post(sideCarUrl.String()).
+		Send(data).
+		End()
+	if len(errs) != 0 {
+		c.AbortWithError(http.StatusBadGateway, errs[0])
+	}
+
+	c.Status(code)
+	if exists && resp.StatusCode == http.StatusNotModified {
+		c.Writer.WriteString(pageCache.content)
+	} else {
+		c.Writer.WriteString(body)
+		cache.Add(view, httpCache{
+			etag:    resp.Header.Get("Etag"),
+			content: body,
+		})
+	}
+	c.Abort()
 }
