@@ -14,7 +14,6 @@ import (
 )
 
 func LoginForm(c *gin.Context) {
-	log.Println("login.LoginForm")
 	session := middlewares.GetSession(c)
 	nextUrl := c.DefaultQuery("next", "/")
 	if !session.Exists("username") {
@@ -26,7 +25,6 @@ func LoginForm(c *gin.Context) {
 }
 
 func LoginPost(c *gin.Context) {
-	log.Println("login.LoginPost")
 	auth := false
 	var reason string
 	username := c.PostForm("username")
