@@ -22,10 +22,9 @@ type httpCache struct {
 
 func init() {
 	sidecarHost = os.Getenv("SIDECAR_URL")
-
 }
 
-func RenderAppView(c *gin.Context, code int, view string) {
+func RenderAppView(c *gin.Context, code int, view string, data interface{}) {
 	sideCarUrl, err := url.Parse(sidecarHost)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
@@ -42,12 +41,15 @@ func RenderAppView(c *gin.Context, code int, view string) {
 		req.Set("If-None-Match", pageCache.etag)
 	}
 
-	resp, body, errs := req.Get(sideCarUrl.String()).End()
+	resp, body, errs := req.
+		Post(sideCarUrl.String()).
+		Send(data).
+		End()
 	if len(errs) != 0 {
 		c.AbortWithError(http.StatusBadGateway, errs[0])
 	}
 
-	c.Writer.WriteHeader(code)
+	c.Status(code)
 	if exists && resp.StatusCode == http.StatusNotModified {
 		c.Writer.WriteString(pageCache.content)
 	} else {

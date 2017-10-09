@@ -18,7 +18,7 @@ func LoginForm(c *gin.Context) {
 	session := middlewares.GetSession(c)
 	nextUrl := c.DefaultQuery("next", "/")
 	if !session.Exists("username") {
-		helper.RenderAppView(c, http.StatusOK, "login")
+		helper.RenderAppView(c, http.StatusOK, "login", nil)
 	} else {
 		c.Redirect(http.StatusFound, nextUrl)
 	}
