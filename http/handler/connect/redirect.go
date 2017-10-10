@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/middlewares"
-	"github.com/ysitd-cloud/account/provider"
+	"github.com/ysitd-cloud/account/oauth"
 )
 
 func redirectToOAuth(c *gin.Context) {

@@ -2,6 +2,7 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ysitd-cloud/account/http/handler"
 	"github.com/ysitd-cloud/account/http/handler/connect"
 	"github.com/ysitd-cloud/account/http/handler/login"
 	"github.com/ysitd-cloud/account/http/middlewares"
