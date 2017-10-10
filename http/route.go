@@ -7,6 +7,7 @@ import (
 	"github.com/ysitd-cloud/account/http/handler/login"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/providers"
+	"github.com/ysitd-cloud/account/http/handler/pages"
 )
 
 func Register(app *gin.Engine) {
@@ -16,6 +17,7 @@ func Register(app *gin.Engine) {
 
 	login.Register(app)
 	connect.Register(app)
+	pages.Register(app)
 	{
 		api := app.Group("/api")
 		registerApi(api)

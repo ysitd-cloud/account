@@ -8,5 +8,5 @@ import (
 )
 
 func listConnect(c *gin.Context) {
-	helper.RenderAppView(c, http.StatusOK, "account.connect", "YSITD Cloud Connect")
+	helper.RenderAppView(c, http.StatusOK, "connect", nil)
 }
