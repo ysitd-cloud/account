@@ -1,4 +1,4 @@
-package provider
+package oauth
 
 import "github.com/ysitd-cloud/account/model"
 

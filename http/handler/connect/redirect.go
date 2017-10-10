@@ -23,7 +23,7 @@ func redirectToOAuth(c *gin.Context) {
 	session.Set("provider:usage", "connect")
 	session.Save()
 
-	authProvider := provider.GetProvider(providerID)
+	authProvider := oauth.GetProvider(providerID)
 	config := authProvider.GetConfig()
 	url := config.AuthCodeURL(state)
 

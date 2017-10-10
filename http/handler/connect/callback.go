@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/middlewares"
-	"github.com/ysitd-cloud/account/provider"
+	"github.com/ysitd-cloud/account/oauth"
 )
 
 func oauthCallback(c *gin.Context) {
@@ -32,7 +32,7 @@ func oauthCallback(c *gin.Context) {
 		return
 	}
 
-	authProvider := provider.GetProvider(providerID)
+	authProvider := oauth.GetProvider(providerID)
 	config := authProvider.GetConfig()
 	token, err := config.Exchange(context.Background(), code)
 	if err != nil {

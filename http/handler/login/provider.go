@@ -28,7 +28,7 @@ func redirectToOAuth(c *gin.Context) {
 	session.Set("next:url", c.DefaultQuery("next", "/"))
 	session.Save()
 
-	authProvider := provider.GetProvider(providerID)
+	authProvider := oauth.GetProvider(providerID)
 	config := authProvider.GetConfig()
 	url := config.AuthCodeURL(state)
 
@@ -61,7 +61,7 @@ func oauthLoginCallback(c *gin.Context) {
 		return
 	}
 
-	authProvider := provider.GetProvider(providerID)
+	authProvider := oauth.GetProvider(providerID)
 	config := authProvider.GetConfig()
 	token, err := config.Exchange(context.Background(), code)
 	if err != nil {
