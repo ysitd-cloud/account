@@ -5,13 +5,14 @@ import (
 	"github.com/ysitd-cloud/account/http/handler/connect"
 	"github.com/ysitd-cloud/account/http/handler/login"
 	"github.com/ysitd-cloud/account/http/middlewares"
+	"github.com/ysitd-cloud/account/providers"
 )
 
 func Register(app *gin.Engine) {
-	app.Use(middlewares.DB())
-	app.Use(middlewares.Sessions())
-	app.Use(middlewares.Osin())
-	app.Use(middlewares.Judge())
+	app.Use(middlewares.BindKernel)
+	app.Use(providers.Kernel.Make("session.middleware").(gin.HandlerFunc))
+	app.Use(middlewares.Security())
+
 	login.Register(app)
 	connect.Register(app)
 	{
@@ -22,5 +23,10 @@ func Register(app *gin.Engine) {
 	{
 		oauth := app.Group("/oauth")
 		registerOAuth(oauth)
+	}
+
+	if gin.ReleaseMode != gin.Mode() {
+		proxy := app.Group("/assets/")
+		proxy.GET("/:assets", handler.AssetsProxy)
 	}
 }

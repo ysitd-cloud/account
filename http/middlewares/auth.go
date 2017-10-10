@@ -6,6 +6,7 @@ import (
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/judge-go-client"
 )
 
@@ -16,7 +17,10 @@ func BearerToken(c *gin.Context) {
 		return
 	}
 
-	server := c.MustGet("osin.server").(*osin.Server)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	server := kernel.Make("osin.server").(*osin.Server)
+	defer server.Storage.Close()
+
 	token := c.MustGet("authorization.value").(string)
 
 	if access, err := server.Storage.LoadAccess(token); err != nil {
@@ -43,8 +47,10 @@ func JudgeToken(action, resource string) gin.HandlerFunc {
 		}
 		subjectType := judge.SubjectType(pieces[0])
 		subjectID := pieces[1]
-		client :=
-			c.MustGet("judge").(judge.Client)
+
+		kernel := c.MustGet("kernel").(container.Kernel)
+		client := kernel.Make("judge.client").(judge.Client)
+
 		subject := judge.NewSubject(subjectID, subjectType)
 		result, reason, errors := client.Judge(subject, action, resource, token)
 		if len(errors) > 0 {

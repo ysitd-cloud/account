@@ -5,11 +5,15 @@ import (
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/http/middlewares"
 )
 
 func HandleAuthorize(c *gin.Context) {
-	server := c.MustGet("osin.server").(*osin.Server)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	server := kernel.Make("osin.server").(*osin.Server)
+	defer server.Storage.Close()
+
 	resp := server.NewResponse()
 	defer resp.Close()
 
@@ -28,7 +32,10 @@ func HandleAuthorize(c *gin.Context) {
 }
 
 func HandleAuthorizeApprove(c *gin.Context) {
-	server := c.MustGet("osin.server").(*osin.Server)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	server := kernel.Make("osin.server").(*osin.Server)
+	defer server.Storage.Close()
+
 	req := c.MustGet("osin.request").(*osin.AuthorizeRequest)
 	resp := c.MustGet("osin.response").(*osin.Response)
 	session := middlewares.GetSession(c)

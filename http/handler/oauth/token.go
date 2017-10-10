@@ -5,10 +5,14 @@ import (
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/go-di-container"
 )
 
 func HandleTokenRequest(c *gin.Context) {
-	server := c.MustGet("osin.server").(*osin.Server)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	server := kernel.Make("osin.server").(*osin.Server)
+	defer server.Storage.Close()
+
 	resp := server.NewResponse()
 	defer resp.Close()
 
