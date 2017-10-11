@@ -6,11 +6,13 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/model"
 )
 
 func listProvider(c *gin.Context) {
-	db := c.MustGet("db").(*sql.DB)
+	kernel := c.MustGet("kernel").(container.Kernel)
+	db := kernel.Make("db").(*sql.DB)
 	providers, err := model.ListProvider(db)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)

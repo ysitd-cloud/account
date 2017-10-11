@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/middlewares"
-	"github.com/ysitd-cloud/account/provider"
+	"github.com/ysitd-cloud/account/oauth"
 )
 
 func redirectToOAuth(c *gin.Context) {
@@ -23,7 +23,7 @@ func redirectToOAuth(c *gin.Context) {
 	session.Set("provider:usage", "connect")
 	session.Save()
 
-	authProvider := provider.GetProvider(providerID)
+	authProvider := oauth.GetProvider(providerID)
 	config := authProvider.GetConfig()
 	url := config.AuthCodeURL(state)
 

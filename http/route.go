@@ -2,10 +2,12 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ysitd-cloud/account/http/handler"
 	"github.com/ysitd-cloud/account/http/handler/connect"
 	"github.com/ysitd-cloud/account/http/handler/login"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/providers"
+	"github.com/ysitd-cloud/account/http/handler/pages"
 )
 
 func Register(app *gin.Engine) {
@@ -14,6 +16,7 @@ func Register(app *gin.Engine) {
 	app.Use(middlewares.Security())
 	login.Register(app)
 	connect.Register(app)
+	pages.Register(app)
 	{
 		api := app.Group("/api")
 		registerApi(api)
