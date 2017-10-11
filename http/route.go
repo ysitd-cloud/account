@@ -5,9 +5,9 @@ import (
 	"github.com/ysitd-cloud/account/http/handler"
 	"github.com/ysitd-cloud/account/http/handler/connect"
 	"github.com/ysitd-cloud/account/http/handler/login"
+	"github.com/ysitd-cloud/account/http/handler/pages"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/providers"
-	"github.com/ysitd-cloud/account/http/handler/pages"
 )
 
 func Register(app *gin.Engine) {
