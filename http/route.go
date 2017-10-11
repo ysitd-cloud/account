@@ -2,7 +2,8 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/account/http/handler"
+	"github.com/ysitd-cloud/account/http/handler/connect"
+	"github.com/ysitd-cloud/account/http/handler/login"
 	"github.com/ysitd-cloud/account/http/middlewares"
 	"github.com/ysitd-cloud/account/providers"
 )
@@ -11,9 +12,8 @@ func Register(app *gin.Engine) {
 	app.Use(middlewares.BindKernel)
 	app.Use(providers.Kernel.Make("session.middleware").(gin.HandlerFunc))
 	app.Use(middlewares.Security())
-	app.GET("/login", handler.LoginForm)
-	app.POST("/login", handler.LoginPost)
-
+	login.Register(app)
+	connect.Register(app)
 	{
 		api := app.Group("/api")
 		registerApi(api)

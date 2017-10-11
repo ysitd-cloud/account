@@ -100,7 +100,7 @@ func ContainsJudgeHeader(c *gin.Context) {
 func ContainsAuthHeader(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
-		c.AbortWithStatus(http.StatusForbidden)
+		c.AbortWithStatus(http.StatusUnauthorized)
 		return
 	}
 

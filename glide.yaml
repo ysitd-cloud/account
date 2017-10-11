@@ -34,3 +34,7 @@ import:
 - package: github.com/gin-contrib/secure
   repo: https://github.com/ysitd-cloud/secure
   vcs: git
+- package: golang.org/x/oauth2
+- package: github.com/google/go-github
+  subpackages:
+  - github
