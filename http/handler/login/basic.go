@@ -2,7 +2,6 @@ package login
 
 import (
 	"database/sql"
-	"log"
 	"net/http"
 	"net/url"
 
