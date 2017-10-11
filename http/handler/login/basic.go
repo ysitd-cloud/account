@@ -13,7 +13,6 @@ import (
 )
 
 func basicForm(c *gin.Context) {
-	log.Println("login.LoginForm")
 	session := middlewares.GetSession(c)
 	nextUrl := c.DefaultQuery("next", "/")
 	if !session.Exists("username") {
