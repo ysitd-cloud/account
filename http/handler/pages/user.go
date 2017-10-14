@@ -10,7 +10,3 @@ import (
 func profile(c *gin.Context) {
 	helper.RenderAppView(c, http.StatusOK, "", nil)
 }
-
-func modifiedPassword(c *gin.Context) {
-	helper.RenderAppView(c, http.StatusOK, "password", nil)
-}

@@ -8,4 +8,5 @@ import (
 func Register(app *gin.Engine) {
 	app.GET("/", middlewares.LoginOrRedirect, profile)
 	app.GET("/password", middlewares.LoginOrRedirect, modifiedPassword)
+	app.POST("/password", middlewares.LoginOrRedirect, updatePassword)
 }

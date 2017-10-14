@@ -73,6 +73,7 @@ func (user *User) ValidatePassword(password string) bool {
 	query := "SELECT password FROM user_auth WHERE username = $1"
 
 	db := providers.Kernel.Make("db").(*sql.DB)
+	defer db.Close()
 
 	row := db.QueryRow(query, user.Username)
 	if err := row.Scan(&hash); err != nil {
@@ -80,4 +81,19 @@ func (user *User) ValidatePassword(password string) bool {
 	}
 
 	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(password)) == nil
+}
+
+func (user *User) ChangePassword(password string) error {
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+
+	query := "UPDATE user_auth SET password = $1 WHERE username = $2"
+
+	db := providers.Kernel.Make("db").(*sql.DB)
+	defer db.Close()
+
+	_, err = db.Exec(query, string(hash), user.Username)
+	return err
 }
