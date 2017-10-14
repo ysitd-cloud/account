@@ -34,6 +34,7 @@ func RenderAppView(c *gin.Context, code int, view string, data interface{}) {
 	req := gorequest.New()
 
 	sideCarUrl.Path = fmt.Sprintf("/%s", view)
+	sideCarUrl.RawQuery = c.Request.URL.RawQuery
 	resultCaceh, exists := cache.Get(view)
 	var pageCache httpCache
 	if exists {
