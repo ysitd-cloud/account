@@ -15,12 +15,13 @@ func oauthCallback(c *gin.Context) {
 	providerID := c.Param("provider")
 
 	session := middlewares.GetSession(c)
-	state, convert := session.Get(getStateSessionKey(providerID)).(string)
-	if !convert {
-		c.AbortWithStatus(http.StatusBadRequest)
+	stateKey := getStateSessionKey(providerID)
+	if !session.Exists(stateKey) {
+		c.Redirect(http.StatusBadRequest, "/connect")
 		return
 	}
 
+	state := session.Get(getStateSessionKey(providerID)).(string)
 	if state != c.Query("state") {
 		c.AbortWithStatus(http.StatusUnauthorized)
 		return
