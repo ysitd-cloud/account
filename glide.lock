@@ -1,5 +1,5 @@
-hash: d8c947cf9bc0f0908adc417bb30068ded391b3ba2bdac94fd593503e760ff6f1
-updated: 2017-10-11T12:08:42.08670991+08:00
+hash: 1e9dc374177c8f7d960c59d76b7d9f00281114b7914fc7fc3cbc5055b3fe9990
+updated: 2017-11-08T16:42:41.695912909+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -8,15 +8,14 @@ imports:
   subpackages:
   - spew
 - name: github.com/garyburd/redigo
-  version: 433969511232c397de61b1442f9fd49ec06ae9ba
+  version: 47dc60e71eed504e3ef8e77ee3c6fe720f3be57f
   subpackages:
   - internal
   - redis
 - name: github.com/gin-contrib/pprof
   version: cea200e02ddddca4b843d75d32aa13c413549de9
 - name: github.com/gin-contrib/secure
-  version: 1d2903615d9a21847cc4df4de0574574737b30c0
-  repo: https://github.com/ysitd-cloud/secure
+  version: cb26e530f89836e40b61b4e5ba8fce0842328c36
   vcs: git
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
