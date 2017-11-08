@@ -29,7 +29,7 @@ func oauthCallback(c *gin.Context) {
 
 	code := c.Query("code")
 	if len(code) == 0 {
-		c.AbortWithStatus(http.StatusMethodNotAllowed)
+		c.AbortWithStatus(http.StatusPreconditionFailed)
 		return
 	}
 
