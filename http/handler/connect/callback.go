@@ -29,7 +29,7 @@ func oauthCallback(c *gin.Context) {
 
 	code := c.Query("code")
 	if len(code) == 0 {
-		c.AbortWithStatus(http.StatusBadRequest)
+		c.AbortWithStatus(http.StatusMethodNotAllowed)
 		return
 	}
 
@@ -37,7 +37,7 @@ func oauthCallback(c *gin.Context) {
 	config := authProvider.GetConfig()
 	token, err := config.Exchange(context.Background(), code)
 	if err != nil {
-		c.AbortWithError(http.StatusInternalServerError, err)
+		c.AbortWithError(http.StatusBadGateway, err)
 		return
 	}
 
@@ -59,6 +59,8 @@ func oauthCallback(c *gin.Context) {
 	ON CONFLICT (username, provider) DO UPDATE SET user_id = $3
 	`
 	db := c.MustGet("db").(*sql.DB)
+	defer db.Close()
+
 	_, err = db.Exec(query, username, providerID, id)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
