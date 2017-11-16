@@ -1,13 +1,13 @@
-FROM ysitd/glide
+FROM ysitd/glide as builder
 
 COPY . /go/src/github.com/ysitd-cloud/account
 
 WORKDIR /go/src/github.com/ysitd-cloud/account
 
 RUN glide --no-color install -v && \
-    go install -v
+    go build -v
 
-ENV PORT 80
-EXPOSE 80
+FROM scratch
+COPY --from=builder /go/src/github.com/ysitd-cloud/account/account
 
-CMD ["account"]
+CMD ["./account"]
