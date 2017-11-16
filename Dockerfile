@@ -10,4 +10,4 @@ RUN glide --no-color install -v && \
 FROM scratch
 COPY --from=builder /go/src/github.com/ysitd-cloud/account/account .
 
-CMD ["./account"]
+CMD ["/account"]
