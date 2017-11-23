@@ -19,7 +19,6 @@ import:
   version: ^0.4.0
   subpackages:
   - pkg
-- package: github.com/ysitd-cloud/judge-go-client
 - package: github.com/golang/groupcache
   subpackages:
   - lru
