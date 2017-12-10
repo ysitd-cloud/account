@@ -1,13 +1,11 @@
 package login
 
 import (
-	"crypto/rand"
-	"encoding/base64"
-
-	"net/http"
-
 	"context"
+	"crypto/rand"
 	"database/sql"
+	"encoding/base64"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ysitd-cloud/account/http/middlewares"

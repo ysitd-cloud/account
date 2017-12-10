@@ -15,13 +15,6 @@ import:
   - redis
 - package: github.com/satori/go.uuid
   version: ^1.1.0
-- package: github.com/ory-am/common
-  version: ^0.4.0
-  subpackages:
-  - pkg
-- package: github.com/golang/groupcache
-  subpackages:
-  - lru
 - package: github.com/gin-gonic/gin
   version: ~1.2.0
   repo: https://github.com/ysitd-cloud/gin
@@ -31,7 +24,6 @@ import:
 - package: github.com/ysitd-cloud/gin-utils
 - package: github.com/tonyhhyip/go-di-container
 - package: github.com/gin-contrib/secure
-  vcs: git
 - package: golang.org/x/oauth2
 - package: github.com/google/go-github
   subpackages:

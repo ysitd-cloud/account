@@ -1,12 +1,8 @@
-hash: faacafc158e6ff1fe3b4a027f9be9c2ea70ad80e8c6d0c086065e333293824d8
-updated: 2017-11-23T10:57:16.834921879+08:00
+hash: aaeff8a0c73d9be251a5c51bb563e2b404977dc0f0e4d963f369043f77e54bea
+updated: 2017-12-11T01:39:27.318156+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
-- name: github.com/davecgh/go-spew
-  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
-  subpackages:
-  - spew
 - name: github.com/garyburd/redigo
   version: 47dc60e71eed504e3ef8e77ee3c6fe720f3be57f
   subpackages:
@@ -16,7 +12,6 @@ imports:
   version: cea200e02ddddca4b843d75d32aa13c413549de9
 - name: github.com/gin-contrib/secure
   version: cb26e530f89836e40b61b4e5ba8fce0842328c36
-  vcs: git
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
@@ -28,10 +23,6 @@ imports:
   - render
 - name: github.com/go-errors/errors
   version: 8fa88b06e5974e97fbf9899a7f86a344bfd1f105
-- name: github.com/golang/groupcache
-  version: b710c8433bd175204919eb38776e944233235d03
-  subpackages:
-  - lru
 - name: github.com/golang/protobuf
   version: 4bd1920723d7b7c925de087aa32e2187708897f7
   subpackages:
@@ -62,33 +53,16 @@ imports:
   version: 57fdcb988a5c543893cc61bce354a6e24ab70022
 - name: github.com/moul/http2curl
   version: 4e24498b31dba4683efb9d35c1c8a91e2eda28c8
-- name: github.com/oleiade/reflections
-  version: 2b6ec3da648e3e834dc41bad8d9ed7f2dc6a9496
-- name: github.com/ory-am/common
-  version: b6357395e30805e2ad1f6d8fb759fa2b7146d8da
-  subpackages:
-  - pkg
 - name: github.com/parnurzeal/gorequest
   version: a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3
 - name: github.com/pborman/uuid
   version: e790cca94e6cc75c7064b1332e63811d4aae1a53
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
-- name: github.com/pmezard/go-difflib
-  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
-  subpackages:
-  - difflib
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
-- name: github.com/Sirupsen/logrus
-  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
-- name: github.com/stretchr/testify
-  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
-  subpackages:
-  - assert
-  - require
 - name: github.com/tonyhhyip/go-di-container
   version: 70c3bbde180962982ad98529ff7f56a98693292f
 - name: github.com/ugorji/go

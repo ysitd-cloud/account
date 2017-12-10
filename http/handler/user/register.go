@@ -8,7 +8,6 @@ import (
 func Register(app *gin.RouterGroup) {
 	app.GET("/user/info", getUserInfo)
 	app.GET("/users",
-		middlewares.JudgeToken("list", "cloud.ysitd.account.user"),
 		listUsers,
 	)
 	group := app.Group("/users")
@@ -17,7 +16,6 @@ func Register(app *gin.RouterGroup) {
 
 func bindGroup(group *gin.RouterGroup) {
 	group.GET("/:user",
-		middlewares.JudgeToken("read", "cloud.ysitd.account.user"),
 		middlewares.CheckGetUserAccess,
 		getUser,
 	)

@@ -21,8 +21,6 @@ func registerOAuth(group *gin.RouterGroup) {
 	group.POST("/token", oauth.HandleTokenRequest)
 
 	group.GET("/token/validate",
-		middlewares.ContainsJudgeHeader,
-		middlewares.JudgeToken("validate", "cloud.ysitd.account.token"),
 		oauth.ValidateToken,
 	)
 

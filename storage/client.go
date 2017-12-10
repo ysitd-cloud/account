@@ -6,8 +6,9 @@ import (
 
 	"github.com/RangelReale/osin"
 	"github.com/go-errors/errors"
-	"github.com/ory-am/common/pkg"
 )
+
+var errNotFound = errors.New("Not found")
 
 func (s *Store) GetClient(id string) (osin.Client, error) {
 	row := s.DB.QueryRow("SELECT id, secret, redirect_uri, extra FROM client WHERE id=$1", id)
@@ -15,7 +16,7 @@ func (s *Store) GetClient(id string) (osin.Client, error) {
 	var extra string
 
 	if err := row.Scan(&c.Id, &c.Secret, &c.RedirectUri, &extra); err == sql.ErrNoRows {
-		return nil, pkg.ErrNotFound
+		return nil, errNotFound
 	} else if err != nil {
 		return nil, err
 	}
