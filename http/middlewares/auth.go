@@ -7,7 +7,6 @@ import (
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/judge-go-client"
 )
 
 func BearerToken(c *gin.Context) {
