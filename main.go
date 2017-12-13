@@ -1,12 +1,15 @@
 package main
 
 import (
+	"net"
+
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/ysitd-cloud/account/pkg/http"
 	"github.com/ysitd-cloud/account/pkg/providers"
-	"github.com/ysitd-cloud/gin-utils/net"
+	ginNet "github.com/ysitd-cloud/gin-utils/net"
+	"google.golang.org/grpc"
 )
 
 func init() {
@@ -23,5 +26,9 @@ func main() {
 
 	http.Register(app)
 
-	app.Run(net.GetAddress())
+	go app.Run(ginNet.GetAddress())
+
+	server := providers.Kernel.Make("grpc.server").(*grpc.Server)
+	listener := providers.Kernel.Make("grpc.listener").(net.Listener)
+	server.Serve(listener)
 }

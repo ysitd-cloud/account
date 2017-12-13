@@ -28,3 +28,10 @@ import:
 - package: github.com/google/go-github
   subpackages:
   - github
+- package: github.com/golang/protobuf
+  subpackages:
+  - proto
+- package: google.golang.org/grpc
+  version: ^1.8.2
+- package: github.com/ysitd-cloud/grpc-schema
+  version: fe4149681f7ffcd9d121b1cb4697278a3afeff0e

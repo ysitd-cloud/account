@@ -56,6 +56,9 @@ func LoadUserFromDBWithUsername(db *sql.DB, username string) (*User, error) {
 func LoadFromRow(row *sql.Row) (*User, error) {
 	var username, displayName, email, avatarUrl string
 	if err := row.Scan(&username, &displayName, &email, &avatarUrl); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	}
 	user := &User{

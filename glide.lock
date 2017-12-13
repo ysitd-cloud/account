@@ -1,5 +1,5 @@
-hash: aaeff8a0c73d9be251a5c51bb563e2b404977dc0f0e4d963f369043f77e54bea
-updated: 2017-12-11T01:39:27.318156+08:00
+hash: d22c83d3504e031eb0ec2f25a7b7283f4d891166d1083a03265938d95310141f
+updated: 2017-12-13T12:28:50.527213+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -27,6 +27,10 @@ imports:
   version: 4bd1920723d7b7c925de087aa32e2187708897f7
   subpackages:
   - proto
+  - ptypes
+  - ptypes/any
+  - ptypes/duration
+  - ptypes/timestamp
 - name: github.com/google/go-github
   version: 3a960f412f14b09737fec6c3cc4c66840f840afd
   subpackages:
@@ -78,28 +82,45 @@ imports:
   subpackages:
   - env
   - net
-- name: github.com/ysitd-cloud/judge-go-client
-  version: eb7404c0578283790fc5c125481c33522c5bad29
+- name: github.com/ysitd-cloud/grpc-schema
+  version: fe4149681f7ffcd9d121b1cb4697278a3afeff0e
+  subpackages:
+  - account
+  - account/actions
+  - account/models
 - name: golang.org/x/crypto
-  version: d172538b2cfce0c13cee31e647d0367aa8cd2486
+  version: 81e90905daefcd6fd217b62423c0908922eadb30
   subpackages:
   - bcrypt
   - blowfish
 - name: golang.org/x/net
-  version: f2499483f923065a842d38eb4c7f1927e6fc6e6d
+  version: 1c05540f6879653db88113bc4a2b70aec4bd491f
   subpackages:
   - context
   - context/ctxhttp
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
   - publicsuffix
+  - trace
 - name: golang.org/x/oauth2
   version: bb50c06baba3d0c76f9d125c0719093e315b5b44
   subpackages:
   - github
   - internal
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: 7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: b19bf474d317b857955b12035d2c5acb57ce8b01
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
 - name: google.golang.org/appengine
   version: 24e4144ec923c2374f6b06610c0df16a9222c3d9
   subpackages:
@@ -110,6 +131,33 @@ imports:
   - internal/remote_api
   - internal/urlfetch
   - urlfetch
+- name: google.golang.org/genproto
+  version: a8101f21cf983e773d0c1133ebc5424792003214
+  subpackages:
+  - googleapis/rpc/status
+- name: google.golang.org/grpc
+  version: e687fa4e6424368ece6e4fe727cea2c806a0fcb4
+  subpackages:
+  - balancer
+  - balancer/roundrobin
+  - codes
+  - connectivity
+  - credentials
+  - encoding
+  - grpclb/grpc_lb_v1/messages
+  - grpclog
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - resolver
+  - resolver/dns
+  - resolver/passthrough
+  - stats
+  - status
+  - tap
+  - transport
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2

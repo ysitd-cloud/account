@@ -2,6 +2,7 @@ package providers
 
 import (
 	"github.com/tonyhhyip/go-di-container"
+	"github.com/ysitd-cloud/account/pkg/grpc"
 )
 
 var Kernel container.Kernel = container.NewKernel()
@@ -42,4 +43,6 @@ func init() {
 
 		return &sp
 	})
+
+	Kernel.Register(grpc.CreateGrpcServiceProvider)
 }
