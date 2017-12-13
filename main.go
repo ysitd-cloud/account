@@ -4,8 +4,8 @@ import (
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/ysitd-cloud/account/http"
-	"github.com/ysitd-cloud/account/providers"
+	"github.com/ysitd-cloud/account/pkg/http"
+	"github.com/ysitd-cloud/account/pkg/providers"
 	"github.com/ysitd-cloud/gin-utils/net"
 )
 
