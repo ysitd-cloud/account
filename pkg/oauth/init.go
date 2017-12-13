@@ -7,7 +7,8 @@ import (
 	"github.com/ysitd-cloud/account/pkg/model"
 )
 
-func init() {
+func boot() {
+	booted = true
 	db := kernel.Kernel.Make("db").(*sql.DB)
 
 	{
