@@ -3,12 +3,12 @@ package oauth
 import (
 	"database/sql"
 
+	"github.com/ysitd-cloud/account/pkg/kernel"
 	"github.com/ysitd-cloud/account/pkg/model"
-	container "github.com/ysitd-cloud/account/pkg/providers"
 )
 
 func init() {
-	db := container.Kernel.Make("db").(*sql.DB)
+	db := kernel.Kernel.Make("db").(*sql.DB)
 
 	{
 		provider, err := model.GetProviderByID(db, "github")

@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/providers"
+	providers "github.com/ysitd-cloud/account/pkg/kernel"
 )
 
 func TestBindKernel(t *testing.T) {

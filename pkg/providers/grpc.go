@@ -1,4 +1,4 @@
-package grpc
+package providers
 
 import (
 	"database/sql"
@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/tonyhhyip/go-di-container"
+	grpcService "github.com/ysitd-cloud/account/pkg/grpc"
 	pb "github.com/ysitd-cloud/grpc-schema/account"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -16,21 +17,11 @@ type grpcServiceProvder struct {
 	*container.AbstractServiceProvider
 }
 
-func CreateGrpcServiceProvider(app container.Container) container.ServiceProvider {
-	sp := &grpcServiceProvder{
-		AbstractServiceProvider: container.NewAbstractServiceProvider(true),
-	}
-
-	sp.SetContainer(app)
-
-	return sp
-}
-
 func (*grpcServiceProvder) Register(app container.Container) {
 	app.Singleton("grpc.service", func(app container.Container) interface{} {
 		db := app.Make("db").(*sql.DB)
-		return &accountService{
-			db: db,
+		return &grpcService.AccountService{
+			DB: db,
 		}
 	})
 

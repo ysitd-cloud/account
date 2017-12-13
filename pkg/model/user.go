@@ -3,7 +3,7 @@ package model
 import (
 	"database/sql"
 
-	"github.com/ysitd-cloud/account/pkg/providers"
+	"github.com/ysitd-cloud/account/pkg/kernel"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -75,7 +75,7 @@ func (user *User) ValidatePassword(password string) bool {
 	var hash string
 	query := "SELECT password FROM user_auth WHERE username = $1"
 
-	db := providers.Kernel.Make("db").(*sql.DB)
+	db := kernel.Kernel.Make("db").(*sql.DB)
 	defer db.Close()
 
 	row := db.QueryRow(query, user.Username)
@@ -94,7 +94,7 @@ func (user *User) ChangePassword(password string) error {
 
 	query := "UPDATE user_auth SET password = $1 WHERE username = $2"
 
-	db := providers.Kernel.Make("db").(*sql.DB)
+	db := kernel.Kernel.Make("db").(*sql.DB)
 	defer db.Close()
 
 	_, err = db.Exec(query, string(hash), user.Username)

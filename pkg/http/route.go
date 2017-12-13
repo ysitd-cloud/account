@@ -7,12 +7,12 @@ import (
 	"github.com/ysitd-cloud/account/pkg/http/handler/login"
 	"github.com/ysitd-cloud/account/pkg/http/handler/pages"
 	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/providers"
+	"github.com/ysitd-cloud/account/pkg/kernel"
 )
 
 func Register(app *gin.Engine) {
 	app.Use(middlewares.BindKernel)
-	app.Use(providers.Kernel.Make("session.middleware").(gin.HandlerFunc))
+	app.Use(kernel.Kernel.Make("session.middleware").(gin.HandlerFunc))
 	app.Use(middlewares.Security())
 	login.Register(app)
 	connect.Register(app)

@@ -8,9 +8,9 @@ import (
 	"github.com/ysitd-cloud/grpc-schema/account/models"
 )
 
-func (s *accountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
+func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
 	username := req.GetUsername()
-	user, err := model.LoadUserFromDBWithUsername(s.db, username)
+	user, err := model.LoadUserFromDBWithUsername(s.DB, username)
 	if err != nil {
 		return nil, err
 	}
