@@ -17,6 +17,13 @@ type grpcServiceProvder struct {
 	*container.AbstractServiceProvider
 }
 
+func (*grpcServiceProvder) Provides() []string {
+	return []string{
+		"grpc.server",
+		"grpc.listener",
+	}
+}
+
 func (*grpcServiceProvder) Register(app container.Container) {
 	app.Singleton("grpc.service", func(app container.Container) interface{} {
 		db := app.Make("db").(*sql.DB)
