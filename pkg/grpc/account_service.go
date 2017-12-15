@@ -2,7 +2,6 @@ package grpc
 
 import (
 	"strings"
-	"time"
 
 	"github.com/RangelReale/osin"
 	"github.com/ysitd-cloud/account/pkg/model"
