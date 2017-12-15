@@ -4,7 +4,7 @@ COPY . /go/src/github.com/ysitd-cloud/account
 
 WORKDIR /go/src/github.com/ysitd-cloud/account
 
-RUN glide --no-color install -v && \
+RUN glide --no-color install -v --skip-test && \
     go build -v
 
 FROM alpine:3.6
