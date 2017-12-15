@@ -1,5 +1,5 @@
-hash: d22c83d3504e031eb0ec2f25a7b7283f4d891166d1083a03265938d95310141f
-updated: 2017-12-13T12:28:50.527213+08:00
+hash: 2f90bca672d8382e88e4cdc5a4d9c860f3eb27064f939be1daf0b0bddc94ffbc
+updated: 2017-12-16T00:02:37.662813+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
@@ -83,7 +83,7 @@ imports:
   - env
   - net
 - name: github.com/ysitd-cloud/grpc-schema
-  version: fe4149681f7ffcd9d121b1cb4697278a3afeff0e
+  version: ef0004f6f8a71ecf75714d152c3720351d7fd014
   subpackages:
   - account
   - account/actions

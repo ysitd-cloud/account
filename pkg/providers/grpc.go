@@ -6,8 +6,10 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/RangelReale/osin"
 	"github.com/tonyhhyip/go-di-container"
 	grpcService "github.com/ysitd-cloud/account/pkg/grpc"
+	"github.com/ysitd-cloud/account/pkg/kernel"
 	pb "github.com/ysitd-cloud/grpc-schema/account"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -28,7 +30,8 @@ func (*grpcServiceProvder) Register(app container.Container) {
 	app.Singleton("grpc.service", func(app container.Container) interface{} {
 		db := app.Make("db").(*sql.DB)
 		return &grpcService.AccountService{
-			DB: db,
+			DB:        db,
+			Container: app,
 		}
 	})
 

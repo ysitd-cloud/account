@@ -34,4 +34,4 @@ import:
 - package: google.golang.org/grpc
   version: ^1.8.2
 - package: github.com/ysitd-cloud/grpc-schema
-  version: fe4149681f7ffcd9d121b1cb4697278a3afeff0e
+  version: ef0004f6f8a71ecf75714d152c3720351d7fd014

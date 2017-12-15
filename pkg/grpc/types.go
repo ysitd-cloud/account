@@ -1,7 +1,12 @@
 package grpc
 
-import "database/sql"
+import (
+	"database/sql"
+
+	"github.com/tonyhhyip/go-di-container"
+)
 
 type AccountService struct {
-	DB *sql.DB
+	DB        *sql.DB
+	Container container.Container
 }
