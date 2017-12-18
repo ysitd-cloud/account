@@ -58,6 +58,7 @@ func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfo
 		return reply, nil
 	}
 
+	reply.Exists = true
 	reply.User = &models.User{
 		Username:    user.Username,
 		DisplayName: user.DisplayName,
