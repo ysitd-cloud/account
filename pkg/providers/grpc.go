@@ -55,8 +55,7 @@ func (*grpcServiceProvder) Register(app container.Container) {
 	})
 
 	app.Singleton("grpc.server", func(app container.Container) interface{} {
-		cred := app.Make("grpc.cert").(credentials.TransportCredentials)
-		server := grpc.NewServer(grpc.Creds(cred))
+		server := grpc.NewServer()
 
 		service := app.Make("grpc.service").(pb.AccountServer)
 
