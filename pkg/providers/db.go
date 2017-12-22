@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/lib/pq"
 	"github.com/tonyhhyip/go-di-container"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type databaseServiceProvider struct {
@@ -16,6 +17,7 @@ type databaseServiceProvider struct {
 func (*databaseServiceProvider) Provides() []string {
 	return []string{
 		"db",
+		"db.pool",
 		"db.postgres",
 		"db.postgres.url",
 	}
@@ -32,4 +34,10 @@ func (*databaseServiceProvider) Register(app container.Container) {
 		return db
 	})
 	app.Alias("db", "db.postgres")
+
+	app.Singleton("db.pool", func(app container.Container) interface{} {
+		driver := "postgres"
+		url := app.Make("db.postgres.url").(string)
+		return utils.NewDatabasePool(driver, url)
+	})
 }
