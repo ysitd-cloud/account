@@ -1,12 +1,11 @@
 package grpc
 
 import (
-	"database/sql"
-
 	"github.com/tonyhhyip/go-di-container"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type AccountService struct {
-	DB        *sql.DB
+	Pool      utils.DatabasePool
 	Container container.Container
 }
