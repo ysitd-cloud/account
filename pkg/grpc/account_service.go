@@ -13,7 +13,14 @@ import (
 
 func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
 	username := req.GetUsername()
-	user, err := model.LoadUserFromDBWithUsername(s.DB, username)
+
+	db, err := s.Pool.Acquire()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	user, err := model.LoadUserFromDBWithUsername(db, username)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +51,14 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 
 func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfoRequest) (*actions.GetUserInfoReply, error) {
 	username := req.GetUsername()
-	user, err := model.LoadUserFromDBWithUsername(s.DB, username)
+
+	db, err := s.Pool.Acquire()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	user, err := model.LoadUserFromDBWithUsername(db, username)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +121,13 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 }
 
 func (s *AccountService) getUser(username string) (*models.User, error) {
-	user, err := model.LoadUserFromDBWithUsername(s.DB, username)
+	db, err := s.Pool.Acquire()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	user, err := model.LoadUserFromDBWithUsername(db, username)
 	if err != nil {
 		return nil, err
 	}

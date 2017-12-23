@@ -1,7 +1,6 @@
 package providers
 
 import (
-	"database/sql"
 	"net"
 	"os"
 	"path/filepath"
