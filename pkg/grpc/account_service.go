@@ -103,6 +103,7 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 		}
 
 		reply.Token = token
+		reply.Exists = true
 	}
 
 	return reply, nil
