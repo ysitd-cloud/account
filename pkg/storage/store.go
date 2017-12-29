@@ -6,17 +6,18 @@ import (
 
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type Store struct {
-	DB    *sql.DB
+	DB    utils.DatabasePool
 	Redis *redis.Pool
 }
 
-func NewStore(db *sql.DB, pool *redis.Pool) osin.Storage {
+func NewStore(dbPool utils.DatabasePool, redis *redis.Pool) osin.Storage {
 	return &Store{
-		db,
-		pool,
+		dbPool,
+		redis,
 	}
 }
 
@@ -24,9 +25,7 @@ func (s *Store) Clone() osin.Storage {
 	return s
 }
 
-func (s *Store) Close() {
-	s.DB.Close()
-}
+func (s *Store) Close() {}
 
 func makeKey(namespace, id string) string {
 	return fmt.Sprintf("%s:%s", namespace, id)

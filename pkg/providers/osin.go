@@ -1,12 +1,11 @@
 package providers
 
 import (
-	"database/sql"
-
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/pkg/storage"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type osinServiceProvider struct {
@@ -23,7 +22,7 @@ func (*osinServiceProvider) Provides() []string {
 
 func (*osinServiceProvider) Register(app container.Container) {
 	app.Bind("osin.storage", func(app container.Container) interface{} {
-		db := app.Make("db").(*sql.DB)
+		db := app.Make("db.pool").(utils.DatabasePool)
 		redisDB := app.Make("redis.pool").(*redis.Pool)
 		return storage.NewStore(db, redisDB)
 	})
