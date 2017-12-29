@@ -1,14 +1,14 @@
 package pages
 
 import (
-	"database/sql"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/pkg/http/helper"
 	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/model"
+	"github.com/ysitd-cloud/account/pkg/model/user"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 func modifiedPassword(c *gin.Context) {
@@ -22,10 +22,9 @@ func updatePassword(c *gin.Context) {
 	username := session.Get("username").(string)
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db").(*sql.DB)
-	defer db.Close()
+	db := kernel.Make("db.pool").(utils.DatabasePool)
 
-	user, err := model.LoadUserFromDBWithUsername(db, username)
+	instance, err := user.LoadFromDBWithUsername(db, username)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
@@ -33,7 +32,7 @@ func updatePassword(c *gin.Context) {
 
 	origin := c.PostForm("origin")
 
-	if !user.ValidatePassword(origin) {
+	if !instance.ValidatePassword(origin) {
 		c.Redirect(http.StatusFound, "/password?error=password")
 		return
 	}
@@ -52,7 +51,7 @@ func updatePassword(c *gin.Context) {
 		return
 	}
 
-	if err = user.ChangePassword(newPassword); err != nil {
+	if err = instance.ChangePassword(newPassword); err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 	}
 
