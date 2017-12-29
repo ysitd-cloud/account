@@ -1,149 +1,173 @@
 package storage
 
 import (
+	"database/sql"
+	"errors"
+
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
-	"github.com/satori/go.uuid"
 )
 
 func (s *Store) SaveAccess(data *osin.AccessData) (err error) {
-	conn := s.Redis.Get()
-	if err := conn.Err(); err != nil {
-		return err
+	prev := ""
+	authorizeData := &osin.AuthorizeData{}
+
+	if data.AccessData != nil {
+		prev = data.AccessData.AccessToken
 	}
 
-	defer conn.Close()
+	if data.AuthorizeData != nil {
+		authorizeData = data.AuthorizeData
+	}
 
-	payload, err := encode(data)
+	extra, err := assertToString(data.UserData)
 	if err != nil {
 		return err
 	}
 
-	accessID := uuid.NewV4().String()
-
-	if _, err := conn.Do("SETEX", makeKey("access", accessID), data.ExpiresIn, string(payload)); err != nil {
+	db, err := s.DB.Acquire()
+	if err != nil {
 		return err
 	}
 
-	if _, err := conn.Do("SETEX", makeKey("access_token", data.AccessToken), data.ExpiresIn, accessID); err != nil {
-		return err
+	defer db.Close()
+
+	tx, err := db.Begin()
+	if err != nil {
+		return errors.New(err.Error())
 	}
 
-	_, err = conn.Do("SETEX", makeKey("refresh_token", data.RefreshToken), data.ExpiresIn, accessID)
-	return err
+	if data.RefreshToken != "" {
+		if err := s.saveRefresh(tx, data.RefreshToken, data.AccessToken); err != nil {
+			return err
+		}
+	}
+
+	if data.Client == nil {
+		return errors.New("data.Client must not be nil")
+	}
+
+	query := "INSERT INTO access (client, authorize, previous, access_token, refresh_token, expires_in, scope, redirect_uri, created_at, extra) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)"
+	_, err = tx.Exec(query, data.Client.GetId(), authorizeData.Code, prev, data.AccessToken, data.RefreshToken, data.ExpiresIn, data.Scope, data.RedirectUri, data.CreatedAt, extra)
+	if err != nil {
+		if rbe := tx.Rollback(); rbe != nil {
+			return errors.New(rbe.Error())
+		}
+		return errors.New(err.Error())
+	}
+
+	if err = tx.Commit(); err != nil {
+		return errors.New(err.Error())
+	}
+
+	return nil
+}
+
+func (s *Store) saveRefresh(tx *sql.Tx, refresh, access string) (err error) {
+	query := "INSERT INTO refresh (token, access) VALUES ($1, $2)"
+	_, err = tx.Exec(query, refresh, access)
+	if err != nil {
+		if rbe := tx.Rollback(); rbe != nil {
+			return errors.New(rbe.Error())
+		}
+		return errors.New(err.Error())
+	}
+	return nil
 }
 
 // LoadAccess gets access data with given access token
-func (s *Store) LoadAccess(token string) (*osin.AccessData, error) {
-	return s.loadAccessByKey(makeKey("access_token", token))
+func (s *Store) LoadAccess(code string) (*osin.AccessData, error) {
+	var extra, cid, prevAccessToken, authorizeCode string
+	var result osin.AccessData
+
+	db, err := s.DB.Acquire()
+	if err != nil {
+		return nil, err
+	}
+
+	defer db.Close()
+
+	query := "SELECT client, authorize, previous, access_token, refresh_token, expires_in, scope, redirect_uri, created_at, extra FROM access WHERE access_token=$1 LIMIT 1"
+	if err := db.QueryRow(
+		query,
+		code,
+	).Scan(
+		&cid,
+		&authorizeCode,
+		&prevAccessToken,
+		&result.AccessToken,
+		&result.RefreshToken,
+		&result.ExpiresIn,
+		&result.Scope,
+		&result.RedirectUri,
+		&result.CreatedAt,
+		&extra,
+	); err == sql.ErrNoRows {
+		return nil, errNotFound
+	} else if err != nil {
+		return nil, errors.New(err.Error())
+	}
+
+	result.UserData = extra
+	client, err := s.GetClient(cid)
+	if err != nil {
+		return nil, err
+	}
+
+	result.Client = client
+	result.AuthorizeData, _ = s.LoadAuthorize(authorizeCode)
+	prevAccess, _ := s.LoadAccess(prevAccessToken)
+	result.AccessData = prevAccess
+	return &result, nil
 }
 
 // RemoveAccess deletes AccessData with given access token
-func (s *Store) RemoveAccess(token string) error {
-	return s.removeAccessByKey(makeKey("access_token", token))
+func (s *Store) RemoveAccess(code string) error {
+	db, err := s.DB.Acquire()
+	if err != nil {
+		return err
+	}
+
+	defer db.Close()
+
+	_, err = db.Exec("DELETE FROM refresh WHERE token=$1", code)
+	if err != nil {
+		return errors.New(err.Error())
+	}
+	return nil
 }
 
 // LoadRefresh gets access data with given refresh token
-func (s *Store) LoadRefresh(token string) (*osin.AccessData, error) {
-	return s.loadAccessByKey(makeKey("refresh_token", token))
+func (s *Store) LoadRefresh(code string) (*osin.AccessData, error) {
+	db, err := s.DB.Acquire()
+	if err != nil {
+		return nil, err
+	}
+
+	defer db.Close()
+
+	row := db.QueryRow("SELECT access FROM refresh WHERE token=$1 LIMIT 1", code)
+	var access string
+	if err := row.Scan(&access); err == sql.ErrNoRows {
+		return nil, errNotFound
+	} else if err != nil {
+		return nil, errors.New(err.Error())
+	}
+	return s.LoadAccess(access)
 }
 
 // RemoveRefresh deletes AccessData with given refresh token
 func (s *Store) RemoveRefresh(token string) error {
-	return s.removeAccessByKey(makeKey("refresh_token", token))
-}
-
-func (s *Store) removeAccessByKey(key string) error {
-	conn := s.Redis.Get()
-	if err := conn.Err(); err != nil {
-		return err
-	}
-
-	defer conn.Close()
-
-	accessID, err := redis.String(conn.Do("GET", key))
+	db, err := s.DB.Acquire()
 	if err != nil {
 		return err
 	}
 
-	access, err := s.loadAccessByKey(key)
+	defer db.Close()
+
+	_, err = db.Exec("DELETE FROM refresh WHERE token=$1", token)
 	if err != nil {
-		return err
+		return errors.New(err.Error())
 	}
-
-	if access == nil {
-		return nil
-	}
-
-	accessKey := makeKey("access", accessID)
-	if _, err := conn.Do("DEL", accessKey); err != nil {
-		return err
-	}
-
-	accessTokenKey := makeKey("access_token", access.AccessToken)
-	if _, err := conn.Do("DEL", accessTokenKey); err != nil {
-		return err
-	}
-
-	refreshTokenKey := makeKey("refresh_token", access.RefreshToken)
-	_, err = conn.Do("DEL", refreshTokenKey)
-	return err
-}
-
-func (s *Store) loadAccessByKey(key string) (*osin.AccessData, error) {
-	conn := s.Redis.Get()
-	if err := conn.Err(); err != nil {
-		return nil, err
-	}
-
-	defer conn.Close()
-
-	var (
-		rawAuthGob interface{}
-		err        error
-	)
-
-	if rawAuthGob, err = conn.Do("GET", key); err != nil {
-		return nil, err
-	}
-	if rawAuthGob == nil {
-		return nil, nil
-	}
-
-	accessID, err := redis.String(conn.Do("GET", key))
-	if err != nil {
-		return nil, err
-	}
-
-	accessIDKey := makeKey("access", accessID)
-	accessGob, err := redis.Bytes(conn.Do("GET", accessIDKey))
-	if err != nil {
-		return nil, err
-	}
-
-	var access osin.AccessData
-	if err := decode(accessGob, &access); err != nil {
-		return nil, err
-	}
-
-	ttl, err := redis.Int(conn.Do("TTL", accessIDKey))
-	if err != nil {
-		return nil, err
-	}
-
-	access.ExpiresIn = int32(ttl)
-
-	access.Client, err = s.GetClient(access.Client.GetId())
-	if err != nil {
-		return nil, err
-	}
-
-	if access.AuthorizeData != nil && access.AuthorizeData.Client != nil {
-		access.AuthorizeData.Client, err = s.GetClient(access.AuthorizeData.Client.GetId())
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	return &access, nil
+	return nil
 }
