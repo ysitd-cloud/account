@@ -5,7 +5,6 @@ import (
 	"errors"
 
 	"github.com/RangelReale/osin"
-	"github.com/garyburd/redigo/redis"
 )
 
 func (s *Store) SaveAccess(data *osin.AccessData) (err error) {
