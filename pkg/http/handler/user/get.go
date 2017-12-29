@@ -1,26 +1,25 @@
 package user
 
 import (
-	"database/sql"
 	"net/http"
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/model"
+	"github.com/ysitd-cloud/account/pkg/model/user"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 func getUser(c *gin.Context) {
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db").(*sql.DB)
-	defer db.Close()
+	db := kernel.Make("db.pool").(utils.DatabasePool)
 
-	id := c.Param("user")
-	user, err := model.LoadUserFromDBWithUsername(db, id)
+	id := c.Param("instance")
+	instance, err := user.LoadFromDBWithUsername(db, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, instance)
 		c.Abort()
 	}
 }
@@ -30,14 +29,13 @@ func getUserInfo(c *gin.Context) {
 	approved := access.UserData.(string)
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db").(*sql.DB)
-	defer db.Close()
+	db := kernel.Make("db.pool").(utils.DatabasePool)
 
-	user, err := model.LoadUserFromDBWithUsername(db, approved)
+	instance, err := user.LoadFromDBWithUsername(db, approved)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, instance)
 		c.Abort()
 	}
 }

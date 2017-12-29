@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/RangelReale/osin"
-	"github.com/ysitd-cloud/account/pkg/model"
+	"github.com/ysitd-cloud/account/pkg/model/user"
 	"github.com/ysitd-cloud/grpc-schema/account/actions"
 	"golang.org/x/net/context"
 
@@ -14,13 +14,7 @@ import (
 func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
 	username := req.GetUsername()
 
-	db, err := s.Pool.Acquire()
-	if err != nil {
-		return nil, err
-	}
-	defer db.Close()
-
-	user, err := model.LoadUserFromDBWithUsername(db, username)
+	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
 	if err != nil {
 		return nil, err
 	}
@@ -30,20 +24,20 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 		User:  nil,
 	}
 
-	if user == nil {
+	if instance == nil {
 		return reply, nil
 	}
 
 	password := req.GetPassword()
-	if !user.ValidatePassword(password) {
+	if !instance.ValidatePassword(password) {
 		return reply, nil
 	}
 
 	reply.User = &models.User{
-		Username:    user.Username,
-		DisplayName: user.DisplayName,
-		AvatarUrl:   user.AvatarUrl,
-		Email:       user.Email,
+		Username:    instance.Username,
+		DisplayName: instance.DisplayName,
+		AvatarUrl:   instance.AvatarUrl,
+		Email:       instance.Email,
 	}
 
 	return reply, nil
@@ -52,13 +46,7 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfoRequest) (*actions.GetUserInfoReply, error) {
 	username := req.GetUsername()
 
-	db, err := s.Pool.Acquire()
-	if err != nil {
-		return nil, err
-	}
-	defer db.Close()
-
-	user, err := model.LoadUserFromDBWithUsername(db, username)
+	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
 	if err != nil {
 		return nil, err
 	}
@@ -68,16 +56,16 @@ func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfo
 		User:   nil,
 	}
 
-	if user == nil {
+	if instance == nil {
 		return reply, nil
 	}
 
 	reply.Exists = true
 	reply.User = &models.User{
-		Username:    user.Username,
-		DisplayName: user.DisplayName,
-		AvatarUrl:   user.AvatarUrl,
-		Email:       user.Email,
+		Username:    instance.Username,
+		DisplayName: instance.DisplayName,
+		AvatarUrl:   instance.AvatarUrl,
+		Email:       instance.Email,
 	}
 
 	return reply, nil
@@ -121,22 +109,16 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 }
 
 func (s *AccountService) getUser(username string) (*models.User, error) {
-	db, err := s.Pool.Acquire()
-	if err != nil {
-		return nil, err
-	}
-	defer db.Close()
-
-	user, err := model.LoadUserFromDBWithUsername(db, username)
+	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
 	if err != nil {
 		return nil, err
 	}
 
 	return &models.User{
-		Username:    user.Username,
-		DisplayName: user.DisplayName,
-		AvatarUrl:   user.AvatarUrl,
-		Email:       user.Email,
+		Username:    instance.Username,
+		DisplayName: instance.DisplayName,
+		AvatarUrl:   instance.AvatarUrl,
+		Email:       instance.Email,
 	}, nil
 }
 

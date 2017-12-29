@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/parnurzeal/gorequest"
 	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/model"
+	"github.com/ysitd-cloud/account/pkg/model/user"
 )
 
 var sidecarHost string
@@ -24,13 +24,13 @@ func RenderAppView(c *gin.Context, code int, view string, data map[string]interf
 		if data == nil {
 			data = make(map[string]interface{})
 		}
-		user := model.User{
+		instance := user.User{
 			Username:    session.Get("username").(string),
 			DisplayName: session.Get("display_name").(string),
 			Email:       session.Get("email").(string),
 			AvatarUrl:   session.Get("avatar_url").(string),
 		}
-		data["user"] = user
+		data["instance"] = instance
 	}
 
 	sideCarUrl, err := url.Parse(sidecarHost)

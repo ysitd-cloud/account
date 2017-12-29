@@ -1,13 +1,13 @@
 package oauth
 
 import (
-	"database/sql"
 	"net/http"
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/model"
+	"github.com/ysitd-cloud/account/pkg/model/user"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 func ValidateToken(c *gin.Context) {
@@ -28,11 +28,11 @@ func ValidateToken(c *gin.Context) {
 	}
 
 	id := access.UserData.(string)
-	db := kernel.Make("db.postgres").(*sql.DB)
-	user, err := model.LoadUserFromDBWithUsername(db, id)
+	db := kernel.Make("db.pool").(utils.DatabasePool)
+	instance, err := user.LoadFromDBWithUsername(db, id)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)
 	} else {
-		c.AbortWithStatusJSON(http.StatusOK, user)
+		c.AbortWithStatusJSON(http.StatusOK, instance)
 	}
 }

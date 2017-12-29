@@ -9,7 +9,8 @@ import (
 	"github.com/tonyhhyip/go-di-container"
 	"github.com/ysitd-cloud/account/pkg/http/helper"
 	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/model"
+	"github.com/ysitd-cloud/account/pkg/model/user"
+	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 func basicForm(c *gin.Context) {
@@ -30,21 +31,20 @@ func basicSubmit(c *gin.Context) {
 	password := c.PostForm("password")
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db").(*sql.DB)
-	defer db.Close()
+	pool := kernel.Make("db.pool").(utils.DatabasePool)
 
-	user, err := model.LoadUserFromDBWithUsername(db, username)
-	if user == nil || err == sql.ErrNoRows {
+	instance, err := user.LoadFromDBWithUsername(pool, username)
+	if instance == nil || err == sql.ErrNoRows {
 		reason = "not_found"
 	} else if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
-	} else if user.ValidatePassword(password) {
+	} else if instance.ValidatePassword(password) {
 		session := middlewares.GetSession(c)
-		session.Set("username", user.Username)
-		session.Set("email", user.Email)
-		session.Set("avatar_url", user.AvatarUrl)
-		session.Set("display_name", user.DisplayName)
+		session.Set("username", instance.Username)
+		session.Set("email", instance.Email)
+		session.Set("avatar_url", instance.AvatarUrl)
+		session.Set("display_name", instance.DisplayName)
 		session.Save()
 		auth = true
 	} else {
