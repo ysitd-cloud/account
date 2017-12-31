@@ -2,8 +2,6 @@ package providers
 
 import (
 	"net"
-	"os"
-	"path/filepath"
 
 	"github.com/tonyhhyip/go-di-container"
 	grpcService "github.com/ysitd-cloud/account/pkg/grpc"
@@ -11,7 +9,6 @@ import (
 	"github.com/ysitd-cloud/account/pkg/utils"
 	pb "github.com/ysitd-cloud/grpc-schema/account"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 type grpcServiceProvder struct {
