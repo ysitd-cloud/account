@@ -22,6 +22,7 @@ func (*grpcServiceProvder) Provides() []string {
 	return []string{
 		"grpc.server",
 		"grpc.listener",
+		"grpc.proxy",
 	}
 }
 
@@ -41,18 +42,6 @@ func (*grpcServiceProvder) Register(app container.Container) {
 		}
 
 		return listener
-	})
-
-	app.Singleton("grpc.cert", func(app container.Container) interface{} {
-		base := os.Getenv("CERT_PATH")
-		certFile := filepath.Join(base, "tls.crt")
-		keyFile := filepath.Join(base, "tls.key")
-		cred, err := credentials.NewServerTLSFromFile(certFile, keyFile)
-		if err != nil {
-			panic(err)
-		}
-
-		return cred
 	})
 
 	app.Singleton("grpc.server", func(app container.Container) interface{} {
