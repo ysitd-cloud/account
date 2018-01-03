@@ -30,7 +30,7 @@ func RenderAppView(c *gin.Context, code int, view string, data map[string]interf
 			Email:       session.Get("email").(string),
 			AvatarUrl:   session.Get("avatar_url").(string),
 		}
-		data["instance"] = instance
+		data["user"] = instance
 	}
 
 	sideCarUrl, err := url.Parse(sidecarHost)
