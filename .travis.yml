@@ -6,7 +6,7 @@ go:
   - 1.9.1
   - 1.9
 
-go_import_path: github.com/ysitd-cloud/account
+go_import_path: code.ysitd.cloud/component/account
 
 install:
   - go get -v github.com/Masterminds/glide
