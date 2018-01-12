@@ -3,7 +3,7 @@ package user
 import (
 	"database/sql"
 
-	"github.com/ysitd-cloud/account/pkg/utils"
+	"code.ysitd.cloud/component/account/pkg/utils"
 )
 
 func ListFromDB(pool utils.DatabasePool) ([]*User, error) {

@@ -1,8 +1,8 @@
 package middlewares
 
 import (
+	"code.ysitd.cloud/component/account/pkg/kernel"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/account/pkg/kernel"
 )
 
 func BindKernel(c *gin.Context) {

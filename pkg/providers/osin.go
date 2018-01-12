@@ -1,11 +1,11 @@
 package providers
 
 import (
+	"code.ysitd.cloud/component/account/pkg/storage"
+	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/storage"
-	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type osinServiceProvider struct {

@@ -3,13 +3,13 @@ package main
 import (
 	"net"
 
+	proxy2 "code.ysitd.cloud/component/account/pkg/grpc/proxy"
+	"code.ysitd.cloud/component/account/pkg/http"
+	"code.ysitd.cloud/component/account/pkg/kernel"
+	"code.ysitd.cloud/component/account/pkg/providers"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
-	proxy2 "github.com/ysitd-cloud/account/pkg/grpc/proxy"
-	"github.com/ysitd-cloud/account/pkg/http"
-	"github.com/ysitd-cloud/account/pkg/kernel"
-	"github.com/ysitd-cloud/account/pkg/providers"
 	ginNet "github.com/ysitd-cloud/gin-utils/net"
 	"google.golang.org/grpc"
 )

@@ -1,13 +1,13 @@
 FROM ysitd/glide as builder
 
-COPY . /go/src/github.com/ysitd-cloud/account
+COPY . /go/src/code.ysitd.cloud/component/account
 
-WORKDIR /go/src/github.com/ysitd-cloud/account
+WORKDIR /go/src/code.ysitd.cloud/component/account
 
 RUN glide --no-color install -v --skip-test && \
     go build -v
 
 FROM alpine:3.6
-COPY --from=builder /go/src/github.com/ysitd-cloud/account/account /
+COPY --from=builder /go/src/code.ysitd.cloud/component/account/account /
 
 CMD ["/account"]

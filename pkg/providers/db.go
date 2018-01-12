@@ -1,13 +1,12 @@
 package providers
 
 import (
+	"database/sql"
 	"os"
 
-	"database/sql"
-
+	"code.ysitd.cloud/component/account/pkg/utils"
 	_ "github.com/lib/pq"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type databaseServiceProvider struct {

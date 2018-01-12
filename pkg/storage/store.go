@@ -3,9 +3,9 @@ package storage
 import (
 	"fmt"
 
+	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
-	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type Store struct {

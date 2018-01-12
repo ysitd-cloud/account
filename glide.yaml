@@ -1,4 +1,4 @@
-package: github.com/ysitd-cloud/account
+package: code.ysitd.cloud/component/account
 import:
 - package: github.com/RangelReale/osin
 - package: github.com/lib/pq

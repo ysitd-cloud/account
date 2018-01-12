@@ -2,7 +2,6 @@ package providers
 
 import (
 	"strconv"
-
 	"time"
 
 	"github.com/garyburd/redigo/redis"

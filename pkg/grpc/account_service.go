@@ -3,8 +3,8 @@ package grpc
 import (
 	"strings"
 
+	"code.ysitd.cloud/component/account/pkg/model/user"
 	"github.com/RangelReale/osin"
-	"github.com/ysitd-cloud/account/pkg/model/user"
 	"github.com/ysitd-cloud/grpc-schema/account/actions"
 	"golang.org/x/net/context"
 

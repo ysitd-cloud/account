@@ -1,10 +1,9 @@
 package middlewares
 
 import (
+	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"net/http"
 
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"

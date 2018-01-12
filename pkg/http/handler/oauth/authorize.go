@@ -3,10 +3,10 @@ package oauth
 import (
 	"log"
 
+	"code.ysitd.cloud/component/account/pkg/http/middlewares"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/http/middlewares"
 )
 
 func HandleAuthorize(c *gin.Context) {

@@ -1,12 +1,12 @@
 package http
 
 import (
+	"code.ysitd.cloud/component/account/pkg/http/handler"
+	"code.ysitd.cloud/component/account/pkg/http/handler/login"
+	"code.ysitd.cloud/component/account/pkg/http/handler/pages"
+	"code.ysitd.cloud/component/account/pkg/http/middlewares"
+	"code.ysitd.cloud/component/account/pkg/kernel"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/account/pkg/http/handler"
-	"github.com/ysitd-cloud/account/pkg/http/handler/login"
-	"github.com/ysitd-cloud/account/pkg/http/handler/pages"
-	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/kernel"
 )
 
 func Register(app *gin.Engine) {

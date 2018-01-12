@@ -3,8 +3,8 @@ package pages
 import (
 	"net/http"
 
+	"code.ysitd.cloud/component/account/pkg/http/helper"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/account/pkg/http/helper"
 )
 
 func profile(c *gin.Context) {

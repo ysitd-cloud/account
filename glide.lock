@@ -1,10 +1,10 @@
-hash: 2f90bca672d8382e88e4cdc5a4d9c860f3eb27064f939be1daf0b0bddc94ffbc
-updated: 2017-12-16T00:02:37.662813+08:00
+hash: d45560f2a8a581f9946cc6fe9f5b220678fe781498e31cc3b861f0bf87d1aa7b
+updated: 2018-01-13T07:31:48.771659+08:00
 imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/garyburd/redigo
-  version: 47dc60e71eed504e3ef8e77ee3c6fe720f3be57f
+  version: d1ed5c67e5794de818ea85e6b522fda02623a484
   subpackages:
   - internal
   - redis
@@ -15,16 +15,14 @@ imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
-  version: d459835d2b077e44f7c9b453505ee29881d5d12d
+  version: 87a24107d040d98ffb3ad8ccb9eca0e949ad0dea
   repo: https://github.com/ysitd-cloud/gin
   vcs: git
   subpackages:
   - binding
   - render
-- name: github.com/go-errors/errors
-  version: 8fa88b06e5974e97fbf9899a7f86a344bfd1f105
 - name: github.com/golang/protobuf
-  version: 4bd1920723d7b7c925de087aa32e2187708897f7
+  version: 5a0f697c9ed9d68fef0116532c6e05cfeae00e55
   subpackages:
   - proto
   - ptypes
@@ -35,12 +33,8 @@ imports:
   version: 3a960f412f14b09737fec6c3cc4c66840f840afd
   subpackages:
   - github
-- name: github.com/google/go-querystring
-  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
-  subpackages:
-  - query
 - name: github.com/gorilla/context
-  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+  version: 215affda49addc4c8ef7e2534915df2c8c35c6cd
 - name: github.com/gorilla/securecookie
   version: e59506cc896acb7f7bf732d4fdf5e25f7ccd8983
 - name: github.com/gorilla/sessions
@@ -50,7 +44,7 @@ imports:
   subpackages:
   - autoload
 - name: github.com/lib/pq
-  version: dd1fe2071026ce53f36a39112e645b4d4f5793a4
+  version: 3cd0097429be7d611bb644ef85b42bfb102ceea4
   subpackages:
   - oid
 - name: github.com/mattn/go-isatty
@@ -66,11 +60,11 @@ imports:
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
 - name: github.com/satori/go.uuid
-  version: 879c5887cd475cd7864858769793b2ceb0d44feb
+  version: f58768cc1a7a7e77a3bd49e98cdd21419399b6a3
 - name: github.com/tonyhhyip/go-di-container
   version: 70c3bbde180962982ad98529ff7f56a98693292f
 - name: github.com/ugorji/go
-  version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
+  version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:
   - codec
 - name: github.com/ysitd-cloud/gin-sessions
@@ -89,56 +83,35 @@ imports:
   - account/actions
   - account/models
 - name: golang.org/x/crypto
-  version: 81e90905daefcd6fd217b62423c0908922eadb30
+  version: adbae1b6b6fb4b02448a0fc0dbbc9ba2b95b294d
   subpackages:
   - bcrypt
   - blowfish
 - name: golang.org/x/net
-  version: 1c05540f6879653db88113bc4a2b70aec4bd491f
+  version: d4c55e66d8c3a2f3382d264b08e3e3454a66355a
   subpackages:
   - context
-  - context/ctxhttp
   - http2
   - http2/hpack
-  - idna
   - internal/timeseries
   - lex/httplex
   - publicsuffix
   - trace
 - name: golang.org/x/oauth2
   version: bb50c06baba3d0c76f9d125c0719093e315b5b44
-  subpackages:
-  - github
-  - internal
 - name: golang.org/x/sys
-  version: 7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce
+  version: 99f16d856c9836c42d24e7ab64ea72916925fa97
   subpackages:
   - unix
-- name: golang.org/x/text
-  version: b19bf474d317b857955b12035d2c5acb57ce8b01
-  subpackages:
-  - secure/bidirule
-  - transform
-  - unicode/bidi
-  - unicode/norm
-- name: google.golang.org/appengine
-  version: 24e4144ec923c2374f6b06610c0df16a9222c3d9
-  subpackages:
-  - internal
-  - internal/base
-  - internal/datastore
-  - internal/log
-  - internal/remote_api
-  - internal/urlfetch
-  - urlfetch
 - name: google.golang.org/genproto
   version: a8101f21cf983e773d0c1133ebc5424792003214
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: e687fa4e6424368ece6e4fe727cea2c806a0fcb4
+  version: 7cea4cc846bcf00cbb27595b07da5de875ef7de9
   subpackages:
   - balancer
+  - balancer/base
   - balancer/roundrobin
   - codes
   - connectivity
@@ -161,5 +134,5 @@ imports:
 - name: gopkg.in/go-playground/validator.v8
   version: 5f57d2222ad794d0dffb07e664ea05e2ee07d60c
 - name: gopkg.in/yaml.v2
-  version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
 testImports: []

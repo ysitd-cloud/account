@@ -6,10 +6,10 @@ import (
 	"net/url"
 	"os"
 
+	"code.ysitd.cloud/component/account/pkg/http/middlewares"
+	"code.ysitd.cloud/component/account/pkg/model/user"
 	"github.com/gin-gonic/gin"
 	"github.com/parnurzeal/gorequest"
-	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/model/user"
 )
 
 var sidecarHost string

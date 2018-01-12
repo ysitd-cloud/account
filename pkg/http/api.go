@@ -1,9 +1,9 @@
 package http
 
 import (
+	"code.ysitd.cloud/component/account/pkg/http/handler/user"
+	"code.ysitd.cloud/component/account/pkg/http/middlewares"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/account/pkg/http/handler/user"
-	"github.com/ysitd-cloud/account/pkg/http/middlewares"
 )
 
 func registerApi(group *gin.RouterGroup) {

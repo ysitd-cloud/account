@@ -4,9 +4,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	providers "code.ysitd.cloud/component/account/pkg/kernel"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	providers "github.com/ysitd-cloud/account/pkg/kernel"
 )
 
 func TestBindKernel(t *testing.T) {

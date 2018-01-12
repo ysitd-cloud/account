@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"net/url"
 
+	"code.ysitd.cloud/component/account/pkg/http/helper"
+	"code.ysitd.cloud/component/account/pkg/http/middlewares"
+	"code.ysitd.cloud/component/account/pkg/model/user"
+	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/http/helper"
-	"github.com/ysitd-cloud/account/pkg/http/middlewares"
-	"github.com/ysitd-cloud/account/pkg/model/user"
-	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 func basicForm(c *gin.Context) {

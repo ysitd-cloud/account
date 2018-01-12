@@ -3,7 +3,7 @@ package token
 import (
 	"time"
 
-	"github.com/ysitd-cloud/account/pkg/utils"
+	"code.ysitd.cloud/component/account/pkg/utils"
 )
 
 type Token struct {

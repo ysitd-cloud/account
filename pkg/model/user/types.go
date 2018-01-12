@@ -1,6 +1,6 @@
 package user
 
-import "github.com/ysitd-cloud/account/pkg/utils"
+import "code.ysitd.cloud/component/account/pkg/utils"
 
 type User struct {
 	Username    string             `json:"username"`

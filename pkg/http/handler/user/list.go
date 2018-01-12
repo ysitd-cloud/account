@@ -3,10 +3,10 @@ package user
 import (
 	"net/http"
 
+	"code.ysitd.cloud/component/account/pkg/model/user"
+	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/model/user"
-	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 func listUsers(c *gin.Context) {

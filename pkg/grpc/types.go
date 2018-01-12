@@ -1,8 +1,8 @@
 package grpc
 
 import (
+	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/account/pkg/utils"
 )
 
 type AccountService struct {
