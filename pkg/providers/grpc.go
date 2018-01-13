@@ -6,8 +6,8 @@ import (
 	grpcService "code.ysitd.cloud/component/account/pkg/grpc"
 	"code.ysitd.cloud/component/account/pkg/grpc/proxy"
 	"code.ysitd.cloud/component/account/pkg/utils"
+	pb "code.ysitd.cloud/grpc/schema/account"
 	"github.com/tonyhhyip/go-di-container"
-	pb "github.com/ysitd-cloud/grpc-schema/account"
 	"google.golang.org/grpc"
 )
 

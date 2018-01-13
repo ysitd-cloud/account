@@ -4,11 +4,10 @@ import (
 	"strings"
 
 	"code.ysitd.cloud/component/account/pkg/model/user"
+	"code.ysitd.cloud/grpc/schema/account/actions"
+	"code.ysitd.cloud/grpc/schema/account/models"
 	"github.com/RangelReale/osin"
-	"github.com/ysitd-cloud/grpc-schema/account/actions"
 	"golang.org/x/net/context"
-
-	"github.com/ysitd-cloud/grpc-schema/account/models"
 )
 
 func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {

@@ -1,8 +1,8 @@
 package proxy
 
 import (
+	"code.ysitd.cloud/grpc/schema/account"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/grpc-schema/account"
 )
 
 type GrpcProxy interface {

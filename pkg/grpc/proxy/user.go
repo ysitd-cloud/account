@@ -3,9 +3,9 @@ package proxy
 import (
 	"net/http"
 
+	"code.ysitd.cloud/grpc/schema/account"
+	"code.ysitd.cloud/grpc/schema/account/actions"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/grpc-schema/account"
-	"github.com/ysitd-cloud/grpc-schema/account/actions"
 	"golang.org/x/net/context"
 )
 

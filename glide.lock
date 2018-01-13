@@ -1,5 +1,5 @@
-hash: ad0c4fe596730b2dc26db96caf99b667a0efb00e1d0839e924962c29c55c3da0
-updated: 2018-01-13T08:53:07.34374+08:00
+hash: 23f1f5717531de4eca965707c5ca346438e085c466fb287288379abd0824d4a7
+updated: 2018-01-13T10:47:25.762543+08:00
 imports:
 - name: code.ysitd.cloud/gin/sessions
   version: f7b83cff063adb146531f47e9830f64d3721f71f
@@ -10,6 +10,12 @@ imports:
   subpackages:
   - env
   - net
+- name: code.ysitd.cloud/grpc/schema
+  version: b71fc73afa43723a3ca56d2219057c3ba1470f9e
+  subpackages:
+  - account
+  - account/actions
+  - account/models
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/garyburd/redigo
@@ -76,12 +82,6 @@ imports:
   version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:
   - codec
-- name: github.com/ysitd-cloud/grpc-schema
-  version: ef0004f6f8a71ecf75714d152c3720351d7fd014
-  subpackages:
-  - account
-  - account/actions
-  - account/models
 - name: golang.org/x/crypto
   version: adbae1b6b6fb4b02448a0fc0dbbc9ba2b95b294d
   subpackages:
