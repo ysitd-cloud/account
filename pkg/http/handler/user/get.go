@@ -3,8 +3,8 @@ package user
 import (
 	"net/http"
 
+	"code.ysitd.cloud/common/go/db"
 	"code.ysitd.cloud/component/account/pkg/model/user"
-	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
@@ -12,7 +12,7 @@ import (
 
 func getUser(c *gin.Context) {
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db.pool").(utils.DatabasePool)
+	db := kernel.Make("db.pool").(db.Pool)
 
 	id := c.Param("instance")
 	instance, err := user.LoadFromDBWithUsername(db, id)
@@ -29,7 +29,7 @@ func getUserInfo(c *gin.Context) {
 	approved := access.UserData.(string)
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db.pool").(utils.DatabasePool)
+	db := kernel.Make("db.pool").(db.Pool)
 
 	instance, err := user.LoadFromDBWithUsername(db, approved)
 	if err != nil {

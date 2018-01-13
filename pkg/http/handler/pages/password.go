@@ -3,10 +3,10 @@ package pages
 import (
 	"net/http"
 
+	"code.ysitd.cloud/common/go/db"
 	"code.ysitd.cloud/component/account/pkg/http/helper"
 	"code.ysitd.cloud/component/account/pkg/http/middlewares"
 	"code.ysitd.cloud/component/account/pkg/model/user"
-	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 )
@@ -22,7 +22,7 @@ func updatePassword(c *gin.Context) {
 	username := session.Get("username").(string)
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db.pool").(utils.DatabasePool)
+	db := kernel.Make("db.pool").(db.Pool)
 
 	instance, err := user.LoadFromDBWithUsername(db, username)
 	if err != nil {

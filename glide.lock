@@ -1,6 +1,8 @@
-hash: 23f1f5717531de4eca965707c5ca346438e085c466fb287288379abd0824d4a7
-updated: 2018-01-13T10:47:25.762543+08:00
+hash: db71d57b29fb27a942a429b2c94778a66c5d96c43e73da4649d7c88d2e2d1d6f
+updated: 2018-01-13T11:09:20.286065+08:00
 imports:
+- name: code.ysitd.cloud/common/go
+  version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
 - name: code.ysitd.cloud/gin/sessions
   version: f7b83cff063adb146531f47e9830f64d3721f71f
   subpackages:

@@ -3,8 +3,8 @@ package oauth
 import (
 	"net/http"
 
+	"code.ysitd.cloud/common/go/db"
 	"code.ysitd.cloud/component/account/pkg/model/user"
-	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
@@ -28,7 +28,7 @@ func ValidateToken(c *gin.Context) {
 	}
 
 	id := access.UserData.(string)
-	db := kernel.Make("db.pool").(utils.DatabasePool)
+	db := kernel.Make("db.pool").(db.Pool)
 	instance, err := user.LoadFromDBWithUsername(db, id)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)

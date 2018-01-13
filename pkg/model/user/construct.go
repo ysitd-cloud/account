@@ -3,10 +3,10 @@ package user
 import (
 	"database/sql"
 
-	"code.ysitd.cloud/component/account/pkg/utils"
+	"code.ysitd.cloud/common/go/db"
 )
 
-func ListFromDB(pool utils.DatabasePool) ([]*User, error) {
+func ListFromDB(pool db.Pool) ([]*User, error) {
 	db, err := pool.Acquire()
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func ListFromDB(pool utils.DatabasePool) ([]*User, error) {
 	return users, nil
 }
 
-func LoadFromDBWithUsername(pool utils.DatabasePool, username string) (*User, error) {
+func LoadFromDBWithUsername(pool db.Pool, username string) (*User, error) {
 	db, err := pool.Acquire()
 	if err != nil {
 		return nil, err

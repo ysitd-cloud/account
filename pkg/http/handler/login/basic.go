@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"net/url"
 
+	"code.ysitd.cloud/common/go/db"
 	"code.ysitd.cloud/component/account/pkg/http/helper"
 	"code.ysitd.cloud/component/account/pkg/http/middlewares"
 	"code.ysitd.cloud/component/account/pkg/model/user"
-	"code.ysitd.cloud/component/account/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 )
@@ -31,7 +31,7 @@ func basicSubmit(c *gin.Context) {
 	password := c.PostForm("password")
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	pool := kernel.Make("db.pool").(utils.DatabasePool)
+	pool := kernel.Make("db.pool").(db.Pool)
 
 	instance, err := user.LoadFromDBWithUsername(pool, username)
 	if instance == nil || err == sql.ErrNoRows {
