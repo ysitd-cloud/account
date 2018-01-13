@@ -7,10 +7,10 @@ import (
 	"code.ysitd.cloud/component/account/pkg/http"
 	"code.ysitd.cloud/component/account/pkg/kernel"
 	"code.ysitd.cloud/component/account/pkg/providers"
+	ginNet "code.ysitd.cloud/gin/utils/net"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
-	ginNet "github.com/ysitd-cloud/gin-utils/net"
 	"google.golang.org/grpc"
 )
 

@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"time"
 
+	"code.ysitd.cloud/gin/utils/env"
 	"github.com/garyburd/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
-	"github.com/ysitd-cloud/gin-utils/env"
 )
 
 type redisServiceProvider struct {
