@@ -1,6 +1,10 @@
-hash: d35b010249d264f9083dc2c0a4eb97869415f2e98af4795f568deb3fe3cd94cb
-updated: 2018-01-13T07:39:16.308371+08:00
+hash: f737da405c620f324a37001415f1918b1913659a49af24ce420920b88260f74c
+updated: 2018-01-13T08:35:12.576323+08:00
 imports:
+- name: code.ysitd.cloud/gin/sessions
+  version: 2ceccd6fa98bbeada774d8875056c817889afffb
+  subpackages:
+  - redis
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/garyburd/redigo
@@ -69,8 +73,6 @@ imports:
   - codec
 - name: github.com/ysitd-cloud/gin-sessions
   version: 2ceccd6fa98bbeada774d8875056c817889afffb
-  subpackages:
-  - redis
 - name: github.com/ysitd-cloud/gin-utils
   version: adb809e0d1710cdefc9227095e8a77e88337c286
   subpackages:

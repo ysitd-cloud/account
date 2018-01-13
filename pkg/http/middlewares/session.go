@@ -1,8 +1,8 @@
 package middlewares
 
 import (
+	"code.ysitd.cloud/gin/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/ysitd-cloud/gin-sessions"
 )
 
 func GetSession(c *gin.Context) sessions.Session {

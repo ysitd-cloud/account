@@ -1,6 +1,10 @@
 language: go
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.glide
+
 go:
   - 1.9.2
   - 1.9.1
