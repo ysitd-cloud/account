@@ -6,6 +6,7 @@ import (
 	"code.ysitd.cloud/common/go/db"
 	grpcService "code.ysitd.cloud/component/account/pkg/grpc"
 	"code.ysitd.cloud/component/account/pkg/grpc/proxy"
+	"code.ysitd.cloud/component/account/pkg/metrics"
 	pb "code.ysitd.cloud/grpc/schema/account"
 	"github.com/tonyhhyip/go-di-container"
 	"google.golang.org/grpc"
@@ -26,10 +27,16 @@ func (*grpcServiceProvder) Provides() []string {
 func (*grpcServiceProvder) Register(app container.Container) {
 	app.Singleton("grpc.service", func(app container.Container) interface{} {
 		pool := app.Make("db.pool").(db.Pool)
-		return &grpcService.AccountService{
+		collector := app.Make("metrics").(metrics.Collector)
+		service := &grpcService.AccountService{
 			Pool:      pool,
 			Container: app,
+			Collector: collector,
 		}
+
+		service.Init()
+
+		return service
 	})
 
 	app.Singleton("grpc.listener", func(app container.Container) interface{} {

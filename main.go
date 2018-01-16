@@ -10,6 +10,7 @@ import (
 	ginNet "code.ysitd.cloud/gin/utils/net"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"google.golang.org/grpc"
 )
 
@@ -20,17 +21,25 @@ func init() {
 }
 
 func main() {
-	app := kernel.Kernel.Make("http.server").(*gin.Engine)
+	{
+		app := kernel.Kernel.Make("http.server").(*gin.Engine)
+		http.Register(app)
+		go app.Run(ginNet.GetAddress())
+	}
 
-	http.Register(app)
+	{
+		proxy := kernel.Kernel.Make("grpc.proxy").(proxy2.GrpcProxy)
+		app := proxy.CreateApp()
+		handler := promhttp.Handler()
+		app.GET("/metrics", func(c *gin.Context) {
+			handler.ServeHTTP(c.Writer, c.Request)
+		})
+		go app.Run(":50050")
+	}
 
-	go app.Run(ginNet.GetAddress())
-
-	proxy := kernel.Kernel.Make("grpc.proxy").(proxy2.GrpcProxy)
-	engine := proxy.CreateApp()
-	go engine.Run(":50050")
-
-	server := kernel.Kernel.Make("grpc.server").(*grpc.Server)
-	listener := kernel.Kernel.Make("grpc.listener").(net.Listener)
-	server.Serve(listener)
+	{
+		server := kernel.Kernel.Make("grpc.server").(*grpc.Server)
+		listener := kernel.Kernel.Make("grpc.listener").(net.Listener)
+		server.Serve(listener)
+	}
 }

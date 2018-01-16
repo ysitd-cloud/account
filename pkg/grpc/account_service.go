@@ -7,11 +7,24 @@ import (
 	"code.ysitd.cloud/grpc/schema/account/actions"
 	"code.ysitd.cloud/grpc/schema/account/models"
 	"github.com/RangelReale/osin"
+	"github.com/prometheus/client_golang/prometheus"
 	"golang.org/x/net/context"
 )
 
 func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
 	username := req.GetUsername()
+
+	finish, err := s.Collector.InvokeRPC(validateUserPassword, prometheus.Labels{
+		"user": username,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		finish <- err != nil
+		close(finish)
+	}()
 
 	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
 	if err != nil {
@@ -45,6 +58,18 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfoRequest) (*actions.GetUserInfoReply, error) {
 	username := req.GetUsername()
 
+	finish, err := s.Collector.InvokeRPC(getUser, prometheus.Labels{
+		"user": username,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		finish <- err != nil
+		close(finish)
+	}()
+
 	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
 	if err != nil {
 		return nil, err
@@ -72,6 +97,18 @@ func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfo
 
 func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenInfoRequest) (*actions.GetTokenInfoReply, error) {
 	token := req.GetToken()
+
+	finish, err := s.Collector.InvokeRPC(getToken, prometheus.Labels{
+		"token": token,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		finish <- err != nil
+		close(finish)
+	}()
 
 	oauth := s.getOAuthService()
 	defer oauth.Storage.Close()

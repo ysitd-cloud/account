@@ -1,5 +1,5 @@
-hash: db71d57b29fb27a942a429b2c94778a66c5d96c43e73da4649d7c88d2e2d1d6f
-updated: 2018-01-14T10:34:25.217527+08:00
+hash: 4df23bae4ba5d4b8e2b66ae841647435493d21adcfdfcc78e0d25e36b721d935
+updated: 2018-01-16T17:09:04.155429+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
@@ -20,6 +20,10 @@ imports:
   - account
   - account/actions
   - account/models
+- name: github.com/beorn7/perks
+  version: 4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9
+  subpackages:
+  - quantile
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/garyburd/redigo
@@ -27,8 +31,6 @@ imports:
   subpackages:
   - internal
   - redis
-- name: github.com/gin-contrib/pprof
-  version: cea200e02ddddca4b843d75d32aa13c413549de9
 - name: github.com/gin-contrib/secure
   version: cb26e530f89836e40b61b4e5ba8fce0842328c36
 - name: github.com/gin-contrib/sse
@@ -48,10 +50,6 @@ imports:
   - ptypes/any
   - ptypes/duration
   - ptypes/timestamp
-- name: github.com/google/go-github
-  version: 3a960f412f14b09737fec6c3cc4c66840f840afd
-  subpackages:
-  - github
 - name: github.com/gorilla/context
   version: 215affda49addc4c8ef7e2534915df2c8c35c6cd
 - name: github.com/gorilla/securecookie
@@ -68,6 +66,10 @@ imports:
   - oid
 - name: github.com/mattn/go-isatty
   version: 57fdcb988a5c543893cc61bce354a6e24ab70022
+- name: github.com/matttproud/golang_protobuf_extensions
+  version: c12348ce28de40eed0136aa2b644d0ee0650e56c
+  subpackages:
+  - pbutil
 - name: github.com/moul/http2curl
   version: 4e24498b31dba4683efb9d35c1c8a91e2eda28c8
 - name: github.com/parnurzeal/gorequest
@@ -76,10 +78,27 @@ imports:
   version: e790cca94e6cc75c7064b1332e63811d4aae1a53
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
+- name: github.com/prometheus/client_golang
+  version: 967789050ba94deca04a5e84cce8ad472ce313c1
+  subpackages:
+  - prometheus
+  - prometheus/promhttp
+- name: github.com/prometheus/client_model
+  version: 99fa1f4be8e564e8a6b613da7fa6f46c9edafc6c
+  subpackages:
+  - go
+- name: github.com/prometheus/common
+  version: 89604d197083d4781071d3c65855d24ecfb0a563
+  subpackages:
+  - expfmt
+  - internal/bitbucket.org/ww/goautoneg
+  - model
+- name: github.com/prometheus/procfs
+  version: b15cd069a83443be3154b719d0cc9fe8117f09fb
+  subpackages:
+  - xfs
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
-- name: github.com/satori/go.uuid
-  version: f58768cc1a7a7e77a3bd49e98cdd21419399b6a3
 - name: github.com/tonyhhyip/go-di-container
   version: 70c3bbde180962982ad98529ff7f56a98693292f
 - name: github.com/ugorji/go
@@ -102,8 +121,6 @@ imports:
   - lex/httplex
   - publicsuffix
   - trace
-- name: golang.org/x/oauth2
-  version: bb50c06baba3d0c76f9d125c0719093e315b5b44
 - name: golang.org/x/sys
   version: 99f16d856c9836c42d24e7ab64ea72916925fa97
   subpackages:
