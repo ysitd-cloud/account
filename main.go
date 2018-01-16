@@ -8,7 +8,6 @@ import (
 	"code.ysitd.cloud/component/account/pkg/kernel"
 	"code.ysitd.cloud/component/account/pkg/providers"
 	ginNet "code.ysitd.cloud/gin/utils/net"
-	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"google.golang.org/grpc"
@@ -22,10 +21,6 @@ func init() {
 
 func main() {
 	app := kernel.Kernel.Make("http.server").(*gin.Engine)
-
-	if gin.Mode() != gin.ReleaseMode {
-		pprof.Register(app, nil)
-	}
 
 	http.Register(app)
 
