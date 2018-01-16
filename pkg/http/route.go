@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Register(app *gin.Engine) {
+func Register(app gin.IRouter) {
 	app.Use(middlewares.BindKernel)
 	app.Use(kernel.Kernel.Make("session.middleware").(gin.HandlerFunc))
 	app.Use(middlewares.Security())

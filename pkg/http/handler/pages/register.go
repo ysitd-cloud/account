@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Register(app *gin.Engine) {
+func Register(app gin.IRoutes) {
 	app.GET("/", middlewares.LoginOrRedirect, profile)
 	app.GET("/password", middlewares.LoginOrRedirect, modifiedPassword)
 	app.POST("/password", middlewares.LoginOrRedirect, updatePassword)
