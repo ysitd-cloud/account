@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 1.8.0
+[Release](https://github.com/ysitd-cloud/account/releases/tag/1.8.0)
+
+- Codebase migrate
+- Use common go library
+- Upgrade for packages
+
 ## Version 1.7.0
 
 [Release](https://github.com/ysitd-cloud/account/releases/tag/1.7.0)
