@@ -6,14 +6,15 @@ import (
 	"code.ysitd.cloud/component/account/pkg/http/handler/pages"
 	"code.ysitd.cloud/component/account/pkg/http/middlewares"
 	"code.ysitd.cloud/component/account/pkg/kernel"
+	"code.ysitd.cloud/component/account/pkg/metrics"
 	"github.com/gin-gonic/gin"
 )
 
-func Register(app gin.IRouter) {
+func Register(app gin.IRouter, collector metrics.Collector) {
 	app.Use(middlewares.BindKernel)
 	app.Use(kernel.Kernel.Make("session.middleware").(gin.HandlerFunc))
 	app.Use(middlewares.Security())
-	login.Register(app)
+	login.Register(app, collector)
 	pages.Register(app)
 	{
 		api := app.Group("/api")

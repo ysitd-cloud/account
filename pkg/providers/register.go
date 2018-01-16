@@ -1,6 +1,7 @@
 package providers
 
 import (
+	"code.ysitd.cloud/component/account/pkg/http"
 	"code.ysitd.cloud/component/account/pkg/metrics"
 	"github.com/tonyhhyip/go-di-container"
 )
@@ -53,4 +54,5 @@ func Register(kernel container.Kernel) {
 	})
 
 	kernel.Register(metrics.NewMetricsServiceProvider)
+	kernel.Register(http.NewServiceProvider)
 }

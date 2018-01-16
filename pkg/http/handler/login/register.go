@@ -1,6 +1,7 @@
 package login
 
 import (
+	"code.ysitd.cloud/component/account/pkg/metrics"
 	"github.com/gin-gonic/gin"
 )
 
@@ -9,7 +10,7 @@ const (
 	EndpointLoginSubmit = "login_submit"
 )
 
-func Register(app gin.IRoutes) {
-	app.GET("/login", basicForm)
-	app.POST("/login", basicSubmit)
+func Register(app gin.IRoutes, collector metrics.Collector) {
+	app.GET("/login", basicForm(collector))
+	app.POST("/login", basicSubmit(collector))
 }
