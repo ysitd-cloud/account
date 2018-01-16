@@ -16,8 +16,9 @@ func NewServiceProvider(app container.Container) container.ServiceProvider {
 	return sp
 }
 
-func newService(collector metrics.Collector) interfaces.Service {
+func newService(collector metrics.Collector, app container.Container) interfaces.Service {
 	return &service{
 		collector: collector,
+		app:       app,
 	}
 }
