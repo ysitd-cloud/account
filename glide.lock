@@ -1,8 +1,10 @@
 hash: db71d57b29fb27a942a429b2c94778a66c5d96c43e73da4649d7c88d2e2d1d6f
-updated: 2018-01-13T11:09:20.286065+08:00
+updated: 2018-01-14T10:34:25.217527+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
+  subpackages:
+  - db
 - name: code.ysitd.cloud/gin/sessions
   version: f7b83cff063adb146531f47e9830f64d3721f71f
   subpackages:
@@ -32,7 +34,7 @@ imports:
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
-  version: 87a24107d040d98ffb3ad8ccb9eca0e949ad0dea
+  version: ab0c7f408ede64df59ab4027c27ff07e2347c347
   repo: https://github.com/ysitd-cloud/gin
   vcs: git
   subpackages:
