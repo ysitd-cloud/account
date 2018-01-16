@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/tonyhhyip/go-di-container"
 )
 
@@ -15,7 +16,9 @@ func (*serviceProvider) Provides() []string {
 }
 
 func (*serviceProvider) Register(app container.Container) {
+	app.Instance("metrics.registerer", prometheus.DefaultRegisterer)
 	app.Singleton("metrics", func(app container.Container) interface{} {
-		return NewCollector()
+		registry := app.Make("metrics.registerer").(*prometheus.Registry)
+		return NewCollector(registry)
 	})
 }

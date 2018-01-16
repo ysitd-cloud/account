@@ -8,11 +8,12 @@ import (
 )
 
 func (c *collector) RegisterRPC(name string, labelsName []string) {
+	labelsName = append(labelsName, "result")
 	counter := newRPCCounter(name, labelsName)
 	timer := newRPCTimer(name, labelsName)
 
 	overall := newRPCCollector(counter, timer)
-	overall.register()
+	overall.register(c.registry)
 
 	c.rpc[name] = overall
 }
@@ -24,15 +25,18 @@ func (c *collector) InvokeRPC(name string, labels prometheus.Labels) (finish cha
 	}
 
 	channel := make(chan bool)
-	rpc.total.With(labels).Inc()
-	go c.finishInvokeRPC(rpc.timer, labels, channel)
+	go c.finishInvokeRPC(rpc, labels, channel)
 	return channel, nil
 }
 
-func (c *collector) finishInvokeRPC(counter *prometheus.HistogramVec, labels prometheus.Labels, finish <-chan bool) {
+func (c *collector) finishInvokeRPC(rpc *rpcCollector, labels prometheus.Labels, finish <-chan bool) {
 	start := time.Now()
-	<-finish
-	end := time.Now()
-	duration := end.Sub(start)
-	counter.With(labels).Observe(duration.Seconds())
+	if result := <-finish; result {
+		labels["result"] = "success"
+	} else {
+		labels["result"] = "failed"
+	}
+	duration := time.Now().Sub(start)
+	rpc.total.With(labels).Inc()
+	rpc.timer.With(labels).Observe(duration.Seconds())
 }

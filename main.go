@@ -6,6 +6,7 @@ import (
 	proxy2 "code.ysitd.cloud/component/account/pkg/grpc/proxy"
 	"code.ysitd.cloud/component/account/pkg/http"
 	"code.ysitd.cloud/component/account/pkg/kernel"
+	"code.ysitd.cloud/component/account/pkg/metrics"
 	"code.ysitd.cloud/component/account/pkg/providers"
 	ginNet "code.ysitd.cloud/gin/utils/net"
 	"github.com/gin-gonic/gin"
@@ -30,7 +31,8 @@ func main() {
 	{
 		proxy := kernel.Kernel.Make("grpc.proxy").(proxy2.GrpcProxy)
 		app := proxy.CreateApp()
-		handler := promhttp.Handler()
+		collector := kernel.Kernel.Make("metrics").(metrics.Collector)
+		handler := promhttp.HandlerFor(collector.GetGatherer(), promhttp.HandlerOpts{})
 		app.GET("/metrics", func(c *gin.Context) {
 			handler.ServeHTTP(c.Writer, c.Request)
 		})
