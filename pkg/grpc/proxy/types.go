@@ -1,15 +1,12 @@
 package proxy
 
 import (
+	"code.ysitd.cloud/gin/utils/interfaces"
 	"code.ysitd.cloud/grpc/schema/account"
 	"github.com/gin-gonic/gin"
 )
 
-type GrpcProxy interface {
-	CreateApp() *gin.Engine
-}
-
-func CreateProxy(service account.AccountServer) GrpcProxy {
+func CreateProxy(service account.AccountServer) interfaces.Service {
 	return &proxy{
 		service: service,
 	}
@@ -25,7 +22,7 @@ func (p *proxy) createMiddleware() gin.HandlerFunc {
 	}
 }
 
-func (p *proxy) CreateApp() (app *gin.Engine) {
+func (p *proxy) CreateService() (app interfaces.Engine) {
 	app = gin.Default()
 	app.Use(p.createMiddleware())
 	app.GET("/token/:token", getTokenInfo)
