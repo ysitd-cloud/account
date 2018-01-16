@@ -11,7 +11,7 @@ func BootstrapGrpcProxy() {
 	proxy := Kernel.Make("grpc.proxy").(interfaces.Service)
 	app := proxy.CreateService()
 	app.GET("/metrics", bootstrapGrpcMetricsEndpoint())
-	app.Run(":50050")
+	go app.Run(":50050")
 }
 
 func bootstrapGrpcMetricsEndpoint() gin.HandlerFunc {

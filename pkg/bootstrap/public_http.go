@@ -8,5 +8,5 @@ import (
 func BootstrapPublicHttpServer() {
 	service := Kernel.Make("http.service").(interfaces.Service)
 	app := service.CreateService()
-	app.Run(net.GetAddress())
+	go app.Run(net.GetAddress())
 }
