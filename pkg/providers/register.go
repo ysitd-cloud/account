@@ -53,6 +53,6 @@ func Register(kernel container.Kernel) {
 		return sp
 	})
 
-	kernel.Register(metrics.NewMetricsServiceProvider)
+	kernel.Register(metrics.NewServiceProvider)
 	kernel.Register(http.NewServiceProvider)
 }

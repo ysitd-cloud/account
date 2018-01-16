@@ -5,7 +5,7 @@ import (
 	"github.com/tonyhhyip/go-di-container"
 )
 
-func NewMetricsServiceProvider(app container.Container) container.ServiceProvider {
+func NewServiceProvider(app container.Container) container.ServiceProvider {
 	sp := &serviceProvider{
 		AbstractServiceProvider: container.NewAbstractServiceProvider(true),
 	}
