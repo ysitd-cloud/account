@@ -22,7 +22,7 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 	}
 
 	defer func() {
-		finish <- err != nil
+		finish <- err == nil
 		close(finish)
 	}()
 
@@ -55,27 +55,29 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 	return reply, nil
 }
 
-func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfoRequest) (*actions.GetUserInfoReply, error) {
+func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfoRequest) (reply *actions.GetUserInfoReply, err error) {
 	username := req.GetUsername()
 
 	finish, err := s.Collector.InvokeRPC(getUser, prometheus.Labels{
 		"user": username,
 	})
 	if err != nil {
-		return nil, err
+		return
 	}
 
 	defer func() {
-		finish <- err != nil
+		finish <- err == nil
 		close(finish)
 	}()
 
 	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
 	if err != nil {
-		return nil, err
+		return
 	}
 
-	reply := &actions.GetUserInfoReply{
+	err = nil
+
+	reply = &actions.GetUserInfoReply{
 		Exists: false,
 		User:   nil,
 	}
@@ -92,7 +94,7 @@ func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfo
 		Email:       instance.Email,
 	}
 
-	return reply, nil
+	return
 }
 
 func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenInfoRequest) (*actions.GetTokenInfoReply, error) {
@@ -106,7 +108,7 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 	}
 
 	defer func() {
-		finish <- err != nil
+		finish <- err == nil
 		close(finish)
 	}()
 
