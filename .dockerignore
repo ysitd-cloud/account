@@ -4,3 +4,4 @@ volumes
 account
 /.env
 vendor
+.git
