@@ -7,8 +7,8 @@ import (
 
 var (
 	ErrNotRegister     = errors.New("key not register")
-	ErrNotRegisterRPC  = errors.Wrap(ErrNotRegister, "rpc is not register")
-	ErrNotRegisterHttp = errors.Wrap(ErrNotRegister, "http endpoint is not register")
+	ErrNotRegisterRPC  = errors.Wrap(ErrNotRegister, "rpcEndpoints is not register")
+	ErrNotRegisterHttp = errors.Wrap(ErrNotRegister, "httpEndpoints endpoint is not register")
 )
 
 type registry interface {
@@ -27,9 +27,11 @@ type Collector interface {
 }
 
 type collector struct {
-	registry registry
-	rpc      map[string]*rpcCollector
-	http     map[string]*rpcCollector
+	registry      registry
+	rpc           *rpcCollector
+	http          *rpcCollector
+	rpcEndpoints  map[string]*rpcCollector
+	httpEndpoints map[string]*rpcCollector
 }
 
 type rpcCollector struct {

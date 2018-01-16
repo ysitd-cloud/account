@@ -15,11 +15,11 @@ func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
 	rpc := newRPCCollector(counter, timer)
 	rpc.register(c.registry)
 
-	c.http[endpoint] = rpc
+	c.httpEndpoints[endpoint] = rpc
 }
 
 func (c *collector) InvokeHttp(endpoint string, labels prometheus.Labels) (chan<- int, error) {
-	rpc, exists := c.http[endpoint]
+	rpc, exists := c.httpEndpoints[endpoint]
 	if !exists {
 		return nil, errors.Wrapf(ErrNotRegisterHttp, "Endpoint %s is not register", endpoint)
 	}
@@ -28,16 +28,21 @@ func (c *collector) InvokeHttp(endpoint string, labels prometheus.Labels) (chan<
 	return channel, nil
 }
 
-func (c *collector) finishHttp(
-	endpoint string,
-	labels prometheus.Labels,
-	rpc *rpcCollector,
-	channel <-chan int,
-) {
+func (c *collector) finishHttp(endpoint string, labels prometheus.Labels, rpc *rpcCollector, channel <-chan int) {
 	start := time.Now()
 	code := <-channel
 	duration := time.Now().Sub(start).Seconds()
-	labels["code"] = strconv.FormatInt(int64(code), 10)
+
+	statusCode := strconv.FormatInt(int64(code), 10)
+
+	labels["code"] = statusCode
 	rpc.timer.With(labels).Observe(duration)
 	rpc.total.With(labels).Inc()
+
+	overAllLabels := prometheus.Labels{
+		"code":     statusCode,
+		"endpoint": endpoint,
+	}
+	c.http.total.With(overAllLabels).Inc()
+	c.http.timer.With(overAllLabels).Observe(duration)
 }
