@@ -21,6 +21,10 @@ func (s *service) init() {
 func (s *service) CreateService() (app interfaces.Engine) {
 	app = gin.Default()
 	{
+		app.Use(func(c *gin.Context) {
+			c.Set("kernel", s.app)
+			c.Next()
+		})
 		s.bindMiddleware(app)
 		s.registerLoginRoute(app)
 		pages.Register(app)
