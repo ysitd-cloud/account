@@ -9,5 +9,5 @@ import (
 func BootstrapGrpcServer() {
 	server := Kernel.Make("grpc.server").(*grpc.Server)
 	listener := Kernel.Make("grpc.listener").(net.Listener)
-	go server.Serve(listener)
+	server.Serve(listener)
 }

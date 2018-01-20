@@ -1,5 +1,5 @@
-hash: 4df23bae4ba5d4b8e2b66ae841647435493d21adcfdfcc78e0d25e36b721d935
-updated: 2018-01-20T13:40:21.981696+08:00
+hash: 94b0c040f1637e97242d0a9d023696ebb54129d9210b1a57f224bbb92de60196
+updated: 2018-01-20T14:16:41.969004+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
@@ -99,7 +99,7 @@ imports:
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
 - name: github.com/tonyhhyip/go-di-container
-  version: ed6a15342329f379db4fa2ec46bdd3e773da0f70
+  version: d3a112c821f6502e88a9b89e201acc646839d756
 - name: github.com/ugorji/go
   version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:

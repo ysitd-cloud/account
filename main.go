@@ -11,8 +11,8 @@ import (
 func main() {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
-	bootstrap.BootstrapPublicHttpServer()
-	bootstrap.BootstrapGrpcProxy()
-	bootstrap.BootstrapGrpcServer()
+	go bootstrap.BootstrapPublicHttpServer()
+	go bootstrap.BootstrapGrpcProxy()
+	go bootstrap.BootstrapGrpcServer()
 	<-quit
 }

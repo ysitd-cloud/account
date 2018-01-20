@@ -10,11 +10,11 @@ import (
 func BootstrapGrpcProxy() {
 	proxy := Kernel.Make("grpc.proxy").(interfaces.Service)
 	app := proxy.CreateService()
-	app.GET("/metrics", bootstrapGrpcMetricsEndpoint())
-	go app.Run(":50050")
+	app.GET("/metrics", bootstrapMetricsEndpoint())
+	app.Run(":50050")
 }
 
-func bootstrapGrpcMetricsEndpoint() gin.HandlerFunc {
+func bootstrapMetricsEndpoint() gin.HandlerFunc {
 	collector := Kernel.Make("metrics").(metrics.Collector)
 	handler := promhttp.HandlerFor(collector.GetGatherer(), promhttp.HandlerOpts{})
 	return func(c *gin.Context) {

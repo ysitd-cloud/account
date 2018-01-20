@@ -1,9 +1,13 @@
 package metrics
 
 import (
+	"sync"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/tonyhhyip/go-di-container"
 )
+
+var once sync.Once
 
 func NewServiceProvider(app container.Container) container.ServiceProvider {
 	sp := &serviceProvider{
@@ -22,7 +26,9 @@ func NewCollector(registry registry) Collector {
 		registry:      registry,
 	}
 
-	c.init()
+	once.Do(func() {
+		c.init()
+	})
 
 	return c
 }

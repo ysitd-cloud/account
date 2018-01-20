@@ -1,6 +1,8 @@
 package http
 
 import (
+	"sync"
+
 	"code.ysitd.cloud/component/account/pkg/http/handler/pages"
 	"code.ysitd.cloud/gin/utils/interfaces"
 	"github.com/gin-gonic/gin"
@@ -12,10 +14,14 @@ const (
 	endpointUserInfo    = "user_info"
 )
 
+var once sync.Once
+
 func (s *service) init() {
-	s.collector.RegisterHttp(endpointLoginForm, []string{})
-	s.collector.RegisterHttp(endpointLoginSubmit, []string{"user"})
-	s.collector.RegisterHttp(endpointUserInfo, []string{"user"})
+	once.Do(func() {
+		s.collector.RegisterHttp(endpointLoginForm, []string{})
+		s.collector.RegisterHttp(endpointLoginSubmit, []string{"user"})
+		s.collector.RegisterHttp(endpointUserInfo, []string{"user"})
+	})
 }
 
 func (s *service) CreateService() (app interfaces.Engine) {
