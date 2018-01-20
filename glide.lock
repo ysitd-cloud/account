@@ -1,5 +1,5 @@
 hash: 4df23bae4ba5d4b8e2b66ae841647435493d21adcfdfcc78e0d25e36b721d935
-updated: 2018-01-16T21:31:27.694004+08:00
+updated: 2018-01-20T13:40:21.981696+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
@@ -13,6 +13,7 @@ imports:
   version: dd47f3b7f8b68d8d080a3f54b20ef2525d23e844
   subpackages:
   - env
+  - interfaces
   - net
 - name: code.ysitd.cloud/grpc/schema
   version: b71fc73afa43723a3ca56d2219057c3ba1470f9e
@@ -33,10 +34,8 @@ imports:
   - redis
 - name: github.com/gin-contrib/secure
   version: cb26e530f89836e40b61b4e5ba8fce0842328c36
-- name: github.com/gin-contrib/sse
-  version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
-  version: ab0c7f408ede64df59ab4027c27ff07e2347c347
+  version: 11d866e2e129d937714e431e29cd4a22c36c65a9
   repo: https://github.com/ysitd-cloud/gin
   vcs: git
   subpackages:
@@ -100,7 +99,7 @@ imports:
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
 - name: github.com/tonyhhyip/go-di-container
-  version: 70c3bbde180962982ad98529ff7f56a98693292f
+  version: ed6a15342329f379db4fa2ec46bdd3e773da0f70
 - name: github.com/ugorji/go
   version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:
@@ -137,7 +136,7 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: 7cea4cc846bcf00cbb27595b07da5de875ef7de9
+  version: 6b51017f791ae1cfbec89c52efdf444b13b550ef
   subpackages:
   - balancer
   - balancer/base
