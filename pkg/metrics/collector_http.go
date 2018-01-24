@@ -10,6 +10,7 @@ import (
 )
 
 func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
+	labelsName = append(labelsName, "code")
 	counter := newHttpCounter(endpoint, labelsName)
 	timer := newHttpTimer(endpoint, labelsName)
 
@@ -17,6 +18,7 @@ func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
 	logrus.WithFields(logrus.Fields{
 		"target":   "http",
 		"endpoint": endpoint,
+		"labels":   labelsName,
 	}).Debug("Register metrics collector")
 	rpc.register(c.registry)
 
