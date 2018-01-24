@@ -1,5 +1,5 @@
-hash: 94b0c040f1637e97242d0a9d023696ebb54129d9210b1a57f224bbb92de60196
-updated: 2018-01-20T14:16:41.969004+08:00
+hash: c1cb0734e203a611b707add8b0ccfcd68cb9043fc908c23abf5f88854e117899
+updated: 2018-01-24T08:24:22.570611+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
@@ -93,11 +93,15 @@ imports:
   - internal/bitbucket.org/ww/goautoneg
   - model
 - name: github.com/prometheus/procfs
-  version: b15cd069a83443be3154b719d0cc9fe8117f09fb
+  version: 85fadb6e89903ef7cca6f6a804474cd5ea85b6e1
   subpackages:
+  - internal/util
+  - nfsd
   - xfs
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
+- name: github.com/sirupsen/logrus
+  version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
 - name: github.com/tonyhhyip/go-di-container
   version: d3a112c821f6502e88a9b89e201acc646839d756
 - name: github.com/ugorji/go

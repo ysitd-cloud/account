@@ -6,6 +6,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/sirupsen/logrus"
 )
 
 func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
@@ -13,6 +14,10 @@ func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
 	timer := newHttpTimer(endpoint, labelsName)
 
 	rpc := newRPCCollector(counter, timer)
+	logrus.WithFields(logrus.Fields{
+		"target":   "http",
+		"endpoint": endpoint,
+	}).Debug("Register metrics collector")
 	rpc.register(c.registry)
 
 	c.httpEndpoints[endpoint] = rpc
@@ -45,4 +50,11 @@ func (c *collector) finishHttp(endpoint string, labels prometheus.Labels, rpc *r
 	}
 	c.http.total.With(overAllLabels).Inc()
 	c.http.timer.With(overAllLabels).Observe(duration)
+
+	logger := logrus.WithField("target", "http")
+	for k, v := range labels {
+		logger = logger.WithField(k, v)
+	}
+
+	logger.Debug("Collect Metrics")
 }

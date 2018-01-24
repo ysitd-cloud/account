@@ -34,3 +34,5 @@ import:
   - prometheus/promhttp
 - package: github.com/pkg/errors
   version: ^0.8.0
+- package: github.com/sirupsen/logrus
+  version: ^1.0.4

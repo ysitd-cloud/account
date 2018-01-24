@@ -5,6 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/sirupsen/logrus"
 )
 
 func (c *collector) RegisterRPC(name string, labelsName []string) {
@@ -13,6 +14,10 @@ func (c *collector) RegisterRPC(name string, labelsName []string) {
 	timer := newRPCTimer(name, labelsName)
 
 	overall := newRPCCollector(counter, timer)
+	logrus.WithFields(logrus.Fields{
+		"target": "rpc",
+		"name":   name,
+	}).Debug("Register metrics collector")
 	overall.register(c.registry)
 
 	c.rpcEndpoints[name] = overall
@@ -50,4 +55,11 @@ func (c *collector) finishInvokeRPC(rpc *rpcCollector, endpoint string, labels p
 	// Overall RPC
 	c.rpc.total.With(overAllLabels).Inc()
 	c.rpc.timer.With(overAllLabels).Observe(duration)
+
+	logger := logrus.WithField("target", "rpc")
+	for k, v := range labels {
+		logger = logger.WithField(k, v)
+	}
+
+	logger.Debug("Collect Metrics")
 }
