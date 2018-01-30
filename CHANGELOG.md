@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.8.1
+[Release](https://github.com/ysitd-cloud/account/releases/tag/1.8.1)
+
+- Add metrics collect
+
+
 ## Version 1.8.0
 [Release](https://github.com/ysitd-cloud/account/releases/tag/1.8.0)
 
