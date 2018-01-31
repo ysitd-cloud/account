@@ -1,8 +1,8 @@
 hash: c1cb0734e203a611b707add8b0ccfcd68cb9043fc908c23abf5f88854e117899
-updated: 2018-01-24T08:24:22.570611+08:00
+updated: 2018-01-31T12:43:01.235721+08:00
 imports:
 - name: code.ysitd.cloud/common/go
-  version: 31c9b8afdba7b3dbe1b408a7b63844d58dd17379
+  version: 4ed1e630d722932408a85b1217ff4f25482c85e9
   subpackages:
   - db
 - name: code.ysitd.cloud/gin/sessions
@@ -93,17 +93,17 @@ imports:
   - internal/bitbucket.org/ww/goautoneg
   - model
 - name: github.com/prometheus/procfs
-  version: 85fadb6e89903ef7cca6f6a804474cd5ea85b6e1
+  version: cb4147076ac75738c9a7d279075a253c0cc5acbd
   subpackages:
   - internal/util
-  - nfsd
+  - nfs
   - xfs
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
 - name: github.com/sirupsen/logrus
   version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
 - name: github.com/tonyhhyip/go-di-container
-  version: d3a112c821f6502e88a9b89e201acc646839d756
+  version: 77ff030b0a993bd4f5ad4ed525ee4b42ba630625
 - name: github.com/ugorji/go
   version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:
@@ -113,6 +113,7 @@ imports:
   subpackages:
   - bcrypt
   - blowfish
+  - ssh/terminal
 - name: golang.org/x/net
   version: 1c05540f6879653db88113bc4a2b70aec4bd491f
   subpackages:
