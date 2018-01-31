@@ -1,5 +1,5 @@
-hash: c1cb0734e203a611b707add8b0ccfcd68cb9043fc908c23abf5f88854e117899
-updated: 2018-01-31T12:43:01.235721+08:00
+hash: 5f6a943b38374c2fe1201a909d5ec2d6695f88611b7a221e877f3f96c71a3fc0
+updated: 2018-01-31T17:29:32.370709+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 4ed1e630d722932408a85b1217ff4f25482c85e9
@@ -103,7 +103,7 @@ imports:
 - name: github.com/sirupsen/logrus
   version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
 - name: github.com/tonyhhyip/go-di-container
-  version: 77ff030b0a993bd4f5ad4ed525ee4b42ba630625
+  version: d3a112c821f6502e88a9b89e201acc646839d756
 - name: github.com/ugorji/go
   version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:

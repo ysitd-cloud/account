@@ -19,6 +19,7 @@ import:
   vcs: git
 - package: code.ysitd.cloud/gin/utils
 - package: github.com/tonyhhyip/go-di-container
+  version: d3a112c821f6502e88a9b89e201acc646839d756
 - package: github.com/gin-contrib/secure
 - package: github.com/golang/protobuf
   subpackages:
