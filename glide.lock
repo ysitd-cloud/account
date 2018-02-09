@@ -1,5 +1,5 @@
 hash: 5f6a943b38374c2fe1201a909d5ec2d6695f88611b7a221e877f3f96c71a3fc0
-updated: 2018-01-31T17:29:32.370709+08:00
+updated: 2018-02-09T13:08:18.21938+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 4ed1e630d722932408a85b1217ff4f25482c85e9
@@ -10,7 +10,7 @@ imports:
   subpackages:
   - redis
 - name: code.ysitd.cloud/gin/utils
-  version: dd47f3b7f8b68d8d080a3f54b20ef2525d23e844
+  version: 9acd745aa495a2d5b7c68f4bd9d3ac85107276a9
   subpackages:
   - env
   - interfaces
