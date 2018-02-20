@@ -4,8 +4,7 @@ import (
 	"os"
 
 	"code.ysitd.cloud/gin/sessions"
-	redisSession "code.ysitd.cloud/gin/sessions/redis"
-	"github.com/garyburd/redigo/redis"
+	"code.ysitd.cloud/gin/sessions/etcd"
 	"github.com/tonyhhyip/go-di-container"
 )
 
@@ -25,10 +24,12 @@ func (*sessionServiceProvider) Provides() []string {
 func (*sessionServiceProvider) Register(app container.Container) {
 	app.Instance("session.name", os.Getenv("SESSION_NAME"))
 	app.Instance("session.secret", os.Getenv("SESSION_SECRET"))
+	app.Instance("session.path", os.Getenv("SESSION_PATH"))
 	app.Singleton("session.store", func(app container.Container) interface{} {
 		secret := app.Make("session.secret").(string)
-		pool := app.Make("redis.pool").(*redis.Pool)
-		store, err := redisSession.NewRedisStoreWithPool(pool, []byte(secret))
+		host := app.Make("etcd.host").(string)
+		path := app.Make("session.path").(string)
+		store, err := etcd.NewEtcdStoreFromAddr([]string{host}, path, []byte(secret))
 		if err != nil {
 			panic(err)
 		}
