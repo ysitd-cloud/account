@@ -15,8 +15,8 @@ go:
 go_import_path: code.ysitd.cloud/component/account
 
 install:
-  - go get -v github.com/Masterminds/glide
-  - cd $GOPATH/src/github.com/Masterminds/glide && git checkout v0.13.1 && go install && cd -
+  - curl -o glide.zip -L https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.zip
+  - unzip glide.zip && mv linux-amd64/glide $GOPATH/bin/glide && rm -r linux-amd64
   - glide install -v
 
 script:
