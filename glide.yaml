@@ -8,13 +8,13 @@ import:
   subpackages:
   - bcrypt
 - package: code.ysitd.cloud/gin/sessions
-  version: 11b5afc3fbbbaa1a5910710adfced3e10d6365b9
+  version: ^3.0.0
 - package: github.com/garyburd/redigo
   version: ^1.1.0
   subpackages:
   - redis
 - package: github.com/gin-gonic/gin
-  version: ~1.3.1
+  version: ~1.2.0
   repo: https://github.com/ysitd-cloud/gin
   vcs: git
 - package: code.ysitd.cloud/gin/utils

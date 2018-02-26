@@ -8,14 +8,6 @@ import (
 
 func Register(kernel container.Kernel) {
 	kernel.Register(func(app container.Container) container.ServiceProvider {
-		sp := &etcdServiceProvider{
-			AbstractServiceProvider: container.NewAbstractServiceProvider(true),
-		}
-		sp.SetContainer(app)
-
-		return sp
-	})
-	kernel.Register(func(app container.Container) container.ServiceProvider {
 		sp := databaseServiceProvider{
 			AbstractServiceProvider: container.NewAbstractServiceProvider(true),
 		}

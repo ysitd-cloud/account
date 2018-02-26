@@ -1,14 +1,14 @@
-hash: 05912a24344e5579046651fc7e4065a541f396084ab2c9bb43fb98a17c893c20
-updated: 2018-02-21T04:44:21.229282+08:00
+hash: 5f6a943b38374c2fe1201a909d5ec2d6695f88611b7a221e877f3f96c71a3fc0
+updated: 2018-02-09T13:08:18.21938+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 4ed1e630d722932408a85b1217ff4f25482c85e9
   subpackages:
   - db
 - name: code.ysitd.cloud/gin/sessions
-  version: 11b5afc3fbbbaa1a5910710adfced3e10d6365b9
+  version: f7b83cff063adb146531f47e9830f64d3721f71f
   subpackages:
-  - etcd
+  - redis
 - name: code.ysitd.cloud/gin/utils
   version: 9acd745aa495a2d5b7c68f4bd9d3ac85107276a9
   subpackages:
@@ -25,18 +25,8 @@ imports:
   version: 4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9
   subpackages:
   - quantile
-- name: github.com/coreos/etcd
-  version: 28f3f26c0e303392556035b694f75768d449d33d
-  subpackages:
-  - client
-  - pkg/pathutil
-  - pkg/srv
-  - pkg/types
-  - version
-- name: github.com/coreos/go-semver
-  version: 8ab6407b697782a06568d4b7f1db25550ec2e4c6
-  subpackages:
-  - semver
+- name: github.com/boj/redistore
+  version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/garyburd/redigo
   version: d1ed5c67e5794de818ea85e6b522fda02623a484
   subpackages:
@@ -45,7 +35,7 @@ imports:
 - name: github.com/gin-contrib/secure
   version: cb26e530f89836e40b61b4e5ba8fce0842328c36
 - name: github.com/gin-gonic/gin
-  version: 59febab65eeab8e0cc88fce40b1cd59a18f21dea
+  version: 11d866e2e129d937714e431e29cd4a22c36c65a9
   repo: https://github.com/ysitd-cloud/gin
   vcs: git
   subpackages:
@@ -103,8 +93,10 @@ imports:
   - internal/bitbucket.org/ww/goautoneg
   - model
 - name: github.com/prometheus/procfs
-  version: a6e9df898b1336106c743392c48ee0b71f5c4efa
+  version: cb4147076ac75738c9a7d279075a253c0cc5acbd
   subpackages:
+  - internal/util
+  - nfs
   - xfs
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
@@ -113,7 +105,7 @@ imports:
 - name: github.com/tonyhhyip/go-di-container
   version: d3a112c821f6502e88a9b89e201acc646839d756
 - name: github.com/ugorji/go
-  version: bdcc60b419d136a85cdf2e7cbcac34b3f1cd6e57
+  version: c88ee250d0221a57af388746f5cf03768c21d6e2
   subpackages:
   - codec
 - name: golang.org/x/crypto
@@ -149,7 +141,7 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: 8e4536a86ab602859c20df5ebfd0bd4228d08655
+  version: 6b51017f791ae1cfbec89c52efdf444b13b550ef
   subpackages:
   - balancer
   - balancer/base
@@ -158,7 +150,6 @@ imports:
   - connectivity
   - credentials
   - encoding
-  - encoding/proto
   - grpclb/grpc_lb_v1/messages
   - grpclog
   - internal
