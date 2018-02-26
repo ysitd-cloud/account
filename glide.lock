@@ -1,12 +1,12 @@
-hash: 5f6a943b38374c2fe1201a909d5ec2d6695f88611b7a221e877f3f96c71a3fc0
-updated: 2018-02-09T13:08:18.21938+08:00
+hash: ddc0999af5a40c79f1e198666112de13511aeab7a4f930db9c538438dba6fae8
+updated: 2018-02-26T17:35:27.97382+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: 4ed1e630d722932408a85b1217ff4f25482c85e9
   subpackages:
   - db
 - name: code.ysitd.cloud/gin/sessions
-  version: f7b83cff063adb146531f47e9830f64d3721f71f
+  version: 11b5afc3fbbbaa1a5910710adfced3e10d6365b9
   subpackages:
   - redis
 - name: code.ysitd.cloud/gin/utils
@@ -93,10 +93,8 @@ imports:
   - internal/bitbucket.org/ww/goautoneg
   - model
 - name: github.com/prometheus/procfs
-  version: cb4147076ac75738c9a7d279075a253c0cc5acbd
+  version: a6e9df898b1336106c743392c48ee0b71f5c4efa
   subpackages:
-  - internal/util
-  - nfs
   - xfs
 - name: github.com/RangelReale/osin
   version: 2f5f7674c44822fc44682c117025ccb0752627f8
@@ -141,7 +139,7 @@ imports:
   subpackages:
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: 6b51017f791ae1cfbec89c52efdf444b13b550ef
+  version: 8e4536a86ab602859c20df5ebfd0bd4228d08655
   subpackages:
   - balancer
   - balancer/base
@@ -150,6 +148,7 @@ imports:
   - connectivity
   - credentials
   - encoding
+  - encoding/proto
   - grpclb/grpc_lb_v1/messages
   - grpclog
   - internal
