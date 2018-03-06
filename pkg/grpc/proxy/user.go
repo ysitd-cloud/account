@@ -6,7 +6,6 @@ import (
 	"code.ysitd.cloud/grpc/schema/account"
 	"code.ysitd.cloud/grpc/schema/account/actions"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/net/context"
 )
 
 func getUserInfo(c *gin.Context) {
