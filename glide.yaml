@@ -29,6 +29,7 @@ import:
 - package: code.ysitd.cloud/grpc/schema
   version: b71fc73afa43723a3ca56d2219057c3ba1470f9e
 - package: code.ysitd.cloud/common/go
+  version: a53841447c0827dfd62244bbcfbcd95280373ec7
 - package: github.com/prometheus/client_golang
   version: ^0.9.0-pre1
   subpackages:
