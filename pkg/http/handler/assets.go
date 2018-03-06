@@ -10,21 +10,21 @@ import (
 )
 
 var sidecarHost string
-var sideCarUrl *url.URL
+var sideCarURL *url.URL
 
 var assertProxy *httputil.ReverseProxy
 
 func init() {
 	sidecarHost = os.Getenv("SIDECAR_URL")
-	sideCarUrl, _ = url.Parse(sidecarHost)
+	sideCarURL, _ = url.Parse(sidecarHost)
 	assertProxy = &httputil.ReverseProxy{
 		Director: assetsDirector,
 	}
 }
 
 func assetsDirector(req *http.Request) {
-	req.URL.Scheme = sideCarUrl.Scheme
-	req.URL.Host = sideCarUrl.Host
+	req.URL.Scheme = sideCarURL.Scheme
+	req.URL.Host = sideCarURL.Host
 
 	req.Header.Set("User-Agent", "Account Manager")
 }

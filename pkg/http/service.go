@@ -18,9 +18,9 @@ var once sync.Once
 
 func (s *service) init() {
 	once.Do(func() {
-		s.collector.RegisterHttp(endpointLoginForm, []string{})
-		s.collector.RegisterHttp(endpointLoginSubmit, []string{"user"})
-		s.collector.RegisterHttp(endpointUserInfo, []string{"user"})
+		s.collector.RegisterHTTP(endpointLoginForm, []string{})
+		s.collector.RegisterHTTP(endpointLoginSubmit, []string{"user"})
+		s.collector.RegisterHTTP(endpointUserInfo, []string{"user"})
 	})
 }
 

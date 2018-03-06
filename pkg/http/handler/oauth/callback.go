@@ -16,7 +16,7 @@ func Callback(c *gin.Context) {
 		return
 	}
 
-	var prefix string = ""
+	prefix := ""
 
 	switch usage {
 	case "connect":

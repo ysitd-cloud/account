@@ -9,10 +9,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
+func (c *collector) RegisterHTTP(endpoint string, labelsName []string) {
 	labelsName = append(labelsName, "code")
-	counter := newHttpCounter(endpoint, labelsName)
-	timer := newHttpTimer(endpoint, labelsName)
+	counter := newHTTPCounter(endpoint, labelsName)
+	timer := newHTTPTimer(endpoint, labelsName)
 
 	rpc := newRPCCollector(counter, timer)
 	logrus.WithFields(logrus.Fields{
@@ -25,17 +25,17 @@ func (c *collector) RegisterHttp(endpoint string, labelsName []string) {
 	c.httpEndpoints[endpoint] = rpc
 }
 
-func (c *collector) InvokeHttp(endpoint string, labels prometheus.Labels) (chan<- int, error) {
+func (c *collector) InvokeHTTP(endpoint string, labels prometheus.Labels) (chan<- int, error) {
 	rpc, exists := c.httpEndpoints[endpoint]
 	if !exists {
-		return nil, errors.Wrapf(ErrNotRegisterHttp, "Endpoint %s is not register", endpoint)
+		return nil, errors.Wrapf(ErrNotRegisterHTTP, "Endpoint %s is not register", endpoint)
 	}
 	channel := make(chan int)
-	go c.finishHttp(endpoint, labels, rpc, channel)
+	go c.finishHTTP(endpoint, labels, rpc, channel)
 	return channel, nil
 }
 
-func (c *collector) finishHttp(endpoint string, labels prometheus.Labels, rpc *rpcCollector, channel <-chan int) {
+func (c *collector) finishHTTP(endpoint string, labels prometheus.Labels, rpc *rpcCollector, channel <-chan int) {
 	start := time.Now()
 	code := <-channel
 	duration := time.Now().Sub(start).Seconds()

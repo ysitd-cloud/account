@@ -58,7 +58,7 @@ func newRPCTimer(name string, labelsName []string) *prometheus.HistogramVec {
 	}, labelsName)
 }
 
-func newHttpCounter(endpoint string, labelsName []string) *prometheus.CounterVec {
+func newHTTPCounter(endpoint string, labelsName []string) *prometheus.CounterVec {
 	return prometheus.NewCounterVec(prometheus.CounterOpts{
 		Namespace: "http",
 		Subsystem: endpoint,
@@ -67,7 +67,7 @@ func newHttpCounter(endpoint string, labelsName []string) *prometheus.CounterVec
 	}, labelsName)
 }
 
-func newHttpTimer(endpoint string, labelsName []string) *prometheus.HistogramVec {
+func newHTTPTimer(endpoint string, labelsName []string) *prometheus.HistogramVec {
 	return prometheus.NewHistogramVec(prometheus.HistogramOpts{
 		Namespace: "http",
 		Subsystem: endpoint,

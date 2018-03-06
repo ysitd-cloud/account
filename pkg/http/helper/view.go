@@ -33,7 +33,7 @@ func RenderAppView(c *gin.Context, code int, view string, data map[string]interf
 		data["user"] = instance
 	}
 
-	sideCarUrl, err := url.Parse(sidecarHost)
+	sideCarURL, err := url.Parse(sidecarHost)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
@@ -41,11 +41,11 @@ func RenderAppView(c *gin.Context, code int, view string, data map[string]interf
 
 	req := gorequest.New()
 
-	sideCarUrl.Path = fmt.Sprintf("/%s", view)
-	sideCarUrl.RawQuery = c.Request.URL.RawQuery
+	sideCarURL.Path = fmt.Sprintf("/%s", view)
+	sideCarURL.RawQuery = c.Request.URL.RawQuery
 
 	_, body, errs := req.
-		Post(sideCarUrl.String()).
+		Post(sideCarURL.String()).
 		Send(data).
 		End()
 	if len(errs) != 0 {

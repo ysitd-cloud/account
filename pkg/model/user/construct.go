@@ -28,15 +28,15 @@ func ListFromDB(pool db.Pool) ([]*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		var username, displayName, email, avatarUrl string
-		if err := rows.Scan(&username, &displayName, &email, &avatarUrl); err != nil {
+		var username, displayName, email, avatarURL string
+		if err := rows.Scan(&username, &displayName, &email, &avatarURL); err != nil {
 			return nil, err
 		}
 		user := &User{
 			Username:    username,
 			DisplayName: displayName,
 			Email:       email,
-			AvatarUrl:   avatarUrl,
+			AvatarUrl:   avatarURL,
 			DB:          pool,
 		}
 
@@ -55,8 +55,8 @@ func LoadFromDBWithUsername(pool db.Pool, username string) (*User, error) {
 
 	query := "SELECT username, display_name, email, avatar_url FROM users WHERE username = $1"
 	row := db.QueryRow(query, username)
-	var displayName, email, avatarUrl string
-	if err := row.Scan(&username, &displayName, &email, &avatarUrl); err != nil {
+	var displayName, email, avatarURL string
+	if err := row.Scan(&username, &displayName, &email, &avatarURL); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -66,7 +66,7 @@ func LoadFromDBWithUsername(pool db.Pool, username string) (*User, error) {
 		Username:    username,
 		DisplayName: displayName,
 		Email:       email,
-		AvatarUrl:   avatarUrl,
+		AvatarUrl:   avatarURL,
 		DB:          pool,
 	}
 

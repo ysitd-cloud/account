@@ -22,7 +22,7 @@ func (s *service) registerAPI(app gin.IRouter) {
 			labels := prometheus.Labels{
 				"user": approved,
 			}
-			finish, err := s.collector.InvokeHttp(endpointUserInfo, labels)
+			finish, err := s.collector.InvokeHTTP(endpointUserInfo, labels)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
 				return

@@ -18,7 +18,7 @@ import (
 func basicForm(collector metrics.Collector) gin.HandlerFunc {
 	labels := prometheus.Labels{}
 	return func(c *gin.Context) {
-		finish, err := collector.InvokeHttp(EndpointLoginForm, labels)
+		finish, err := collector.InvokeHTTP(EndpointLoginForm, labels)
 		if err != nil {
 			c.AbortWithError(http.StatusInternalServerError, err)
 			return
@@ -30,11 +30,11 @@ func basicForm(collector metrics.Collector) gin.HandlerFunc {
 		}()
 
 		session := middlewares.GetSession(c)
-		nextUrl := c.DefaultQuery("next", "/")
+		nextURL := c.DefaultQuery("next", "/")
 		if !session.Exists("username") {
 			helper.RenderAppView(c, http.StatusOK, "login", nil)
 		} else {
-			c.Redirect(http.StatusFound, nextUrl)
+			c.Redirect(http.StatusFound, nextURL)
 		}
 	}
 }
@@ -50,7 +50,7 @@ func basicSubmit(collector metrics.Collector) gin.HandlerFunc {
 			"user": username,
 		}
 
-		finish, err := collector.InvokeHttp(EndpointLoginSubmit, labels)
+		finish, err := collector.InvokeHTTP(EndpointLoginSubmit, labels)
 		if err != nil {
 			c.AbortWithError(http.StatusInternalServerError, err)
 			return

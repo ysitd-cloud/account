@@ -7,6 +7,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+// BootstrapGrpcProxy start running grpc proxy service
 func BootstrapGrpcProxy() {
 	proxy := Kernel.Make("grpc.proxy").(interfaces.Service)
 	app := proxy.CreateService()

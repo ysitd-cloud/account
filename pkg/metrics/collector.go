@@ -9,12 +9,12 @@ func (c *collector) GetGatherer() prometheus.Gatherer {
 }
 
 func (c *collector) init() {
-	c.initHttpCollector()
-	c.initRpcCollector()
+	c.initHTTPCollector()
+	c.initRPCCollector()
 	c.registry.MustRegister(c.rpc.timer, c.rpc.total, c.http.timer, c.http.total)
 }
 
-func (c *collector) initRpcCollector() {
+func (c *collector) initRPCCollector() {
 	counter := prometheus.NewCounterVec(prometheus.CounterOpts{
 		Subsystem: "rpc",
 		Name:      "count",
@@ -34,7 +34,7 @@ func (c *collector) initRpcCollector() {
 	c.rpc = newRPCCollector(counter, timer)
 }
 
-func (c *collector) initHttpCollector() {
+func (c *collector) initHTTPCollector() {
 	counter := prometheus.NewCounterVec(prometheus.CounterOpts{
 		Subsystem: "http",
 		Name:      "count",

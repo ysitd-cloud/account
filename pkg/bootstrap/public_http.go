@@ -5,7 +5,7 @@ import (
 	"code.ysitd.cloud/gin/utils/net"
 )
 
-func BootstrapPublicHttpServer() {
+func BootstrapPublicHTTPServer() {
 	service := Kernel.Make("http.service").(interfaces.Service)
 	app := service.CreateService()
 	app.Run(net.GetAddress())

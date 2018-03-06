@@ -121,8 +121,8 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 	}
 
 	if access, err := oauth.Storage.LoadAccess(token); err == nil {
-		issuerId := access.UserData.(string)
-		user, err := s.getUser(issuerId)
+		issuerID := access.UserData.(string)
+		issuer, err := s.getUser(issuerID)
 		if err != nil {
 			return nil, err
 		}
@@ -134,7 +134,7 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 		scopes := strings.Split(access.Scope, ",")
 
 		token := &models.Token{
-			Issuer:   user,
+			Issuer:   issuer,
 			Audience: client,
 			Scopes:   scopes,
 			Expire:   encodeToTimestamp(access.ExpireAt()),

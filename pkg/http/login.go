@@ -17,7 +17,7 @@ func (s *service) registerLoginRoute(app gin.IRoutes) {
 	{
 		labels := prometheus.Labels{}
 		app.GET("/login", func(c *gin.Context) {
-			finish, err := s.collector.InvokeHttp(endpointLoginForm, labels)
+			finish, err := s.collector.InvokeHTTP(endpointLoginForm, labels)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
 				return
@@ -29,11 +29,11 @@ func (s *service) registerLoginRoute(app gin.IRoutes) {
 			}()
 
 			session := middlewares.GetSession(c)
-			nextUrl := c.DefaultQuery("next", "/")
+			nextURL := c.DefaultQuery("next", "/")
 			if !session.Exists("username") {
 				helper.RenderAppView(c, http.StatusOK, "login", nil)
 			} else {
-				c.Redirect(http.StatusFound, nextUrl)
+				c.Redirect(http.StatusFound, nextURL)
 			}
 		})
 	}
@@ -49,7 +49,7 @@ func (s *service) registerLoginRoute(app gin.IRoutes) {
 				"user": username,
 			}
 
-			finish, err := s.collector.InvokeHttp(endpointLoginSubmit, labels)
+			finish, err := s.collector.InvokeHTTP(endpointLoginSubmit, labels)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
 				return
