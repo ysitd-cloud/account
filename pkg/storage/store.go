@@ -9,13 +9,13 @@ import (
 )
 
 type Store struct {
-	DB    db.Pool
+	DB    db.DBOpener
 	Redis *redis.Pool
 }
 
-func NewStore(dbPool db.Pool, redis *redis.Pool) osin.Storage {
+func NewStore(db db.DBOpener, redis *redis.Pool) osin.Storage {
 	return &Store{
-		dbPool,
+		db,
 		redis,
 	}
 }
