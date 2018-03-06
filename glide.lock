@@ -1,8 +1,8 @@
-hash: ddc0999af5a40c79f1e198666112de13511aeab7a4f930db9c538438dba6fae8
-updated: 2018-02-26T17:35:27.97382+08:00
+hash: 2e20812b126407f7db5ae61875ae0dd936e889a7dae7a5d8632b436819478384
+updated: 2018-03-06T19:31:03.874354+08:00
 imports:
 - name: code.ysitd.cloud/common/go
-  version: 4ed1e630d722932408a85b1217ff4f25482c85e9
+  version: a53841447c0827dfd62244bbcfbcd95280373ec7
   subpackages:
   - db
 - name: code.ysitd.cloud/gin/sessions
@@ -28,14 +28,14 @@ imports:
 - name: github.com/boj/redistore
   version: 4562487a4bee9a7c272b72bfaeda4917d0a47ab9
 - name: github.com/garyburd/redigo
-  version: d1ed5c67e5794de818ea85e6b522fda02623a484
+  version: a69d19351219b6dd56f274f96d85a7014a2ec34e
   subpackages:
   - internal
   - redis
 - name: github.com/gin-contrib/secure
   version: cb26e530f89836e40b61b4e5ba8fce0842328c36
 - name: github.com/gin-gonic/gin
-  version: 11d866e2e129d937714e431e29cd4a22c36c65a9
+  version: 59febab65eeab8e0cc88fce40b1cd59a18f21dea
   repo: https://github.com/ysitd-cloud/gin
   vcs: git
   subpackages:
@@ -103,7 +103,7 @@ imports:
 - name: github.com/tonyhhyip/go-di-container
   version: d3a112c821f6502e88a9b89e201acc646839d756
 - name: github.com/ugorji/go
-  version: c88ee250d0221a57af388746f5cf03768c21d6e2
+  version: bdcc60b419d136a85cdf2e7cbcac34b3f1cd6e57
   subpackages:
   - codec
 - name: golang.org/x/crypto
