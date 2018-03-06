@@ -11,7 +11,7 @@ import (
 
 func getUserInfo(c *gin.Context) {
 	service := c.MustGet("service").(account.AccountServer)
-	reply, err := service.GetUserInfo(context.Background(), &actions.GetUserInfoRequest{
+	reply, err := service.GetUserInfo(c, &actions.GetUserInfoRequest{
 		Username: c.Param("username"),
 	})
 
@@ -30,7 +30,7 @@ func validateUserPassword(c *gin.Context) {
 	var req actions.ValidateUserRequest
 	c.BindJSON(&req)
 
-	reply, err := service.ValidateUserPassword(context.Background(), &req)
+	reply, err := service.ValidateUserPassword(c, &req)
 
 	if err != nil {
 		c.AbortWithError(http.StatusBadGateway, err)

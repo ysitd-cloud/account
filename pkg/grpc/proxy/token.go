@@ -6,12 +6,11 @@ import (
 	"code.ysitd.cloud/grpc/schema/account"
 	"code.ysitd.cloud/grpc/schema/account/actions"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/net/context"
 )
 
 func getTokenInfo(c *gin.Context) {
 	service := c.MustGet("service").(account.AccountServer)
-	reply, err := service.GetTokenInfo(context.Background(), &actions.GetTokenInfoRequest{
+	reply, err := service.GetTokenInfo(c, &actions.GetTokenInfoRequest{
 		Token: c.Param("token"),
 	})
 
