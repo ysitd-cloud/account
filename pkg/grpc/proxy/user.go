@@ -1,41 +1,59 @@
 package proxy
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 
-	"code.ysitd.cloud/grpc/schema/account"
 	"code.ysitd.cloud/grpc/schema/account/actions"
-	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/vodka"
 )
 
-func getUserInfo(c *gin.Context) {
-	service := c.MustGet("service").(account.AccountServer)
+func (p *proxy) getUserInfo(c *vodka.Context) {
+	service := p.service
+
+	username, err := vodka.String(c.UserValue("username"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, map[string]string{
+			"cause":   "Fail to parse username from url",
+			"message": err.Error(),
+		})
+	}
+
 	reply, err := service.GetUserInfo(c, &actions.GetUserInfoRequest{
-		Username: c.Param("username"),
+		Username: username,
 	})
 
 	if err != nil {
-		c.AbortWithError(http.StatusBadGateway, err)
+		c.JSON(http.StatusBadGateway, map[string]string{
+			"cause":   "error occur in backend service",
+			"message": err.Error(),
+		})
 		return
 	}
 
 	c.JSON(http.StatusOK, reply)
-	c.Abort()
 }
 
-func validateUserPassword(c *gin.Context) {
-	service := c.MustGet("service").(account.AccountServer)
+func (p *proxy) validateUserPassword(c *vodka.Context) {
+	service := p.service
 
 	var req actions.ValidateUserRequest
-	c.BindJSON(&req)
+	content, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+
+	}
+	json.Unmarshal(content, &req)
 
 	reply, err := service.ValidateUserPassword(c, &req)
 
 	if err != nil {
-		c.AbortWithError(http.StatusBadGateway, err)
+		c.JSON(http.StatusBadGateway, map[string]string{
+			"cause":   "error occur in backend service",
+			"message": err.Error(),
+		})
 		return
 	}
 
 	c.JSON(http.StatusOK, reply)
-	c.Abort()
 }

@@ -1,5 +1,5 @@
-hash: 2e20812b126407f7db5ae61875ae0dd936e889a7dae7a5d8632b436819478384
-updated: 2018-03-06T19:31:03.874354+08:00
+hash: 17007939f4d1c44fe2f1a60a5b3f6904265eb5f13f33e6560a8e2a8cedddf9c3
+updated: 2018-03-07T08:48:45.112773+08:00
 imports:
 - name: code.ysitd.cloud/common/go
   version: a53841447c0827dfd62244bbcfbcd95280373ec7
@@ -102,6 +102,8 @@ imports:
   version: d682213848ed68c0a260ca37d6dd5ace8423f5ba
 - name: github.com/tonyhhyip/go-di-container
   version: d3a112c821f6502e88a9b89e201acc646839d756
+- name: github.com/tonyhhyip/vodka
+  version: 45863d9a3b1b5cc13238adf1908e39e7fbaa35d4
 - name: github.com/ugorji/go
   version: bdcc60b419d136a85cdf2e7cbcac34b3f1cd6e57
   subpackages:

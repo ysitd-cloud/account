@@ -1,12 +1,12 @@
 package proxy
 
 import (
-	"code.ysitd.cloud/gin/utils/interfaces"
 	"code.ysitd.cloud/grpc/schema/account"
 	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/vodka"
 )
 
-func CreateProxy(service account.AccountServer) interfaces.Service {
+func CreateProxy(service account.AccountServer) *proxy {
 	return &proxy{
 		service: service,
 	}
@@ -22,11 +22,10 @@ func (p *proxy) createMiddleware() gin.HandlerFunc {
 	}
 }
 
-func (p *proxy) CreateService() (app interfaces.Engine) {
-	app = gin.Default()
-	app.Use(p.createMiddleware())
-	app.GET("/token/:token", getTokenInfo)
-	app.GET("/user/:username", getUserInfo)
-	app.POST("/validate", validateUserPassword)
+func (p *proxy) CreateService() *vodka.Router {
+	app := vodka.NewRouter()
+	app.GET("/token/:token", p.getTokenInfo)
+	app.GET("/user/:username", p.getUserInfo)
+	app.POST("/validate", p.validateUserPassword)
 	return app
 }

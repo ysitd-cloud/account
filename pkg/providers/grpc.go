@@ -60,6 +60,7 @@ func (*grpcServiceProvder) Register(app container.Container) {
 
 	app.Singleton("grpc.proxy", func(app container.Container) interface{} {
 		service := app.Make("grpc.service").(pb.AccountServer)
-		return proxy.CreateProxy(service)
+		p := proxy.CreateProxy(service)
+		return p.CreateService()
 	})
 }

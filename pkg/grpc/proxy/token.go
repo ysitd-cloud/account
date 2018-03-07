@@ -3,22 +3,31 @@ package proxy
 import (
 	"net/http"
 
-	"code.ysitd.cloud/grpc/schema/account"
 	"code.ysitd.cloud/grpc/schema/account/actions"
-	"github.com/gin-gonic/gin"
+	"github.com/tonyhhyip/vodka"
 )
 
-func getTokenInfo(c *gin.Context) {
-	service := c.MustGet("service").(account.AccountServer)
+func (p *proxy) getTokenInfo(c *vodka.Context) {
+	service := p.service
+	token, err := vodka.String(c.UserValue("token"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, map[string]string{
+			"cause":   "fail to parse token from url",
+			"message": err.Error(),
+		})
+		return
+	}
 	reply, err := service.GetTokenInfo(c, &actions.GetTokenInfoRequest{
-		Token: c.Param("token"),
+		Token: token,
 	})
 
 	if err != nil {
-		c.AbortWithError(http.StatusBadGateway, err)
+		c.JSON(http.StatusBadGateway, map[string]string{
+			"cause":   "error occur in backend service",
+			"message": err.Error(),
+		})
 		return
 	}
 
 	c.JSON(http.StatusOK, reply)
-	c.Abort()
 }

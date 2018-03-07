@@ -38,3 +38,4 @@ import:
   version: ^0.8.0
 - package: github.com/sirupsen/logrus
   version: ^1.0.4
+- package: github.com/tonyhhyip/vodka
