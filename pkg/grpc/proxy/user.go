@@ -41,7 +41,11 @@ func (p *proxy) validateUserPassword(c *vodka.Context) {
 	var req actions.ValidateUserRequest
 	content, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
-
+		c.JSON(http.StatusBadRequest, map[string]string{
+			"cause":   "error occur in parsing JSON",
+			"message": err.Error(),
+		})
+		return
 	}
 	json.Unmarshal(content, &req)
 
