@@ -265,8 +265,8 @@ func (s *Store) RemoveRefresh(token string) (err error) {
 
 func (s *Store) SaveAuthorize(data *osin.AuthorizeData) (err error) {
 	conn := s.Redis.Get()
-	if err := conn.Err(); err != nil {
-		return
+	if rerr := conn.Err(); rerr != nil {
+		return rerr
 	}
 
 	defer conn.Close()
@@ -282,8 +282,8 @@ func (s *Store) SaveAuthorize(data *osin.AuthorizeData) (err error) {
 
 func (s *Store) LoadAuthorize(code string) (ad *osin.AuthorizeData, err error) {
 	conn := s.Redis.Get()
-	if err := conn.Err(); err != nil {
-		return
+	if rerr := conn.Err(); rerr != nil {
+		return nil, rerr
 	}
 
 	defer conn.Close()
@@ -308,8 +308,8 @@ func (s *Store) LoadAuthorize(code string) (ad *osin.AuthorizeData, err error) {
 
 func (s *Store) RemoveAuthorize(code string) (err error) {
 	conn := s.Redis.Get()
-	if err := conn.Err(); err != nil {
-		return
+	if rerr := conn.Err(); rerr != nil {
+		return rerr
 	}
 
 	defer conn.Close()

@@ -9,7 +9,7 @@ type User struct {
 	DisplayName string `json:"display_name"`
 	Email       string `json:"email"`
 	AvatarUrl   string `json:"avatar_url"`
-	password    []byte `json:"-"`
+	password    []byte
 }
 
 func (u *User) ValidatePassword(password string) bool {
