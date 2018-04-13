@@ -20,6 +20,18 @@
   version = "v3.2.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/inject"
+  packages = ["."]
+  revision = "cc1aa653e50f6a9893bcaef89e673e5b24e1e97b"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/structtag"
+  packages = ["."]
+  revision = "217e25fb96916cc60332e399c9aa63f5c422ceed"
+
+[[projects]]
   name = "github.com/garyburd/redigo"
   packages = [
     "internal",
@@ -98,6 +110,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "39b6be4cdb47aaba62b8df10c73f02028c9c9c1e4d36561ed7a7c4f723ff1465"
+  inputs-digest = "a877c12a92513d88df6007c1d724b9e022520d5b5f7110c381d2ebbedc390188"
   solver-name = "gps-cdcl"
   solver-version = 1

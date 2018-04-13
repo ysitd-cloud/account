@@ -69,3 +69,7 @@
 [[constraint]]
   name = "github.com/sirupsen/logrus"
   version = "1.0.5"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/facebookgo/inject"
