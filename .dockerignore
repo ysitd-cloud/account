@@ -1,7 +1,0 @@
-.idea
-docker-compose.yml
-volumes
-account
-/.env
-vendor
-.git
