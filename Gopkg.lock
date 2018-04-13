@@ -2,6 +2,27 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "code.ysitd.cloud/common/go"
+  packages = ["db"]
+  revision = "62b37a1348f482394de2975ead038ff7016b9a62"
+
+[[projects]]
+  name = "github.com/RangelReale/osin"
+  packages = ["."]
+  revision = "92fc3c3539125bddc695a988974243479d82f8b4"
+  version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/garyburd/redigo"
+  packages = [
+    "internal",
+    "redis"
+  ]
+  revision = "a69d19351219b6dd56f274f96d85a7014a2ec34e"
+  version = "v1.6.0"
+
+[[projects]]
   name = "github.com/joho/godotenv"
   packages = [
     ".",
@@ -10,9 +31,55 @@
   revision = "a79fa1e548e2c689c241d10173efd51e5d689d5b"
   version = "v1.2.0"
 
+[[projects]]
+  branch = "master"
+  name = "github.com/lib/pq"
+  packages = [
+    ".",
+    "oid"
+  ]
+  revision = "d34b9ff171c21ad295489235aec8b6626023cd04"
+
+[[projects]]
+  name = "github.com/pborman/uuid"
+  packages = ["."]
+  revision = "e790cca94e6cc75c7064b1332e63811d4aae1a53"
+  version = "v1.1"
+
+[[projects]]
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/tonyhhyip/go-di-container"
+  packages = ["."]
+  revision = "42c988ba8772b2c88d8cbed4439aa481bf8cb255"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+  packages = [
+    "bcrypt",
+    "blowfish",
+    "ssh/terminal"
+  ]
+  revision = "d6449816ce06963d9d136eee5a56fca5b0616e7e"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = [
+    "unix",
+    "windows"
+  ]
+  revision = "3b87a42e500a6dc65dae1a55d0b641295971163e"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e9f7f32aa6d74fc5d9b05215c8e2800cd2af884bd00e751fa8ac5bbffe4eb4f0"
+  inputs-digest = "d1ed35b821418b4986b25b2752ec74404ff13dc0c705bc5d49cb018aa05cd07b"
   solver-name = "gps-cdcl"
   solver-version = 1
