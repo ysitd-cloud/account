@@ -19,10 +19,12 @@ func (s *Service) ValidaUserSignIn(ctx context.Context, username, password strin
 	instance, err = s.GetUserInfo(ctx, username)
 	if err != nil {
 		return
+	} else if instance == nil {
+		return nil, ErrUserNotExists
 	}
 
 	if valid := instance.ValidatePassword(password); !valid {
-		return nil, IncorrectPasswordError
+		return nil, ErrIncorrectPassword
 	}
 	return
 }

@@ -4,13 +4,16 @@ import (
 	"net/http"
 	"os"
 
+	"code.ysitd.cloud/component/account/pkg/server/public/session"
 	"code.ysitd.cloud/component/account/pkg/service"
 	"github.com/gorilla/handlers"
 	"github.com/tonyhhyip/vodka"
 )
 
 type Provider struct {
-	Service *service.Service `inject:""`
+	Service  *service.Service `inject:""`
+	Manager  *session.Manager `inject:""`
+	Renderer *Renderer        `inject:""`
 }
 
 func (p *Provider) CreateHandler() http.Handler {
@@ -29,5 +32,8 @@ func (p *Provider) createRouter() (r *vodka.Router) {
 		ContentTypeNosniff: true,
 		STSSeconds:         5184000,
 	})
+
+	r.GET("/login", p.loginForm)
+	r.POST("/login", p.loginHandle)
 	return
 }

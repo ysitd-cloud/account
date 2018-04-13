@@ -2,4 +2,7 @@ package service
 
 import "errors"
 
-var IncorrectPasswordError = errors.New("incorrect password")
+var (
+	ErrIncorrectPassword = errors.New("incorrect password")
+	ErrUserNotExists     = errors.New("user not existss")
+)
