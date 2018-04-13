@@ -5,5 +5,6 @@ func NewConfigFromEnv() *Config {
 		Verbose:  false,
 		Database: newDatabaseFromEnv(),
 		Render:   newRenderFromEnv(),
+		Session:  newSessionFromEnv(),
 	}
 }

@@ -6,6 +6,17 @@ type Config struct {
 	Verbose  bool
 	Database *database
 	Render   *render
+	Session  *session
+}
+
+type session struct {
+	Key string `env:"TOKEN_SIGN_KEY"`
+}
+
+func newSessionFromEnv() (s *session) {
+	s = new(session)
+	env.InjectWithEnv(s)
+	return
 }
 
 type render struct {
