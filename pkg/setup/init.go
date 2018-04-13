@@ -1,6 +1,8 @@
 package setup
 
 import (
+	"os"
+
 	"code.ysitd.cloud/component/account/pkg/config"
 	"github.com/facebookgo/inject"
 )
@@ -28,5 +30,10 @@ func init() {
 
 	for _, fun := range funs {
 		fun(c, graph)
+	}
+
+	if err := graph.Populate(); err != nil {
+		logger.Error(err)
+		os.Exit(1)
 	}
 }
