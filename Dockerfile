@@ -9,6 +9,6 @@ RUN dep ensure -vendor-only && \
 
 FROM alpine:3.6
 
-COPY --from=build /go/bin/code.ysitd.cloud/component/account/server /
+COPY --from=builder /go/bin/code.ysitd.cloud/component/account/server /
 
 CMD ["/account"]
