@@ -1,7 +1,7 @@
 package http
 
 import (
-	"code.ysitd.cloud/component/account/pkg/http/handler"
+	"code.ysitd.cloud/auth/account/pkg/http/handler"
 	"github.com/gin-gonic/gin"
 )
 

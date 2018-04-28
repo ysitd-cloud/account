@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
-	"code.ysitd.cloud/component/account/pkg/kernel"
-	"code.ysitd.cloud/component/account/pkg/providers"
+	"code.ysitd.cloud/auth/account/pkg/kernel"
+	"code.ysitd.cloud/auth/account/pkg/providers"
 )
 
 // Kernel of everything

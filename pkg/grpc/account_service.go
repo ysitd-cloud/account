@@ -3,7 +3,7 @@ package grpc
 import (
 	"strings"
 
-	"code.ysitd.cloud/component/account/pkg/model/user"
+	"code.ysitd.cloud/auth/account/pkg/model/user"
 	"code.ysitd.cloud/grpc/schema/account/actions"
 	"code.ysitd.cloud/grpc/schema/account/models"
 	"github.com/RangelReale/osin"

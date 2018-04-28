@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"code.ysitd.cloud/component/account/pkg/kernel"
+	"code.ysitd.cloud/auth/account/pkg/kernel"
 	"github.com/gin-gonic/gin"
 )
 

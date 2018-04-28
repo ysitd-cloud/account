@@ -1,8 +1,8 @@
 package http
 
 import (
-	"code.ysitd.cloud/component/account/pkg/http/handler/oauth"
-	"code.ysitd.cloud/component/account/pkg/http/middlewares"
+	"code.ysitd.cloud/auth/account/pkg/http/handler/oauth"
+	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"github.com/gin-gonic/gin"
 )
 

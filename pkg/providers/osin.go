@@ -1,8 +1,8 @@
 package providers
 
 import (
+	"code.ysitd.cloud/auth/account/pkg/storage"
 	"code.ysitd.cloud/common/go/db"
-	"code.ysitd.cloud/component/account/pkg/storage"
 	"github.com/RangelReale/osin"
 	"github.com/garyburd/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"

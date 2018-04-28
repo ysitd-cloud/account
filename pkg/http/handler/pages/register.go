@@ -1,7 +1,7 @@
 package pages
 
 import (
-	"code.ysitd.cloud/component/account/pkg/http/middlewares"
+	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"github.com/gin-gonic/gin"
 )
 

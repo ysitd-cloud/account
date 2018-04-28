@@ -1,8 +1,8 @@
 package grpc
 
 import (
+	"code.ysitd.cloud/auth/account/pkg/metrics"
 	"code.ysitd.cloud/common/go/db"
-	"code.ysitd.cloud/component/account/pkg/metrics"
 	"github.com/tonyhhyip/go-di-container"
 )
 

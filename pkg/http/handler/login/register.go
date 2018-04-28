@@ -1,7 +1,7 @@
 package login
 
 import (
-	"code.ysitd.cloud/component/account/pkg/metrics"
+	"code.ysitd.cloud/auth/account/pkg/metrics"
 	"github.com/gin-gonic/gin"
 )
 

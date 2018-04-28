@@ -3,7 +3,7 @@ package oauth
 import (
 	"log"
 
-	"code.ysitd.cloud/component/account/pkg/http/middlewares"
+	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"

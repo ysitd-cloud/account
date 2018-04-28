@@ -3,7 +3,7 @@ package http
 import (
 	"sync"
 
-	"code.ysitd.cloud/component/account/pkg/http/handler/pages"
+	"code.ysitd.cloud/auth/account/pkg/http/handler/pages"
 	"code.ysitd.cloud/gin/utils/interfaces"
 	"github.com/gin-gonic/gin"
 )

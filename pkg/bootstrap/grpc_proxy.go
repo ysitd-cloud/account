@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	"code.ysitd.cloud/component/account/pkg/metrics"
+	"code.ysitd.cloud/auth/account/pkg/metrics"
 	"code.ysitd.cloud/gin/utils/interfaces"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

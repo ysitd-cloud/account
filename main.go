@@ -4,7 +4,7 @@ import (
 	"os"
 	"os/signal"
 
-	"code.ysitd.cloud/component/account/pkg/bootstrap"
+	"code.ysitd.cloud/auth/account/pkg/bootstrap"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/sirupsen/logrus"

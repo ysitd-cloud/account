@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"os"
 
-	"code.ysitd.cloud/component/account/pkg/http/middlewares"
-	"code.ysitd.cloud/component/account/pkg/model/user"
+	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
+	"code.ysitd.cloud/auth/account/pkg/model/user"
 	"github.com/gin-gonic/gin"
 	"github.com/parnurzeal/gorequest"
 )

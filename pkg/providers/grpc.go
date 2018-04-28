@@ -3,10 +3,10 @@ package providers
 import (
 	"net"
 
+	grpcService "code.ysitd.cloud/auth/account/pkg/grpc"
+	"code.ysitd.cloud/auth/account/pkg/grpc/proxy"
+	"code.ysitd.cloud/auth/account/pkg/metrics"
 	"code.ysitd.cloud/common/go/db"
-	grpcService "code.ysitd.cloud/component/account/pkg/grpc"
-	"code.ysitd.cloud/component/account/pkg/grpc/proxy"
-	"code.ysitd.cloud/component/account/pkg/metrics"
 	pb "code.ysitd.cloud/grpc/schema/account"
 	"github.com/tonyhhyip/go-di-container"
 	"google.golang.org/grpc"

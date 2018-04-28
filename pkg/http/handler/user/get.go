@@ -3,8 +3,8 @@ package user
 import (
 	"net/http"
 
+	"code.ysitd.cloud/auth/account/pkg/model/user"
 	"code.ysitd.cloud/common/go/db"
-	"code.ysitd.cloud/component/account/pkg/model/user"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"

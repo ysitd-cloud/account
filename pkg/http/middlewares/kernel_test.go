@@ -4,7 +4,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	providers "code.ysitd.cloud/component/account/pkg/kernel"
+	providers "code.ysitd.cloud/auth/account/pkg/kernel"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 )

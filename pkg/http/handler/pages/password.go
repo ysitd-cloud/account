@@ -3,10 +3,10 @@ package pages
 import (
 	"net/http"
 
+	"code.ysitd.cloud/auth/account/pkg/http/helper"
+	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
+	"code.ysitd.cloud/auth/account/pkg/model/user"
 	"code.ysitd.cloud/common/go/db"
-	"code.ysitd.cloud/component/account/pkg/http/helper"
-	"code.ysitd.cloud/component/account/pkg/http/middlewares"
-	"code.ysitd.cloud/component/account/pkg/model/user"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 )
