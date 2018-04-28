@@ -11,7 +11,7 @@ import (
 var errNotFound = errors.New("not found")
 
 func (s *Store) GetClient(id string) (osin.Client, error) {
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func (s *Store) UpdateClient(c osin.Client) error {
 		return err
 	}
 
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func (s *Store) CreateClient(c osin.Client) error {
 		return err
 	}
 
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return err
 	}
@@ -74,7 +74,7 @@ func (s *Store) CreateClient(c osin.Client) error {
 
 // RemoveClient removes a client (identified by id) from the database. Returns an error if something went wrong.
 func (s *Store) RemoveClient(id string) (err error) {
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return err
 	}

@@ -24,7 +24,7 @@ func (s *Store) SaveAccess(data *osin.AccessData) (err error) {
 		return err
 	}
 
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func (s *Store) LoadAccess(code string) (*osin.AccessData, error) {
 	var extra, cid, prevAccessToken, authorizeCode string
 	var result osin.AccessData
 
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func (s *Store) LoadAccess(code string) (*osin.AccessData, error) {
 
 // RemoveAccess deletes AccessData with given access token
 func (s *Store) RemoveAccess(code string) error {
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return err
 	}
@@ -138,7 +138,7 @@ func (s *Store) RemoveAccess(code string) error {
 
 // LoadRefresh gets access data with given refresh token
 func (s *Store) LoadRefresh(code string) (*osin.AccessData, error) {
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +157,7 @@ func (s *Store) LoadRefresh(code string) (*osin.AccessData, error) {
 
 // RemoveRefresh deletes AccessData with given refresh token
 func (s *Store) RemoveRefresh(token string) error {
-	db, err := s.DB.Acquire()
+	db, err := s.DB.Open()
 	if err != nil {
 		return err
 	}

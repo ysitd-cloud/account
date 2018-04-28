@@ -2,12 +2,6 @@
 
 
 [[projects]]
-  branch = "master"
-  name = "code.ysitd.cloud/common/go"
-  packages = ["db"]
-  revision = "62b37a1348f482394de2975ead038ff7016b9a62"
-
-[[projects]]
   name = "code.ysitd.cloud/gin/sessions"
   packages = [
     ".",
@@ -338,6 +332,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a47718fffb5c574430c5d12c0c0d96d572adf9e5808e08c9f56e999d2951a717"
+  inputs-digest = "8ff72bbcae5ac5e5bd96006247f2e05b779e93afc5aa2a48d9bced17694d234a"
   solver-name = "gps-cdcl"
   solver-version = 1
