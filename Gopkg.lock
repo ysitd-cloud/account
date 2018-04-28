@@ -49,15 +49,6 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
-  name = "github.com/garyburd/redigo"
-  packages = [
-    "internal",
-    "redis"
-  ]
-  revision = "a69d19351219b6dd56f274f96d85a7014a2ec34e"
-  version = "v1.6.0"
-
-[[projects]]
   branch = "master"
   name = "github.com/gin-contrib/secure"
   packages = ["."]
@@ -347,6 +338,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9e06bfe60b24c2871962cfbb3aaa8597c899f830378deb7496c0d715a23fee3e"
+  inputs-digest = "a47718fffb5c574430c5d12c0c0d96d572adf9e5808e08c9f56e999d2951a717"
   solver-name = "gps-cdcl"
   solver-version = 1

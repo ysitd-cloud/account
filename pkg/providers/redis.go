@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"code.ysitd.cloud/gin/utils/env"
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
 )
 

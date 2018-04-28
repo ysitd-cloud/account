@@ -5,7 +5,7 @@ import (
 
 	"code.ysitd.cloud/gin/sessions"
 	redisSession "code.ysitd.cloud/gin/sessions/redis"
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
 )
 

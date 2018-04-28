@@ -2,7 +2,7 @@ package storage
 
 import (
 	"github.com/RangelReale/osin"
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 )
 
 func (s *Store) SaveAuthorize(data *osin.AuthorizeData) (err error) {

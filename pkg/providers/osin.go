@@ -4,7 +4,7 @@ import (
 	"code.ysitd.cloud/auth/account/pkg/storage"
 	"code.ysitd.cloud/common/go/db"
 	"github.com/RangelReale/osin"
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
 )
 
