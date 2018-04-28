@@ -3,10 +3,10 @@ package providers
 import (
 	"os"
 
-	"code.ysitd.cloud/gin/sessions"
-	redisSession "code.ysitd.cloud/gin/sessions/redis"
 	"github.com/gomodule/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
+	"golang.ysitd.cloud/gin/sessions"
+	redisSession "golang.ysitd.cloud/gin/sessions/redis"
 )
 
 type sessionServiceProvider struct {

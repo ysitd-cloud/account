@@ -2,15 +2,6 @@
 
 
 [[projects]]
-  name = "code.ysitd.cloud/gin/sessions"
-  packages = [
-    ".",
-    "redis"
-  ]
-  revision = "63a0d8857928ef46033eaacb2879eba3b24c7f14"
-  version = "4.0.0"
-
-[[projects]]
   branch = "master"
   name = "code.ysitd.cloud/gin/utils"
   packages = [
@@ -268,7 +259,10 @@
 
 [[projects]]
   name = "golang.ysitd.cloud/gin/sessions"
-  packages = ["."]
+  packages = [
+    ".",
+    "redis"
+  ]
   revision = "63a0d8857928ef46033eaacb2879eba3b24c7f14"
   version = "4.0.0"
 
@@ -332,6 +326,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8ff72bbcae5ac5e5bd96006247f2e05b779e93afc5aa2a48d9bced17694d234a"
+  inputs-digest = "f1de36b46673e6dd1778f39b35a3a3744cf68847caf157923b9572cbb2751cf4"
   solver-name = "gps-cdcl"
   solver-version = 1
