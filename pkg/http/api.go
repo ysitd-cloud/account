@@ -5,10 +5,10 @@ import (
 
 	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"code.ysitd.cloud/auth/account/pkg/model/user"
-	"code.ysitd.cloud/common/go/db"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
+	"golang.ysitd.cloud/db"
 )
 
 func (s *service) registerAPI(app gin.IRouter) {
@@ -33,7 +33,7 @@ func (s *service) registerAPI(app gin.IRouter) {
 				close(finish)
 			}()
 
-			pool := s.app.Make("db.pool").(db.Pool)
+			pool := s.app.Make("db.pool").(db.Opener)
 
 			instance, err := user.LoadFromDBWithUsername(pool, approved)
 			if err != nil {

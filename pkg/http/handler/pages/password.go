@@ -6,9 +6,9 @@ import (
 	"code.ysitd.cloud/auth/account/pkg/http/helper"
 	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"code.ysitd.cloud/auth/account/pkg/model/user"
-	"code.ysitd.cloud/common/go/db"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
+	"golang.ysitd.cloud/db"
 )
 
 func modifiedPassword(c *gin.Context) {
@@ -22,7 +22,7 @@ func updatePassword(c *gin.Context) {
 	username := session.Get("username").(string)
 
 	kernel := c.MustGet("kernel").(container.Kernel)
-	db := kernel.Make("db.pool").(db.Pool)
+	db := kernel.Make("db.pool").(db.Opener)
 
 	instance, err := user.LoadFromDBWithUsername(db, username)
 	if err != nil {

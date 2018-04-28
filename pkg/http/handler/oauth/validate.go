@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"code.ysitd.cloud/auth/account/pkg/model/user"
-	"code.ysitd.cloud/common/go/db"
 	"github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
+	"golang.ysitd.cloud/db"
 )
 
 func ValidateToken(c *gin.Context) {
@@ -28,7 +28,7 @@ func ValidateToken(c *gin.Context) {
 	}
 
 	id := access.UserData.(string)
-	db := kernel.Make("db.pool").(db.Pool)
+	db := kernel.Make("db.pool").(db.Opener)
 	instance, err := user.LoadFromDBWithUsername(db, id)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)

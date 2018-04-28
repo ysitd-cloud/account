@@ -8,9 +8,9 @@ import (
 	"code.ysitd.cloud/auth/account/pkg/http/helper"
 	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"code.ysitd.cloud/auth/account/pkg/model/user"
-	"code.ysitd.cloud/common/go/db"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
+	"golang.ysitd.cloud/db"
 )
 
 func (s *service) registerLoginRoute(app gin.IRoutes) {
@@ -60,7 +60,7 @@ func (s *service) registerLoginRoute(app gin.IRoutes) {
 				close(finish)
 			}()
 
-			pool := s.app.Make("db.pool").(db.Pool)
+			pool := s.app.Make("db.pool").(db.Opener)
 
 			instance, err := user.LoadFromDBWithUsername(pool, username)
 			if instance == nil || err == sql.ErrNoRows {

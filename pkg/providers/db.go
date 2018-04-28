@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"os"
 
-	"code.ysitd.cloud/common/go/db"
 	_ "github.com/lib/pq"
 	"github.com/tonyhhyip/go-di-container"
+	"golang.ysitd.cloud/db"
 )
 
 type databaseServiceProvider struct {
@@ -37,6 +37,6 @@ func (*databaseServiceProvider) Register(app container.Container) {
 	app.Singleton("db.pool", func(app container.Container) interface{} {
 		driver := "postgres"
 		url := app.Make("db.postgres.url").(string)
-		return db.NewPool(driver, url)
+		return db.NewOpener(driver, url)
 	})
 }

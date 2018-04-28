@@ -37,6 +37,6 @@ func (user *User) ChangePassword(password string) error {
 }
 
 func (user *User) getDB() *sql.DB {
-	db, _ := user.DB.Acquire()
+	db, _ := user.DB.Open()
 	return db
 }

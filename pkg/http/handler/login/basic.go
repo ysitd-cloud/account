@@ -9,10 +9,10 @@ import (
 	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"code.ysitd.cloud/auth/account/pkg/metrics"
 	"code.ysitd.cloud/auth/account/pkg/model/user"
-	"code.ysitd.cloud/common/go/db"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/tonyhhyip/go-di-container"
+	"golang.ysitd.cloud/db"
 )
 
 func basicForm(collector metrics.Collector) gin.HandlerFunc {
@@ -62,7 +62,7 @@ func basicSubmit(collector metrics.Collector) gin.HandlerFunc {
 		}()
 
 		kernel := c.MustGet("kernel").(container.Kernel)
-		pool := kernel.Make("db.pool").(db.Pool)
+		pool := kernel.Make("db.pool").(db.Opener)
 
 		instance, err := user.LoadFromDBWithUsername(pool, username)
 		if instance == nil || err == sql.ErrNoRows {
