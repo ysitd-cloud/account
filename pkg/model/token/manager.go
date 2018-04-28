@@ -6,7 +6,7 @@ import (
 )
 
 func (m *manager) GetToken(token string) (*Token, error) {
-	db, err := m.pool.Acquire()
+	db, err := m.pool.Open()
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +29,7 @@ func (m *manager) GetToken(token string) (*Token, error) {
 }
 
 func (m *manager) Revoke(token string) error {
-	db, err := m.pool.Acquire()
+	db, err := m.pool.Open()
 	if err != nil {
 		return err
 	}
@@ -51,7 +51,7 @@ func (m *manager) ExtendToken(token string, duration time.Duration) error {
 }
 
 func (m *manager) updateToken(t *Token) error {
-	db, err := m.pool.Acquire()
+	db, err := m.pool.Open()
 	if err != nil {
 		return err
 	}

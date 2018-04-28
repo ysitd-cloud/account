@@ -3,7 +3,7 @@ package token
 import (
 	"time"
 
-	"code.ysitd.cloud/common/go/db"
+	"golang.ysitd.cloud/db"
 )
 
 type Token struct {
@@ -22,5 +22,5 @@ type Manager interface {
 }
 
 type manager struct {
-	pool db.Pool
+	pool db.Opener
 }
