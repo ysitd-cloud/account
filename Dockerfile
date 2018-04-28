@@ -1,10 +1,10 @@
-FROM ysitd/glide as builder
+FROM ysitd/dep as builder
 
-COPY . /go/src/code.ysitd.cloud/component/account
+COPY . /go/src/code.ysitd.cloud/auth/account
 
-WORKDIR /go/src/code.ysitd.cloud/component/account
+WORKDIR /go/src/code.ysitd.cloud/auth/account
 
-RUN glide --no-color install -v --skip-test && \
+RUN dep ensure && \
     go build -v -ldflags="-s -w"
 
 FROM alpine:3.6
