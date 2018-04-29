@@ -14,17 +14,14 @@ import (
 func (s *AccountService) ValidateUserPassword(ctx context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
 	username := req.GetUsername()
 
-	finish, err := s.Collector.InvokeRPC(validateUserPassword, prometheus.Labels{
+	done, err := s.Collector.InvokeRPC(validateUserPassword, prometheus.Labels{
 		"user": username,
 	})
 	if err != nil {
 		return nil, err
 	}
 
-	defer func() {
-		finish <- err == nil
-		close(finish)
-	}()
+	defer done(err == nil)
 
 	instance, err := user.LoadFromDBWithUsername(ctx, s.Pool, username)
 	if err != nil {
@@ -58,17 +55,14 @@ func (s *AccountService) ValidateUserPassword(ctx context.Context, req *actions.
 func (s *AccountService) GetUserInfo(ctx context.Context, req *actions.GetUserInfoRequest) (reply *actions.GetUserInfoReply, err error) {
 	username := req.GetUsername()
 
-	finish, err := s.Collector.InvokeRPC(getUser, prometheus.Labels{
+	done, err := s.Collector.InvokeRPC(getUser, prometheus.Labels{
 		"user": username,
 	})
 	if err != nil {
 		return
 	}
 
-	defer func() {
-		finish <- err == nil
-		close(finish)
-	}()
+	defer done(err == nil)
 
 	instance, err := user.LoadFromDBWithUsername(ctx, s.Pool, username)
 	if err != nil {
@@ -100,17 +94,14 @@ func (s *AccountService) GetUserInfo(ctx context.Context, req *actions.GetUserIn
 func (s *AccountService) GetTokenInfo(ctx context.Context, req *actions.GetTokenInfoRequest) (*actions.GetTokenInfoReply, error) {
 	token := req.GetToken()
 
-	finish, err := s.Collector.InvokeRPC(getToken, prometheus.Labels{
+	done, err := s.Collector.InvokeRPC(getToken, prometheus.Labels{
 		"token": token,
 	})
 	if err != nil {
 		return nil, err
 	}
 
-	defer func() {
-		finish <- err == nil
-		close(finish)
-	}()
+	defer done(err == nil)
 
 	oauth := s.getOAuthService()
 	defer oauth.Storage.Close()
