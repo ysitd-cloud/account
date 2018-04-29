@@ -19,8 +19,8 @@ func NewServiceProvider(app container.Container) container.ServiceProvider {
 	return sp
 }
 
-func NewCollector(registry registry) Collector {
-	c := &collector{
+func NewCollector(registry registry) *Collector {
+	c := &Collector{
 		rpcEndpoints:  make(map[string]*rpcCollector),
 		httpEndpoints: make(map[string]*rpcCollector),
 		registry:      registry,

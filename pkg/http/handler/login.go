@@ -19,8 +19,8 @@ const (
 )
 
 type LoginHandler struct {
-	Opener    *db.GeneralOpener `inject:""`
-	Collector metrics.Collector `inject:"collector"`
+	Opener    *db.GeneralOpener  `inject:""`
+	Collector *metrics.Collector `inject:""`
 }
 
 func (h *LoginHandler) RegisterRoutes(routes gin.IRoutes) {

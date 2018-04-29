@@ -4,17 +4,17 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-func (c *collector) GetGatherer() prometheus.Gatherer {
+func (c *Collector) GetGatherer() prometheus.Gatherer {
 	return c.registry
 }
 
-func (c *collector) init() {
+func (c *Collector) init() {
 	c.initHTTPCollector()
 	c.initRPCCollector()
 	c.registry.MustRegister(c.rpc.timer, c.rpc.total, c.http.timer, c.http.total)
 }
 
-func (c *collector) initRPCCollector() {
+func (c *Collector) initRPCCollector() {
 	counter := prometheus.NewCounterVec(prometheus.CounterOpts{
 		Subsystem: "rpc",
 		Name:      "count",
@@ -34,7 +34,7 @@ func (c *collector) initRPCCollector() {
 	c.rpc = newRPCCollector(counter, timer)
 }
 
-func (c *collector) initHTTPCollector() {
+func (c *Collector) initHTTPCollector() {
 	counter := prometheus.NewCounterVec(prometheus.CounterOpts{
 		Subsystem: "http",
 		Name:      "count",

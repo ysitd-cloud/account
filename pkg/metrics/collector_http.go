@@ -9,7 +9,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func (c *collector) RegisterHTTP(endpoint string, labelsName []string) {
+func (c *Collector) RegisterHTTP(endpoint string, labelsName []string) {
 	labelsName = append(labelsName, "code")
 	counter := newHTTPCounter(endpoint, labelsName)
 	timer := newHTTPTimer(endpoint, labelsName)
@@ -19,13 +19,13 @@ func (c *collector) RegisterHTTP(endpoint string, labelsName []string) {
 		"target":   "http",
 		"endpoint": endpoint,
 		"labels":   labelsName,
-	}).Debug("Register metrics collector")
+	}).Debug("Register metrics Collector")
 	rpc.register(c.registry)
 
 	c.httpEndpoints[endpoint] = rpc
 }
 
-func (c *collector) InvokeHTTP(endpoint string, labels prometheus.Labels) (chan<- int, error) {
+func (c *Collector) InvokeHTTP(endpoint string, labels prometheus.Labels) (chan<- int, error) {
 	rpc, exists := c.httpEndpoints[endpoint]
 	if !exists {
 		return nil, errors.Wrapf(ErrNotRegisterHTTP, "Endpoint %s is not register", endpoint)
@@ -35,7 +35,7 @@ func (c *collector) InvokeHTTP(endpoint string, labels prometheus.Labels) (chan<
 	return channel, nil
 }
 
-func (c *collector) finishHTTP(endpoint string, labels prometheus.Labels, rpc *rpcCollector, channel <-chan int) {
+func (c *Collector) finishHTTP(endpoint string, labels prometheus.Labels, rpc *rpcCollector, channel <-chan int) {
 	start := time.Now()
 	code := <-channel
 	duration := time.Now().Sub(start).Seconds()

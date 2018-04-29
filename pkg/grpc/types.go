@@ -9,5 +9,5 @@ import (
 type AccountService struct {
 	Pool      db.Opener
 	Container container.Container
-	Collector metrics.Collector
+	Collector *metrics.Collector `inject:""`
 }

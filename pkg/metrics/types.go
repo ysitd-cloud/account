@@ -16,17 +16,7 @@ type registry interface {
 	prometheus.Gatherer
 }
 
-type Collector interface {
-	GetGatherer() prometheus.Gatherer
-
-	RegisterRPC(name string, labelsName []string)
-	InvokeRPC(name string, labels prometheus.Labels) (finish chan<- bool, err error)
-
-	RegisterHTTP(endpoint string, labelsName []string)
-	InvokeHTTP(endpoint string, labels prometheus.Labels) (chan<- int, error)
-}
-
-type collector struct {
+type Collector struct {
 	registry      registry
 	rpc           *rpcCollector
 	http          *rpcCollector

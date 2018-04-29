@@ -7,7 +7,7 @@ import (
 )
 
 type service struct {
-	collector    metrics.Collector
+	Collector    *metrics.Collector `inject:""`
 	app          container.Container
 	LoginHandler *handler.LoginHandler `inject:""`
 }

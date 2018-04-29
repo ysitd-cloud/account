@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func (c *collector) RegisterRPC(name string, labelsName []string) {
+func (c *Collector) RegisterRPC(name string, labelsName []string) {
 	labelsName = append(labelsName, "result")
 	counter := newRPCCounter(name, labelsName)
 	timer := newRPCTimer(name, labelsName)
@@ -17,13 +17,13 @@ func (c *collector) RegisterRPC(name string, labelsName []string) {
 	logrus.WithFields(logrus.Fields{
 		"target": "rpc",
 		"name":   name,
-	}).Debug("Register metrics collector")
+	}).Debug("Register metrics Collector")
 	overall.register(c.registry)
 
 	c.rpcEndpoints[name] = overall
 }
 
-func (c *collector) InvokeRPC(name string, labels prometheus.Labels) (finish chan<- bool, err error) {
+func (c *Collector) InvokeRPC(name string, labels prometheus.Labels) (finish chan<- bool, err error) {
 	rpc, exists := c.rpcEndpoints[name]
 	if !exists {
 		return nil, errors.Wrapf(ErrNotRegisterRPC, "RPC %s is not registed", name)
@@ -34,7 +34,7 @@ func (c *collector) InvokeRPC(name string, labels prometheus.Labels) (finish cha
 	return channel, nil
 }
 
-func (c *collector) finishInvokeRPC(rpc *rpcCollector, endpoint string, labels prometheus.Labels, finish <-chan bool) {
+func (c *Collector) finishInvokeRPC(rpc *rpcCollector, endpoint string, labels prometheus.Labels, finish <-chan bool) {
 	start := time.Now()
 	overAllLabels := prometheus.Labels{
 		"endpoint": endpoint,

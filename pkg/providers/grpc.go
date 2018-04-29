@@ -27,7 +27,7 @@ func (*grpcServiceProvder) Provides() []string {
 func (*grpcServiceProvder) Register(app container.Container) {
 	app.Singleton("grpc.service", func(app container.Container) interface{} {
 		pool := app.Make("db.pool").(db.Opener)
-		collector := app.Make("metrics").(metrics.Collector)
+		collector := app.Make("metrics").(*metrics.Collector)
 		service := &grpcService.AccountService{
 			Pool:      pool,
 			Container: app,

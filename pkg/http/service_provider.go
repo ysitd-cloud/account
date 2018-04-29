@@ -19,7 +19,7 @@ func (*serviceProvider) Provides() []string {
 
 func (*serviceProvider) Register(app container.Container) {
 	app.Bind("http.service", func(app container.Container) interface{} {
-		collector := app.Make("metrics").(metrics.Collector)
+		collector := app.Make("metrics").(*metrics.Collector)
 		opener := app.Make("db").(*db.GeneralOpener)
 		s := newService(collector, app).(*service)
 		s.init()
