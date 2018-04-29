@@ -7,14 +7,14 @@ import (
 )
 
 func ListFromDB(pool db.Opener) ([]*User, error) {
-	db, err := pool.Open()
+	conn, err := pool.Open()
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
+	defer conn.Close()
 
 	query := "SELECT username, display_name, email, avatar_uri FROM users"
-	stmt, err := db.Prepare(query)
+	stmt, err := conn.Prepare(query)
 	if err != nil {
 		return nil, err
 	}
@@ -47,14 +47,14 @@ func ListFromDB(pool db.Opener) ([]*User, error) {
 }
 
 func LoadFromDBWithUsername(pool db.Opener, username string) (*User, error) {
-	db, err := pool.Open()
+	conn, err := pool.Open()
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
+	defer conn.Close()
 
 	query := "SELECT username, display_name, email, avatar_url FROM users WHERE username = $1"
-	row := db.QueryRow(query, username)
+	row := conn.QueryRow(query, username)
 	var displayName, email, avatarURL string
 	if err := row.Scan(&username, &displayName, &email, &avatarURL); err != nil {
 		if err == sql.ErrNoRows {
