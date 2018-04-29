@@ -119,18 +119,6 @@
   version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/moul/http2curl"
-  packages = ["."]
-  revision = "9ac6cf4d929b2fa8fd2d2e6dec5bb0feb4f4911d"
-
-[[projects]]
-  name = "github.com/parnurzeal/gorequest"
-  packages = ["."]
-  revision = "a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3"
-  version = "v0.2.15"
-
-[[projects]]
   name = "github.com/pborman/uuid"
   packages = ["."]
   revision = "e790cca94e6cc75c7064b1332e63811d4aae1a53"
@@ -222,7 +210,6 @@
     "idna",
     "internal/timeseries",
     "lex/httplex",
-    "publicsuffix",
     "trace"
   ]
   revision = "5f9ae10d9af5b1c89ae6904293b14b064d4ada23"
@@ -332,6 +319,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2df2a9b35ac1f02123d9cb4ffa9ef45d2f38985ffea215594f07386cf00220e7"
+  inputs-digest = "d33b7baf2012450a77f61b14160d1b278bad3a80a5ca714380876497ecb317df"
   solver-name = "gps-cdcl"
   solver-version = 1
