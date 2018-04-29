@@ -8,6 +8,6 @@ RUN dep ensure && \
     go build -v -ldflags="-s -w"
 
 FROM alpine:3.6
-COPY --from=builder /go/src/code.ysitd.cloud/component/account/account /
+COPY --from=builder /go/src/code.ysitd.cloud/auth/account/account /
 
 CMD ["/account"]
