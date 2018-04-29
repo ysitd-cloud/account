@@ -1,6 +1,7 @@
 package grpc
 
 import (
+	"context"
 	"strings"
 
 	"code.ysitd.cloud/auth/account/pkg/model/user"
@@ -8,10 +9,9 @@ import (
 	"code.ysitd.cloud/grpc/schema/account/models"
 	"github.com/RangelReale/osin"
 	"github.com/prometheus/client_golang/prometheus"
-	"golang.org/x/net/context"
 )
 
-func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
+func (s *AccountService) ValidateUserPassword(ctx context.Context, req *actions.ValidateUserRequest) (*actions.ValidateUserReply, error) {
 	username := req.GetUsername()
 
 	finish, err := s.Collector.InvokeRPC(validateUserPassword, prometheus.Labels{
@@ -26,7 +26,7 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 		close(finish)
 	}()
 
-	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
+	instance, err := user.LoadFromDBWithUsername(ctx, s.Pool, username)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (s *AccountService) ValidateUserPassword(_ context.Context, req *actions.Va
 	return reply, nil
 }
 
-func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfoRequest) (reply *actions.GetUserInfoReply, err error) {
+func (s *AccountService) GetUserInfo(ctx context.Context, req *actions.GetUserInfoRequest) (reply *actions.GetUserInfoReply, err error) {
 	username := req.GetUsername()
 
 	finish, err := s.Collector.InvokeRPC(getUser, prometheus.Labels{
@@ -70,7 +70,7 @@ func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfo
 		close(finish)
 	}()
 
-	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
+	instance, err := user.LoadFromDBWithUsername(ctx, s.Pool, username)
 	if err != nil {
 		return
 	}
@@ -97,7 +97,7 @@ func (s *AccountService) GetUserInfo(_ context.Context, req *actions.GetUserInfo
 	return
 }
 
-func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenInfoRequest) (*actions.GetTokenInfoReply, error) {
+func (s *AccountService) GetTokenInfo(ctx context.Context, req *actions.GetTokenInfoRequest) (*actions.GetTokenInfoReply, error) {
 	token := req.GetToken()
 
 	finish, err := s.Collector.InvokeRPC(getToken, prometheus.Labels{
@@ -122,7 +122,7 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 
 	if access, err := oauth.Storage.LoadAccess(token); err == nil {
 		issuerID := access.UserData.(string)
-		issuer, err := s.getUser(issuerID)
+		issuer, err := s.getUser(ctx, issuerID)
 		if err != nil {
 			return nil, err
 		}
@@ -147,8 +147,8 @@ func (s *AccountService) GetTokenInfo(_ context.Context, req *actions.GetTokenIn
 	return reply, nil
 }
 
-func (s *AccountService) getUser(username string) (*models.User, error) {
-	instance, err := user.LoadFromDBWithUsername(s.Pool, username)
+func (s *AccountService) getUser(ctx context.Context, username string) (*models.User, error) {
+	instance, err := user.LoadFromDBWithUsername(ctx, s.Pool, username)
 	if err != nil {
 		return nil, err
 	}

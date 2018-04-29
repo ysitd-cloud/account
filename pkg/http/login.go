@@ -62,7 +62,7 @@ func (s *service) registerLoginRoute(app gin.IRoutes) {
 
 			pool := s.app.Make("db.pool").(db.Opener)
 
-			instance, err := user.LoadFromDBWithUsername(pool, username)
+			instance, err := user.LoadFromDBWithUsername(c.Request.Context(), pool, username)
 			if instance == nil || err == sql.ErrNoRows {
 				reason = "not_found"
 			} else if err != nil {

@@ -28,8 +28,8 @@ func ValidateToken(c *gin.Context) {
 	}
 
 	id := access.UserData.(string)
-	db := kernel.Make("db.pool").(db.Opener)
-	instance, err := user.LoadFromDBWithUsername(db, id)
+	opener := kernel.Make("db.pool").(db.Opener)
+	instance, err := user.LoadFromDBWithUsername(c.Request.Context(), opener, id)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)
 	} else {

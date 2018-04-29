@@ -15,7 +15,7 @@ func getUser(c *gin.Context) {
 	db := kernel.Make("db.pool").(db.Opener)
 
 	id := c.Param("instance")
-	instance, err := user.LoadFromDBWithUsername(db, id)
+	instance, err := user.LoadFromDBWithUsername(c.Request.Context(), db, id)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
@@ -31,7 +31,7 @@ func getUserInfo(c *gin.Context) {
 	kernel := c.MustGet("kernel").(container.Kernel)
 	db := kernel.Make("db.pool").(db.Opener)
 
-	instance, err := user.LoadFromDBWithUsername(db, approved)
+	instance, err := user.LoadFromDBWithUsername(c.Request.Context(), db, approved)
 	if err != nil {
 		c.AbortWithError(http.StatusNotFound, err)
 	} else {

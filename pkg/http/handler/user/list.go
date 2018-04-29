@@ -13,7 +13,7 @@ func listUsers(c *gin.Context) {
 	kernel := c.MustGet("kernel").(container.Kernel)
 	db := kernel.Make("db.pool").(db.Opener)
 
-	users, err := user.ListFromDB(db)
+	users, err := user.ListFromDB(c.Request.Context(), db)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return

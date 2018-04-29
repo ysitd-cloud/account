@@ -24,7 +24,7 @@ func updatePassword(c *gin.Context) {
 	kernel := c.MustGet("kernel").(container.Kernel)
 	db := kernel.Make("db.pool").(db.Opener)
 
-	instance, err := user.LoadFromDBWithUsername(db, username)
+	instance, err := user.LoadFromDBWithUsername(c.Request.Context(), db, username)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return

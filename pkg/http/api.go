@@ -35,7 +35,7 @@ func (s *service) registerAPI(app gin.IRouter) {
 
 			pool := s.app.Make("db.pool").(db.Opener)
 
-			instance, err := user.LoadFromDBWithUsername(pool, approved)
+			instance, err := user.LoadFromDBWithUsername(c.Request.Context(), pool, approved)
 			if err != nil {
 				c.AbortWithError(http.StatusNotFound, err)
 			} else {

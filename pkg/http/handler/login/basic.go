@@ -64,7 +64,7 @@ func basicSubmit(collector metrics.Collector) gin.HandlerFunc {
 		kernel := c.MustGet("kernel").(container.Kernel)
 		pool := kernel.Make("db.pool").(db.Opener)
 
-		instance, err := user.LoadFromDBWithUsername(pool, username)
+		instance, err := user.LoadFromDBWithUsername(c.Request.Context(), pool, username)
 		if instance == nil || err == sql.ErrNoRows {
 			reason = "not_found"
 		} else if err != nil {

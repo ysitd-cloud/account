@@ -3,10 +3,11 @@ package user
 import (
 	"database/sql"
 
+	"context"
 	"golang.ysitd.cloud/db"
 )
 
-func ListFromDB(pool db.Opener) ([]*User, error) {
+func ListFromDB(ctx context.Context, pool db.Opener) ([]*User, error) {
 	conn, err := pool.Open()
 	if err != nil {
 		return nil, err
@@ -14,12 +15,7 @@ func ListFromDB(pool db.Opener) ([]*User, error) {
 	defer conn.Close()
 
 	query := "SELECT username, display_name, email, avatar_uri FROM users"
-	stmt, err := conn.Prepare(query)
-	if err != nil {
-		return nil, err
-	}
-
-	rows, err := stmt.Query()
+	rows, err := conn.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +42,7 @@ func ListFromDB(pool db.Opener) ([]*User, error) {
 	return users, nil
 }
 
-func LoadFromDBWithUsername(pool db.Opener, username string) (*User, error) {
+func LoadFromDBWithUsername(ctx context.Context, pool db.Opener, username string) (*User, error) {
 	conn, err := pool.Open()
 	if err != nil {
 		return nil, err
@@ -54,7 +50,7 @@ func LoadFromDBWithUsername(pool db.Opener, username string) (*User, error) {
 	defer conn.Close()
 
 	query := "SELECT username, display_name, email, avatar_url FROM users WHERE username = $1"
-	row := conn.QueryRow(query, username)
+	row := conn.QueryRowContext(ctx, query, username)
 	var displayName, email, avatarURL string
 	if err := row.Scan(&username, &displayName, &email, &avatarURL); err != nil {
 		if err == sql.ErrNoRows {
