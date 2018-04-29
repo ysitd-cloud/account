@@ -30,16 +30,13 @@ func (h *LoginHandler) RegisterRoutes(routes gin.IRoutes) {
 
 func (h *LoginHandler) loginForm(c *gin.Context) {
 	labels := prometheus.Labels{}
-	finish, err := h.Collector.InvokeHTTP(endpointLoginForm, labels)
+	done, err := h.Collector.InvokeHTTP(endpointLoginForm, labels)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}
 
-	defer func() {
-		finish <- c.Writer.Status()
-		close(finish)
-	}()
+	defer done(c.Writer.Status())
 
 	session := middlewares.GetSession(c)
 	nextURL := c.DefaultQuery("next", "/")
@@ -60,16 +57,13 @@ func (h *LoginHandler) loginPost(c *gin.Context) {
 		"user": username,
 	}
 
-	finish, err := h.Collector.InvokeHTTP(endpointLoginSubmit, labels)
+	done, err := h.Collector.InvokeHTTP(endpointLoginSubmit, labels)
 	if err != nil {
 		c.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}
 
-	defer func() {
-		finish <- c.Writer.Status()
-		close(finish)
-	}()
+	defer done(c.Writer.Status())
 
 	instance, err := user.LoadFromDBWithUsername(c.Request.Context(), h.Opener, username)
 	if instance == nil || err == sql.ErrNoRows {

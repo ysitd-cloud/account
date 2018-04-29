@@ -22,16 +22,13 @@ func (s *service) registerAPI(app gin.IRouter) {
 			labels := prometheus.Labels{
 				"user": approved,
 			}
-			finish, err := s.Collector.InvokeHTTP(endpointUserInfo, labels)
+			done, err := s.Collector.InvokeHTTP(endpointUserInfo, labels)
 			if err != nil {
 				c.AbortWithError(http.StatusInternalServerError, err)
 				return
 			}
 
-			defer func() {
-				finish <- c.Writer.Status()
-				close(finish)
-			}()
+			defer done(c.Writer.Status())
 
 			pool := s.app.Make("db.pool").(db.Opener)
 

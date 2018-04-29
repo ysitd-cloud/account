@@ -11,7 +11,8 @@ var (
 	ErrNotRegisterHTTP = errors.Wrap(ErrNotRegister, "httpEndpoints endpoint is not register")
 )
 
-type DoneFunc func(result bool)
+type RPCDoneFunc func(result bool)
+type HTTPDoneFunc func(code int)
 
 type registry interface {
 	prometheus.Registerer

@@ -25,38 +25,45 @@ func (c *Collector) RegisterHTTP(endpoint string, labelsName []string) {
 	c.httpEndpoints[endpoint] = rpc
 }
 
-func (c *Collector) InvokeHTTP(endpoint string, labels prometheus.Labels) (chan<- int, error) {
+func (c *Collector) InvokeHTTP(endpoint string, labels prometheus.Labels) (done HTTPDoneFunc, err error) {
 	rpc, exists := c.httpEndpoints[endpoint]
 	if !exists {
 		return nil, errors.Wrapf(ErrNotRegisterHTTP, "Endpoint %s is not register", endpoint)
 	}
-	channel := make(chan int)
-	go c.finishHTTP(endpoint, labels, rpc, channel)
-	return channel, nil
+	done = c.wrapFinishInvokeHTTP(rpc, endpoint, labels)
+	return
 }
 
-func (c *Collector) finishHTTP(endpoint string, labels prometheus.Labels, rpc *rpcCollector, channel <-chan int) {
+func (c *Collector) wrapFinishInvokeHTTP(rpc *rpcCollector, endpoint string, labels prometheus.Labels) HTTPDoneFunc {
 	start := time.Now()
-	code := <-channel
-	duration := time.Now().Sub(start).Seconds()
 
-	statusCode := strconv.FormatInt(int64(code), 10)
+	return func(code int) {
+		duration := time.Now().Sub(start).Seconds()
 
-	labels["code"] = statusCode
-	rpc.timer.With(labels).Observe(duration)
-	rpc.total.With(labels).Inc()
+		statusCode := strconv.FormatInt(int64(code), 10)
 
-	overAllLabels := prometheus.Labels{
-		"code":     statusCode,
-		"endpoint": endpoint,
+		labels["code"] = statusCode
+		rpc.timer.With(labels).Observe(duration)
+		rpc.total.With(labels).Inc()
+
+		overAllLabels := prometheus.Labels{
+			"code":     statusCode,
+			"endpoint": endpoint,
+		}
+		c.http.total.With(overAllLabels).Inc()
+		c.http.timer.With(overAllLabels).Observe(duration)
+
+		loggerFields := make(map[string]interface{})
+		loggerFields["target"] = "http"
+		for k, v := range labels {
+			loggerFields[k] = v
+		}
+		logger := logrus.WithField("target", "http")
+
+		// Endpoint RPC Metrics
+		rpc.total.With(labels).Inc()
+		rpc.timer.With(labels).Observe(duration)
+
+		logger.Debug("Collect Metrics")
 	}
-	c.http.total.With(overAllLabels).Inc()
-	c.http.timer.With(overAllLabels).Observe(duration)
-
-	logger := logrus.WithField("target", "http")
-	for k, v := range labels {
-		logger = logger.WithField(k, v)
-	}
-
-	logger.Debug("Collect Metrics")
 }
