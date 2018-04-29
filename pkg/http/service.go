@@ -32,7 +32,7 @@ func (s *service) CreateService() (app interfaces.Engine) {
 			c.Next()
 		})
 		s.bindMiddleware(app)
-		s.registerLoginRoute(app)
+		s.LoginHandler.RegisterRoutes(app)
 		pages.Register(app)
 		s.registerAPI(app)
 		s.registerOAuth(app)
