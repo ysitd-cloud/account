@@ -17,7 +17,7 @@ func main() {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
 	go bootstrap.BootstrapPublicHTTPServer()
-	go bootstrap.BootstrapGrpcProxy()
+	go bootstrap.RunGrpcProxy()
 	go bootstrap.BootstrapGrpcServer()
 	<-quit
 }

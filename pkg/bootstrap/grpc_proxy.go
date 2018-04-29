@@ -1,24 +1,21 @@
 package bootstrap
 
 import (
+	"code.ysitd.cloud/auth/account/pkg/grpc/proxy"
 	"code.ysitd.cloud/auth/account/pkg/metrics"
-	"code.ysitd.cloud/gin/utils/interfaces"
-	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"net/http"
 )
 
-// BootstrapGrpcProxy start running grpc proxy service
-func BootstrapGrpcProxy() {
-	proxy := Kernel.Make("grpc.proxy").(interfaces.Service)
-	app := proxy.CreateService()
-	app.GET("/metrics", bootstrapMetricsEndpoint())
-	app.Run(":50050")
+// RunGrpcProxy start running grpc proxy service
+func RunGrpcProxy() {
+	handler := Kernel.Make("grpc.proxy").(*proxy.Handler)
+	handler.ConfigMetrics(bootstrapMetricsEndpoint())
+	http.ListenAndServe(":50050", handler)
 }
 
-func bootstrapMetricsEndpoint() gin.HandlerFunc {
+func bootstrapMetricsEndpoint() http.Handler {
 	collector := Kernel.Make("metrics").(metrics.Collector)
 	handler := promhttp.HandlerFor(collector.GetGatherer(), promhttp.HandlerOpts{})
-	return func(c *gin.Context) {
-		handler.ServeHTTP(c.Writer, c.Request)
-	}
+	return handler
 }

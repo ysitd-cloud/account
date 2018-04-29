@@ -190,6 +190,12 @@
   revision = "42c988ba8772b2c88d8cbed4439aa481bf8cb255"
 
 [[projects]]
+  name = "github.com/tonyhhyip/vodka"
+  packages = ["."]
+  revision = "e9358f7942b72ebf106e2a13165eef29a46c28ef"
+  version = "2.3.0"
+
+[[projects]]
   name = "github.com/ugorji/go"
   packages = ["codec"]
   revision = "b4c50a2b199d93b13dc15e78929cfb23bfdf21ab"
@@ -326,6 +332,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f1de36b46673e6dd1778f39b35a3a3744cf68847caf157923b9572cbb2751cf4"
+  inputs-digest = "ad1a9158f2d0c212445b94c84ab14e3385857b1307dd7b349f63c7a73164204b"
   solver-name = "gps-cdcl"
   solver-version = 1
