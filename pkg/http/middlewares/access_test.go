@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 )
 

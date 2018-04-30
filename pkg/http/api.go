@@ -5,7 +5,7 @@ import (
 
 	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
 	"code.ysitd.cloud/auth/account/pkg/model/user"
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"golang.ysitd.cloud/db"

@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"code.ysitd.cloud/auth/account/pkg/model/user"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"code.ysitd.cloud/grpc/schema/account/actions"
 	"code.ysitd.cloud/grpc/schema/account/models"
-	"github.com/RangelReale/osin"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

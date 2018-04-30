@@ -8,10 +8,6 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/RangelReale/osin"
-
-[[constraint]]
-  branch = "master"
   name = "golang.org/x/crypto"
 
 [[override]]

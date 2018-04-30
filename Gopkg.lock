@@ -23,12 +23,6 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/RangelReale/osin"
-  packages = ["."]
-  revision = "a05b753d5af2a3272641e712dafc4de3a6f5d631"
-
-[[projects]]
-  branch = "master"
   name = "github.com/beorn7/perks"
   packages = ["quantile"]
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
@@ -233,7 +227,7 @@
     "unix",
     "windows"
   ]
-  revision = "cbbc999da32df943dac6cd71eb3ee39e1d7838b9"
+  revision = "f67ecc163a74fbeea4cb1db0a101dcd07201464a"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -343,6 +337,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ab5684c051715efd98e4b0d650f0d21f911733ee68313db81afbf2afac9cb641"
+  inputs-digest = "666b813cdd47ac086e4c959724ec63c10da55ab0c098bd92afc8ac4a9367b1c4"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -3,7 +3,7 @@ package middlewares
 import (
 	"net/http"
 
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 )
 
