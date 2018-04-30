@@ -7,7 +7,7 @@ import (
 )
 
 type AccountService struct {
-	Pool      db.Opener
+	Pool      *db.GeneralOpener `inject:""`
 	Container container.Container
 	Collector *metrics.Collector `inject:""`
 }
