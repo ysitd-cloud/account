@@ -7,17 +7,17 @@ import (
 
 	"github.com/tonyhhyip/vodka"
 
-	"code.ysitd.cloud/grpc/schema/account"
+	"code.ysitd.cloud/auth/account/pkg/grpc"
 	"code.ysitd.cloud/grpc/schema/account/actions"
 )
 
 type Handler struct {
 	http.Handler
-	MetricsHandler http.Handler          `inject:"metrics handler"`
-	Service        account.AccountServer `inject:"account service"`
+	MetricsHandler http.Handler `inject:"metrics handler"`
+	Service        *grpc.AccountService
 }
 
-func CreateProxy(service account.AccountServer) *Handler {
+func CreateProxy(service *grpc.AccountService) *Handler {
 	return &Handler{
 		Service: service,
 	}

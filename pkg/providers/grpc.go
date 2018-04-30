@@ -2,6 +2,7 @@ package providers
 
 import (
 	"net"
+	"net/http"
 
 	grpcService "code.ysitd.cloud/auth/account/pkg/grpc"
 	"code.ysitd.cloud/auth/account/pkg/grpc/proxy"
@@ -15,6 +16,11 @@ import (
 )
 
 var service grpcService.AccountService
+var p proxy.Handler
+
+func GetProxyHandler() http.Handler {
+	return &p
+}
 
 func GetGrpcServer() *grpc.Server {
 	server := grpc.NewServer()
@@ -25,6 +31,7 @@ func GetGrpcServer() *grpc.Server {
 func InjectGrpcService(graph *inject.Graph) {
 	graph.Provide(
 		NewObject(&service),
+		NewObject(&p),
 	)
 }
 
@@ -76,7 +83,7 @@ func (*grpcServiceProvder) Register(app container.Container) {
 	})
 
 	app.Singleton("grpc.proxy", func(app container.Container) interface{} {
-		service := app.Make("grpc.service").(pb.AccountServer)
+		service := app.Make("grpc.service").(*grpcService.AccountService)
 		return proxy.CreateProxy(service)
 	})
 }
