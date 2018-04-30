@@ -153,5 +153,5 @@ func (s *AccountService) getUser(ctx context.Context, username string) (*models.
 }
 
 func (s *AccountService) getOAuthService() *osin.Server {
-	return s.Container.Make("osin.server").(*osin.Server)
+	return s.Server
 }

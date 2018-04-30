@@ -2,12 +2,12 @@ package grpc
 
 import (
 	"code.ysitd.cloud/auth/account/pkg/metrics"
-	"github.com/tonyhhyip/go-di-container"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"golang.ysitd.cloud/db"
 )
 
 type AccountService struct {
-	Pool      *db.GeneralOpener `inject:""`
-	Container container.Container
+	Pool      *db.GeneralOpener  `inject:""`
+	Server    *osin.Server       `inject:""`
 	Collector *metrics.Collector `inject:""`
 }
