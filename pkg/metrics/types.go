@@ -20,7 +20,7 @@ type registry interface {
 }
 
 type Collector struct {
-	registry      registry
+	registry      *prometheus.Registry
 	rpc           *rpcCollector
 	http          *rpcCollector
 	rpcEndpoints  map[string]*rpcCollector

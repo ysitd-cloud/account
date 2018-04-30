@@ -19,7 +19,7 @@ func NewServiceProvider(app container.Container) container.ServiceProvider {
 	return sp
 }
 
-func NewCollector(registry registry) *Collector {
+func NewCollector(registry *prometheus.Registry) *Collector {
 	c := &Collector{
 		rpcEndpoints:  make(map[string]*rpcCollector),
 		httpEndpoints: make(map[string]*rpcCollector),
