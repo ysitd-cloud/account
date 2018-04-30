@@ -35,6 +35,18 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/facebookgo/inject"
+  packages = ["."]
+  revision = "cc1aa653e50f6a9893bcaef89e673e5b24e1e97b"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/structtag"
+  packages = ["."]
+  revision = "217e25fb96916cc60332e399c9aa63f5c422ceed"
+
+[[projects]]
+  branch = "master"
   name = "github.com/gin-contrib/secure"
   packages = ["."]
   revision = "624341e112805e689f488495c9880bb97026b47c"
@@ -256,8 +268,20 @@
     ".",
     "redis"
   ]
-  revision = "63a0d8857928ef46033eaacb2879eba3b24c7f14"
-  version = "4.0.0"
+  revision = "3c0c702d29e155738d1d36b20f42621f07ba3405"
+  version = "4.1.0"
+
+[[projects]]
+  name = "golang.ysitd.cloud/io"
+  packages = ["."]
+  revision = "7629cb89c615b54847b574835b27cd07b5c8535f"
+  version = "1.0.0"
+
+[[projects]]
+  name = "golang.ysitd.cloud/log"
+  packages = ["."]
+  revision = "10349ab92cc703e7332cca7f61867b67ec92e6fe"
+  version = "1.0.0"
 
 [[projects]]
   name = "golang.ysitd.cloud/sessions/redis"
@@ -265,8 +289,8 @@
     ".",
     "serializer/gob"
   ]
-  revision = "b1774bf0e3ec56627eb9d6c33c6dec3947d9c454"
-  version = "2.0.0"
+  revision = "0df1f2233147a14f654b6518ff6a2ae9a9475554"
+  version = "2.1.0"
 
 [[projects]]
   branch = "master"
@@ -319,6 +343,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d33b7baf2012450a77f61b14160d1b278bad3a80a5ca714380876497ecb317df"
+  inputs-digest = "ab5684c051715efd98e4b0d650f0d21f911733ee68313db81afbf2afac9cb641"
   solver-name = "gps-cdcl"
   solver-version = 1

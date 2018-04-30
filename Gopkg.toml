@@ -70,3 +70,11 @@
 [[constraint]]
   name = "github.com/tonyhhyip/vodka"
   version = "2.2.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/facebookgo/inject"
+
+[[constraint]]
+  name = "golang.ysitd.cloud/log"
+  version = "1.0.0"
