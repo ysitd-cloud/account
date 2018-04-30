@@ -3,17 +3,17 @@ package storage
 import (
 	"fmt"
 
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gomodule/redigo/redis"
 	"golang.ysitd.cloud/db"
 )
 
 type Store struct {
-	DB    db.Opener
+	DB    *db.GeneralOpener
 	Redis *redis.Pool
 }
 
-func NewStore(db db.Opener, redis *redis.Pool) osin.Storage {
+func NewStore(db *db.GeneralOpener, redis *redis.Pool) osin.Storage {
 	return &Store{
 		db,
 		redis,

@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gomodule/redigo/redis"
 )
 
