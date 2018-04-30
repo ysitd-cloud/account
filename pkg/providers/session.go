@@ -3,11 +3,27 @@ package providers
 import (
 	"os"
 
+	"github.com/facebookgo/inject"
 	"github.com/gomodule/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
 	"golang.ysitd.cloud/gin/sessions"
 	redisSession "golang.ysitd.cloud/gin/sessions/redis"
 )
+
+func initSession() *redisSession.RedisStore {
+	secret := os.Getenv("SESSION_SECRET")
+	store, err := redisSession.NewRedisStoreWithPool(nil, []byte(secret))
+	if err != nil {
+		panic(err)
+	}
+	return store
+}
+
+func InjectSession(graph *inject.Graph) {
+	graph.Provide(
+		NewObject(initSession()),
+	)
+}
 
 type sessionServiceProvider struct {
 	*container.AbstractServiceProvider

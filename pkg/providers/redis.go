@@ -5,9 +5,33 @@ import (
 	"time"
 
 	"code.ysitd.cloud/gin/utils/env"
+	"github.com/facebookgo/inject"
 	"github.com/gomodule/redigo/redis"
 	"github.com/tonyhhyip/go-di-container"
 )
+
+func initRedis() *redis.Pool {
+	address := env.GetEnvWithDefault("REDIS_ADDRESS", "localhost:6379")
+	dbNo, err := strconv.Atoi(env.GetEnvWithDefault("REDIS_DB", "0"))
+	if err != nil {
+		panic(err)
+	}
+	return &redis.Pool{
+		Dial: func() (redis.Conn, error) {
+			return redis.Dial("tcp", address, redis.DialDatabase(dbNo))
+		},
+		TestOnBorrow: func(c redis.Conn, _ time.Time) (err error) {
+			_, err = c.Do("PING")
+			return
+		},
+	}
+}
+
+func InjectRedis(graph *inject.Graph) {
+	graph.Provide(
+		&inject.Object{Value: initRedis()},
+	)
+}
 
 type redisServiceProvider struct {
 	*container.AbstractServiceProvider
