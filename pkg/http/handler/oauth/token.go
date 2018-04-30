@@ -3,7 +3,7 @@ package oauth
 import (
 	"fmt"
 
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 )
@@ -18,17 +18,11 @@ func HandleTokenRequest(c *gin.Context) {
 
 	if req := server.HandleAccessRequest(resp, c.Request); req != nil {
 		switch req.Type {
-		case osin.AUTHORIZATION_CODE:
+		case osin.AuthorizationCode:
 			req.Authorized = true
 			resp.Output["user"] = req.AuthorizeData.UserData.(string)
 			req.UserData = resp.Output["user"]
-		case osin.REFRESH_TOKEN:
-			req.Authorized = true
-		case osin.PASSWORD:
-			if req.Username == "test" && req.Password == "test" {
-				req.Authorized = true
-			}
-		case osin.CLIENT_CREDENTIALS:
+		case osin.RefreshToken:
 			req.Authorized = true
 		}
 		server.FinishAccessRequest(resp, c.Request, req)

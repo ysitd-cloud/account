@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"code.ysitd.cloud/auth/account/pkg/http/middlewares"
-	"github.com/RangelReale/osin"
+	"code.ysitd.cloud/auth/account/third_party/forked/github.com/RangelReale/osin"
 	"github.com/gin-gonic/gin"
 	"github.com/tonyhhyip/go-di-container"
 )
